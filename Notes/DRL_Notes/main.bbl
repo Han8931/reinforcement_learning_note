@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{KingmaB14}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: {A} method for stochastic optimization.
+\newblock In {\em 3rd International Conference on Learning Representations,
+  {ICLR} 2015, San Diego, CA, USA, May 7-9, 2015, Conference Track
+  Proceedings}, 2015.
+
+\bibitem{Rachit2017}
+{Rachit Singh}.
+\newblock {}.
+\newblock \url{https://rachitsingh.com/elbo_surgery/}, 2017.
+\newblock Online; accessed 29 January 2014.
+
+\bibitem{DBLP:journals/corr/abs-1803-05567}
+Hany Hassan, Anthony Aue, Chang Chen, Vishal Chowdhary, Jonathan Clark,
+  Christian Federmann, Xuedong Huang, Marcin Junczys{-}Dowmunt, William Lewis,
+  Mu~Li, Shujie Liu, Tie{-}Yan Liu, Renqian Luo, Arul Menezes, Tao Qin, Frank
+  Seide, Xu~Tan, Fei Tian, Lijun Wu, Shuangzhi Wu, Yingce Xia, Dongdong Zhang,
+  Zhirui Zhang, and Ming Zhou.
+\newblock Achieving human parity on automatic chinese to english news
+  translation.
+\newblock {\em CoRR}, abs/1803.05567, 2018.
+
+\end{thebibliography}

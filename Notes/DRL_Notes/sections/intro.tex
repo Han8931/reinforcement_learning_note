@@ -1,0 +1,80 @@
+\chapter{Introduction}
+\section{Markov Decision Process}
+
+The general framework of MDPs (representing environments as MDPs) allows us to model virtually any complex sequential decision-making problem under uncertainty in a way that RL agents can interact with and learn to solve solely through experience. 
+
+
+\begin{definition}[Markov Property]
+	A state $S_t$ is \textbf{Markov} if and only if 
+	$$P[S_{t+1}|S_t, A_t] = P[S_{t+1}|S_t, A_t, S_{t-1},A_{t-1},...]$$
+\end{definition}
+
+\begin{definition}[Transition Function]
+	$$p(s'|s,a) = P(S_t=s'|S_{t-1}=s,A_{t-1}=a)$$
+\end{definition}
+\begin{itemize}
+	\item The way the environment changes as a response to actions is referred to as the state-transition probabilities, or more simply, the transition function, and is denoted by $T(s,a,s')$.
+	\item $\sum_{s'\in S}p(s'|s,a) = 1, \forall s \in S, \forall a\in A(s)$
+\end{itemize}
+
+\begin{definition}[Reward Function]
+	$$r(s,a) =\mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a] $$
+\end{definition}
+\begin{itemize}
+	\item The reward function is defined as a function that takes in a state-action pair.
+	\item It is the expectation of reward at time step $t$, given the state-action pair in the previous time step.
+	\item It can also be defined as a function that takes a full transition tuple $s,a,s'$.
+		$$r(s,a,s') =\mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a,S_{t}=s]$$
+	\item $R_t\in \mathcal{R}\in \mathbb{R}$
+\end{itemize}
+
+\begin{definition}[Discount Factor, $\gamma$]
+	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{t} $$
+\end{definition}
+\begin{itemize}
+	\item $G_t = \sum_{k=0}^{\infty}\gamma^k R_{t+k+1}$
+	\item $G_t = R_{t+1}+\gamma G_{t+1}$
+	\item $\gamma=0$: myopic evaluation
+	\item $\gamma=1$: far-sighted evaluation
+	\item Uncertainty about the future that may not be fully observed
+	\item Mathematically convenient to discount rewards. 
+	\item Avoid infinite returns in cyclic Markov processes.
+\end{itemize}
+
+\subsection{The State-Value Function}
+
+\begin{definition}[The State-Value Function, $V$]
+	The state value function $v(s)$ of an Markov Reward Process is the expected return starting from state $s$
+		$$v_{\pi}(s) &= \mathbb{E}_\pi[G_t|S_t=s]$$
+\end{definition}
+
+\begin{itemize}
+	\item The value of a state $s$ is the expection over policy $\pi$.
+	\item Policies are universal plans, which provides all possible plans for all states. 
+		\begin{itemize}
+			\item Plans are not enough in stochastic environments.
+			\item Policy can be stochastic or deterministic.
+			\item A policy is a function that prescribes actions to take for a given non-terminal state.
+		\end{itemize}
+	\item If we are given a policy and the MDP, we should be able to calculate the expected return starting from every single state. 
+\end{itemize}
+
+\textit{Bellman equation} can be derived as follows:
+
+\begin{align*}
+	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
+	& = \mathbb{E}_\pi\Bigg[\sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\Big|S_t=s\Bigg]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ...|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + ...)|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi[ G_{t+1}|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[\mathbb{E}_\pi[ G_{t+1}|S_{t+1}=s']\Big|S_t = s_t\Big] \\
+	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[v(s_{t+1})\Big|S_t = s_t\Big]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
+	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
+\end{align*}
+The expectation here describes what we expect the return to be if we continue from state s following policy $\pi$. The expectation can be written explicitly by summing over all possible actions and all possible returned states. The next two equations can help us make the next step.
+
+
+https://stats.stackexchange.com/questions/243384/deriving-bellmans-equation-in-reinforcement-learning
+

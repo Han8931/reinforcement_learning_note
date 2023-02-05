@@ -59,22 +59,105 @@ The general framework of MDPs (representing environments as MDPs) allows us to m
 	\item If we are given a policy and the MDP, we should be able to calculate the expected return starting from every single state. 
 \end{itemize}
 
-\textit{Bellman equation} can be derived as follows:
-
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
-	& = \mathbb{E}_\pi\Bigg[\sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\Big|S_t=s\Bigg]\\
-	& = \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ...|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + ...)|S_t=s]\\
 	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi[ G_{t+1}|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[\mathbb{E}_\pi[ G_{t+1}|S_{t+1}=s']\Big|S_t = s_t\Big] \\
-	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[v(s_{t+1})\Big|S_t = s_t\Big]\\
 	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
 	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
 \end{align*}
-The expectation here describes what we expect the return to be if we continue from state s following policy $\pi$. The expectation can be written explicitly by summing over all possible actions and all possible returned states. The next two equations can help us make the next step.
+\begin{itemize}
+	\item \textit{Bellman equation}
+\end{itemize}
 
+\subsection{The Action-Value Function}
+\begin{itemize}
+	\item Another critical question that we often need to ask is not merely about the value of a state but the value of taking action $a$ at a state $s$.
+	\item Which action is better under each policy?
+	\item The action-value function, also known as $Q$-function or $Q^\pi(s,a)$, captures precisely this.
+		\begin{itemize}
+			\item The expected return if the agent follows policy $\pi$ after taking action $a$ in state $s$.
+		\end{itemize}
+\end{itemize}
 
-https://stats.stackexchange.com/questions/243384/deriving-bellmans-equation-in-reinforcement-learning
+\begin{definition}[The Action-Value Function, $Q$]
+	The action-value function $q_{\pi}(s,a)$ is the expected return starting from state $s$, tacking action $a$ under policy $\pi$
+	$$q_{\pi}(s,a) &= \mathbb{E}_\pi[G_t|S_t=s, A_t=a]$$
+\end{definition}
 
+\begin{itemize}
+	\item The Bellman equation for action values is given by
+	\begin{align*}
+		q_{\pi}(s,a) &= \mathbb{E}_\pi[G_t|S_t=s, A_t=a]\\
+		& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s, A_t=a]\\
+		& = \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
+	\end{align*}
+	\item Notice that we do not weight over actions because we are interested only in a specific action.
+\end{itemize}
+
+\subsection{The Action-Advantage Function}
+
+\begin{definition}[The Action-Advantage Function, $A$]
+	$$a_{\pi}(s,a) &= q_\pi(s,a)-v_\pi(s)$$
+\end{definition}
+
+\begin{itemize}
+	\item The advantage function describes how much better it is to take action $a$ instead of following policy $\pi$. In other words, the advantage of choosing action $a$ over the default action.
+\end{itemize}
+
+\subsection{Optimality}
+
+\begin{definition}[Optimal State-Value Function]
+	The optimal state-value function $v_{*}(s)$ is the maximum value over all policies
+	$$v_{*}(s) = \max_{\pi} v_{\pi}(s)$$
+\end{definition}
+
+\begin{itemize}
+	\item The optimal state-value function can be obtained as follows:
+		$$v_{*}(s) = \max_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_*(s')]$$
+\end{itemize}
+
+\begin{definition}[Optimal Action-Value Function]
+	The optimal action-value function $q_{*}(s, a)$ is the maximum value over all policies
+	$$q_{*}(s,a) = \max_{\pi} q_{\pi}(s,a)$$
+\end{definition}
+\begin{itemize}
+	\item The optimal state-value function can be obtained as follows:
+		$$q_{*}(s,a) = \max_a \sum_{s',r}p(s',r|s,a)[r + \gamma \max_a q_*(s',a')]$$
+	\item The optimal value function specifies the best possible performance in the MDP.
+	\item The MDP is solved when we know the optimal value function
+\end{itemize}
+
+\begin{theorem}[Optimal Policy Theorem]
+	$$\pi\geq \pi' \quad\textrm{if}\quad v_\pi(s) \geq v_{\pi'}(s), \forall s$$
+	For any Markov Decision Process:
+	\begin{itemize}
+		\item There exists an optimal policy $\pi_*$ that is better than or equal to all other policies, $\pi_*\geq \pi, \forall \pi$
+		\item All optimal policies achieve the optimal value function, $v_{\pi_*}(s) = v_*(s)$
+		\item All optimal policies achieve the optimal action-value function, $q_{\pi_*}(s,a) = q_{*}(s,a)$
+	\end{itemize}
+\end{theorem}
+
+An optimal policy can be found by maximizing over $q_*(s,a)$, 
+\begin{align*}
+	\pi_*(a|s) = 
+	\begin{cases} 
+		&1 \quad \textrm{if } a = \argmaxE_{a\in \mathcal{A}}q_*(s,a)\\
+		&0 \quad \textrm{otherwise}
+	\end{cases}
+\end{align*}
+\begin{itemize}
+	\item There is always a deterministic optimal policy for any MDP
+	\item If we know $q_*(s,a)$, we immediately have the optimal policy 
+		\begin{itemize}
+			\item Q-learning: learns Q values first
+			\item Policy gradient: learns optimal policy without learning Q values
+		\end{itemize}
+\end{itemize}
+
+%\subsection{Bellman Optimility Equation for $v_*$ and $q_*$}
+%\begin{itemize}
+%	\item $v_*(s) = \max_a q_*(s,a)$
+%	\item $q_*(s,a) = \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a v_*(s')$
+%	\item $v_*(s) = \max_a \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a v_*(s')$
+%	\item $q_*(s,a) = \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a \max_{a'} q_*(s', a')$
+%\end{itemize}

@@ -1,0 +1,27 @@
+\renewcommand{\thesection}{\Alph{section}.\arabic{section}}
+\setcounter{section}{0}
+
+\begin{appendices}
+\chapter{Appendix}
+
+\section{Bellman Equation}
+
+\textit{Bellman equation} can be derived as follows:
+
+\begin{align*}
+	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
+	& = \mathbb{E}_\pi\Bigg[\sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\Big|S_t=s\Bigg]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ...|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + ...)|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi[ G_{t+1}|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[\mathbb{E}_\pi[ G_{t+1}|S_{t+1}=s']\Big|S_t = s_t\Big] \\
+	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[v(s_{t+1})\Big|S_t = s_t\Big]\\
+	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
+	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
+\end{align*}
+The expectation here describes what we expect the return to be if we continue from state s following policy $\pi$. The expectation can be written explicitly by summing over all possible actions and all possible returned states. The next two equations can help us make the next step.
+
+\href{https://stats.stackexchange.com/questions/243384/deriving-bellmans-equation-in-reinforcement-learning}{Reference}
+
+\end{appendices}

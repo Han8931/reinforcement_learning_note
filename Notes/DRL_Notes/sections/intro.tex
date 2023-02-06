@@ -3,6 +3,19 @@
 
 The general framework of MDPs (representing environments as MDPs) allows us to model virtually any complex sequential decision-making problem under uncertainty in a way that RL agents can interact with and learn to solve solely through experience. 
 
+Components of RL:
+\begin{itemize}
+	\item Agent
+	\item Action
+	\item Environment
+	\item State
+	\item The knowledge of the state is fully observable or partially observable.
+	\item Reward
+	\item Episodic task: from an initial state to a terminal state.
+	\item Continuing task: infinite horizon
+	\item Policy
+\end{itemize}
+
 
 \begin{definition}[Markov Property]
 	A state $S_t$ is \textbf{Markov} if and only if 
@@ -161,3 +174,17 @@ An optimal policy can be found by maximizing over $q_*(s,a)$,
 %	\item $v_*(s) = \max_a \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a v_*(s')$
 %	\item $q_*(s,a) = \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a \max_{a'} q_*(s', a')$
 %\end{itemize}
+
+\section{Multi-Armed Bandits}
+
+Bandit problems are stateless. Each arm has a fixed distribution of rewards. It does not depend on which arms were pulled previously. The goal is to explore the reward distributions of all arms and then keep pulling the best one.
+
+Markov decision processes are a temporal extension of bandit problems: pulling an arm influences the future rewards. Technically, there is a state that changes by pulling an arm. The reward distributions depend on that state.
+
+You can view bandit problems as Markov decision processes where all states are terminal. In that case, all decision sequences have a length of 1 and subsequent pulls don't influence each other.
+
+\begin{itemize}
+	\item When the lever of a slot machine is pulled it gives a random reward coming from a probability distribution specific to that machine.
+	\item Although the machines look identical, their reward probability distributions are different. 
+	\item In each turn, gamblers need to decide whether to play the machine that has given the highest average reward so far, or to try another machine. 
+\end{itemize}

@@ -24,4 +24,13 @@ The expectation here describes what we expect the return to be if we continue fr
 
 \href{https://stats.stackexchange.com/questions/243384/deriving-bellmans-equation-in-reinforcement-learning}{Reference}
 
+\section{Laplace Approximation}
+
+\section{Regularized Logistic Regression}
+
+\begin{align*}
+	-\log p(\boldsymbol{w}|\boldsymbol{x}) &= -\underbrace{\log p(\boldsymbol{x}|\boldsymbol{w})}_{likelihood} - \underbrace{\log p(\boldsymbol{w})}_{Prior} + \text{const.} \\
+	&= \sum\limits_j \log \left( 1 + \exp(-y_j \boldsymbol{w}^\top \boldsymbol{x}_j) \right) + \sum\limits_i \frac{q_i (w_i - m_i)^2}{2} + \text{const.}'
+\end{align*}
+
 \end{appendices}

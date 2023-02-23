@@ -1,3 +1,8 @@
+"""
+Reference:
+- https://proceedings.neurips.cc/paper/2011/file/e53a0a2978c28872a4505bdb51db06dc-Paper.pdf
+- https://gdmarmerola.github.io/ts-for-contextual-bandits/
+"""
 from contextual_bandits_user import UserGenerator
 
 import numpy as np
@@ -13,16 +18,25 @@ class RegularizedLR(object):
     """
     def __init__(self, name, alpha, rlambda, n_dim):
         self.name = name
+
+        # We can also increase incentives for exploration or exploitation 
+        # by defining a hyperparameter α, which multiplies 
+        # the variance of the Normal posteriors at prediction time
         self.alpha = alpha 
+
         self.rlambda = rlambda 
         self.n_dim = n_dim
-        self.m = np.zeros(n_dim)
+
+        self.m = np.zeros(n_dim) # Mean 
         self.q = np.ones(n_dim) * rlambda
         self.w = self.get_sampled_weights()
+        # We initialize all qi’s with a hyperparamenter λ, which is equivalent to the λ used in L2 regularization.
 
     def get_sampled_weights(self):
         """
         - For Thompson sampling
+        - The weights are actually assumed to be distributed as independent gaussians:
+        - W~N(m, q^-1)
         """
         w = np.random.normal(self.m, self.alpha * self.q**(-1/2))
         return w
@@ -31,11 +45,17 @@ class RegularizedLR(object):
         X, y = args
         n = len(y)
         regularizer = 0.5 * np.dot(self.q, (w - self.m)**2)
+        #np.sum([np.log(1 + np.exp(-y[j] * w.dot(X[j])))
+        # np.log(1 + np.exp(np.dot(w, X[j]))) - y[j] * np.dot(w, X[j])
+
+        # Logistic regression loss function
+        # Note that this loss function is diff from the classification loss. 
+        # We want to only maximize (or minimize) for a case of y=1
         pred_loss = sum([np.log(1 + np.exp(np.dot(w, X[j]))) - y[j] * np.dot(w, X[j]) for j in range(n)])
         return regularizer + pred_loss
 
     def fit(self, X, y):
-        if y:
+        if y: # y==1
             X = np.array(X)
             y = np.array(y)
 

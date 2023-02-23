@@ -9,3 +9,4 @@
 \contentsline {chapter}{Appendices}{7}{section*.3}%
 \contentsline {chapter}{Appendix}{7}{appendix*.4}%
 \contentsline {section}{\numberline {A.1}Bellman Equation}{7}{section.1..1}%
+\contentsline {section}{\numberline {B.2}Regularized Logistic Regression}{7}{section.1..2}%

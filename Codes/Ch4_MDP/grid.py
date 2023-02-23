@@ -44,7 +44,7 @@ if __name__ == "__main__":
     # [3, 4, 5]: |(1,0), (1,1), (1,2)|
     # [0, 1, 2]: |(0,0), (0,1), (0,2)|
     q = np.zeros(m2) # Initial probability distribution
-    q[m2//2] = 1 # A robot is at the center of the grid.
+    q[m2//2] = 1 # A robot is at the center of the grid, (1,1).
 
     # 9x9 matrix (i,j), state i -> state j.
     robot_movement_p = [0.2, 0.3, 0.25, 0.25]
@@ -71,6 +71,8 @@ if __name__ == "__main__":
 
     # state = [0, 1, ..., 8]
     print(itemfreq(visited))
+
+
 
 
 

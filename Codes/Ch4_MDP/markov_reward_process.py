@@ -28,5 +28,6 @@ for s in range(9):
             else:
                 crashed=True
         avg_rewards[s]+=episode_reward
-    avg_rewards/=n
-print(avg_rewards)
+avg_rewards/=n
+
+print(np.round(avg_rewards,2))

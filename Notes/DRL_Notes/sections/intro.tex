@@ -1,4 +1,27 @@
 \chapter{Introduction}
+\section{Markov Chain}
+\begin{itemize}
+	\item Reachable: $i\to j$
+	\item Communicate: $i\leftrightarrow j$
+	\item Irreducible: $i\leftrightarrow j, \forall i,j$
+	\item Absorbing state: If the only possible transition is to itself. This is also a terminal state.
+	\item Transient state: A state $s$ is called a transient state, if there is another state $s'$, that is reachable from $s$, but not vice versa. 
+	\item Recurrent state: A state that is not transient. 
+	\item Periodic: A state is periodic if all of the paths leaving $s$ come back after some multiple steps ($k>1$). 
+		\begin{itemize}
+			\item Recurrent state is aperiodic if $k=1$.
+		\end{itemize}
+	\item Ergodicity if a Markov chain follows:
+		\begin{itemize}
+			\item Irredicible
+			\item Recurrent
+			\item Aperiodic
+		\end{itemize}
+	\item Steady-state probability distribution.
+\end{itemize}
+
+$$p_n = qP^n$$
+
 \section{Markov Decision Process}
 
 The general framework of MDPs (representing environments as MDPs) allows us to model virtually any complex sequential decision-making problem under uncertainty in a way that RL agents can interact with and learn to solve solely through experience. 

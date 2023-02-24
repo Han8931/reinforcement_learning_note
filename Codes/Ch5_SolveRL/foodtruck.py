@@ -1,11 +1,13 @@
 import numpy as np
-
 import gym
+
+import pdb
 
 class FoodTruck(gym.Env):
     def __init__(self):
+        # demand: the amount of sold burgers
         self.v_demand = [100, 200, 300, 400]
-        self.p_demand = [0.3, 0.4, 0.2, 0.1]
+        self.p_demand = [0.3, 0.4, 0.2, 0.1] # Mon-Fri
         self.capacity = self.v_demand[-1] 
         self.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', "Weekend"]
 
@@ -15,6 +17,7 @@ class FoodTruck(gym.Env):
         self.action_space = [0, 100, 200, 300, 400] # Number of patties to purchase
         # Monday inventory is 0
         # Generate all possible states to construct a fully observable state space
+        # Possible inventory levels are 0-300
         self.state_space = [("Mon", 0)] + [(d, i) for d in self.days[1:] for i in [0, 100, 200, 300]]
 
     def get_next_state_reward(self, state, action, demand):
@@ -72,3 +75,36 @@ class FoodTruck(gym.Env):
         done = self.is_terminal(state)
         info = {'demand': demand, 'sales': result['sales']}
         return state, reward, done, info
+
+
+if __name__ =="__main__":
+
+    # Simulating an arbitrary policy
+    np.random.seed(0)
+    foodtruck = FoodTruck()
+    rewards = []
+    for i_episode in range(10000):
+        state = foodtruck.reset()
+        done = False
+        ep_reward = 0
+        while not done:
+            day, inventory = state
+            action = max(0, 300 - inventory)
+            state, reward, done, info = foodtruck.step(action)
+            ep_reward += reward
+        rewards.append(ep_reward)
+    print(np.mean(rewards))
+
+    # Single day expected reward
+    ucost = 4
+    uprice = 7
+    v_demand = [100, 200, 300, 400]
+    p_demand = [0.3, 0.4, 0.2, 0.1]
+    inv = 400
+
+    # uprice*np.sum([p_demand[i]*min(v_demand[i], inv) for i in range(4)]): profit by selling patties
+    # inv*ucost: cost of purchasing patties
+    profit = uprice*np.sum([p_demand[i]*min(v_demand[i], inv) for i in range(4)]) - inv*ucost
+    print(profit)
+
+

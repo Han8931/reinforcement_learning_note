@@ -9,5 +9,5 @@
 \contentsline {chapter}{Appendices}{7}{section*.3}%
 \contentsline {chapter}{Appendix}{7}{appendix*.4}%
 \contentsline {section}{\numberline {A.1}Bellman Equation}{7}{section.1..1}%
-\contentsline {section}{\numberline {B.2}Laplace Approximation}{7}{section.1..2}%
-\contentsline {section}{\numberline {C.3}Regularized Logistic Regression}{8}{section.1..3}%
+\contentsline {section}{\numberline {B.2}Laplace Approximation}{9}{section.1..2}%
+\contentsline {section}{\numberline {C.3}Regularized Logistic Regression}{9}{section.1..3}%

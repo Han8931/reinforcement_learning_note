@@ -17,7 +17,8 @@ class FoodTruck(gym.Env):
         self.action_space = [0, 100, 200, 300, 400] # Number of patties to purchase
         # Monday inventory is 0
         # Generate all possible states to construct a fully observable state space
-        # Possible inventory levels are 0-300
+        # Possible inventory levels are [0-300]
+        # ('Mon', 0): 0, ('Tue', 0): 0, ('Tue', 100): 0, ('Tue', 200): 0, ('Tue', 300): 0, ('Wed', 0): 0, ('Wed', 100)...
         self.state_space = [("Mon", 0)] + [(d, i) for d in self.days[1:] for i in [0, 100, 200, 300]]
 
     def get_next_state_reward(self, state, action, demand):
@@ -40,16 +41,17 @@ class FoodTruck(gym.Env):
         return result
 
     def get_transition_prob(self, state, action):
+        "= p[s',r|s,a]"
         next_s_r_prob = {}
         for ix, demand in enumerate(self.v_demand):
             result = self.get_next_state_reward(state, action, demand)
             next_s = (result['next_day'], result['next_inventory'])
             reward = result['reward']
-            prob = self.p_demand[ix]
+            prob = self.p_demand[ix] # I am not sure why this one is used as a transition prob here
             if (next_s, reward) not in next_s_r_prob:
                 next_s_r_prob[next_s, reward] = prob
             else:
-                next_s_r_prob[next_s, reward] += prob
+                next_s_r_prob[next_s, reward] += prob # ??
         return next_s_r_prob
 
     def reset(self):
@@ -93,7 +95,7 @@ if __name__ =="__main__":
             state, reward, done, info = foodtruck.step(action)
             ep_reward += reward
         rewards.append(ep_reward)
-    print(np.mean(rewards))
+    print(f"Avg Rewards: {np.mean(rewards)}") 
 
     # Single day expected reward
     ucost = 4
@@ -105,6 +107,6 @@ if __name__ =="__main__":
     # uprice*np.sum([p_demand[i]*min(v_demand[i], inv) for i in range(4)]): profit by selling patties
     # inv*ucost: cost of purchasing patties
     profit = uprice*np.sum([p_demand[i]*min(v_demand[i], inv) for i in range(4)]) - inv*ucost
-    print(profit)
+    print(f"Profit: {profit}") 
 
 

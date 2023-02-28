@@ -5,13 +5,14 @@
 \chapter{Appendix}
 
 \section{Bellman Equation}
+\label{appendix:bellman_equation}
 
 \textit{Bellman equation} can be derived as follows:
 
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
 	&= \mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1}|S_t = s]\\ 
-	&= \mathbb{E}_{\pi}[R_{t+1}|S_t = s] + \mathbb{E}_{\pi}[\gamma G_{t+1}|S_t = s]\\
+	&= \mathbb{E}_{\pi}[R_{t+1}|S_t = s] + \mathbb{E}_{\pi}[\gamma G_{t+1}|S_t = s], \quad \text{By Linearity of Expectation.}\\
 	&= \sum_{r_{t+1}}r_{t+1} P(R_{t+1}|S_t = s) + \mathbb{E}_{\pi}[\gamma G_{t+1}|S_t = s]\\
 	&= \sum_{r_{t+1}}r_{t+1} \sum_a P(R_{t+1}|S_t = s, A_t=a)P(A_t=a|S_t=s) + \mathbb{E}_{\pi}[\gamma G_{t+1}|S_t = s]\\
 	&=\sum_a \sum_{r_{t+1}}r_{t+1} \sum_{s'}  P(R_{t+1}, S_{t+1}=s'|S_t = s, A_t=a)P(A_t=a|S_t=s) + \mathbb{E}_{\pi}[\gamma G_{t+1}|S_t = s]\\
@@ -31,41 +32,48 @@
 &=\sum_a \pi(a|s)\sum_{r,s'}p(s',r|s,a)\Big[r + \gamma  v_\pi(s')\Big] 
 \end{align*}
 
-%\begin{align*}
-%	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
-%	& = \mathbb{E}_\pi\Bigg[\sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\Big|S_t=s\Bigg]\\
-%	& = \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ...|S_t=s]\\
-%	& = \mathbb{E}_\pi[R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + ...)|S_t=s]\\
-%	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
-%	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi[ G_{t+1}|S_t=s]\\
-%	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[\mathbb{E}_\pi[ G_{t+1}|S_{t+1}=s']\Big|S_t = s_t\Big] \\
-%	& = \mathbb{E}_\pi[R_{t+1}|S_t=s] + \gamma \mathbb{E}_\pi\Big[v(s_{t+1})\Big|S_t = s_t\Big]\\
-%	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
-%	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
-%\end{align*}
-The expectation here describes what we expect the return to be if we continue from state s following policy $\pi$. The expectation can be written explicitly by summing over all possible actions and all possible returned states. The next two equations can help us make the next step.
+Or simply, 
+\begin{align*}
+	v_\pi(s) &= \sum_a \pi(a|s)q(s,a)\\
+	&=\sum_a \pi(a|s)\sum_{r,s'}p(s',r|s,a)\Big[r + \gamma  v_\pi(s')\Big] 
+\end{align*}
+%The expectation here describes what we expect the return to be if we continue from state s following policy $\pi$. The expectation can be written explicitly by summing over all possible actions and all possible returned states. The next two equations can help us make the next step.
 
 \href{https://stats.stackexchange.com/questions/243384/deriving-bellmans-equation-in-reinforcement-learning}{Reference}
 
 Similarly,
-\begin{align*}
-	q_\pi(s, a) &= \mathbb{E}_{\pi}[G_t|S_t = s, A_t=a]\\ 
-	&= \mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1}|S_t = s, A_t=a]\\ 
-	&= \sum_{s'}\mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] P(S_{t+1}=s'|S_t=s, A_t=a)\\ 
-	&= \sum_{s'}\mathbb{E}_{\pi}[R_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] \mathcal{P}_{ss'}^a + \gamma\sum_{s'}\mathbb{E}_{\pi}[G_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] \mathcal{P}_{ss'}^a \\ 
-	&= \sum_{s'}\mathbb{E}_{\pi}[R_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] \mathcal{P}_{ss'}^a + \gamma\sum_{s'}\mathbb{E}_{\pi}[G_{t+1}|S_{t+1}=s'] \mathcal{P}_{ss'}^a \\ 
-	&= \sum_{s'} \sum_r r p(s',r|s,a) + \gamma\sum_{s'}v_\pi(s') \mathcal{P}_{ss'}^a \\ 
-	&= \sum_{s'}\sum_r r p(s',r|s,a) + \gamma\sum_{s'}\sum_{a'}q_\pi(s',a')\pi(a'|s') \mathcal{P}_{ss'}^a \\ 
-\end{align*}
+\begin{eqnarray*}
+q_\pi(s,a) &=& \mathbb{E}_\pi[G_t|S_t=s,A_t=a]\\
+&=&\mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s,A_t=a]\\
+&=&\mathbb{E}_\pi[R_{t+1}|S_t=s,A_t=a] + \gamma\mathbb{E}_\pi[G_{t+1}|S_t=s,A_t=a]\\
+&=&\sum_r rp(r|s,a) + \gamma\mathbb{E}_\pi[G_{t+1}|S_t=s,A_t=a]\\
+&=&\sum_r r\sum_{s'}p(s',r|s,a) + \gamma\mathbb{E}_\pi[G_{t+1}|S_t=s,A_t=a]\\
+&=&\sum_{s',r}rp(s',r|s,a) + \gamma\mathbb{E}[\mathbb{E}_\pi[G_{t+1}|S_t=s,A_t=a,R_{t+1},S_{t+1}]] \quad \text{By Law of Total Expectation.}\\
+&=&\sum_{s',r} rp(s',r|s,a) + \gamma\sum_{s',r}\mathbb{E}_\pi[G_{t+1}|S_t=s,A_t=a,R_{t+1}=r,S_{t+1}=s']p(s',r|s,a)\\
+&=&\sum_{s',r} p(s',r|s,a)[r + \gamma\mathbb{E}_\pi[G_{t+1}|S_t=s,A_t=a,R_{t+1}=r,S_{t+1}=s']\\
+	&=&\sum_{s',r} p(s',r|s,a)[r + \gamma\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s'] \quad \text{By Markov Property.}\\
+&=&\sum_{s',r} p(s',r|s,a)[r + \gamma v_\pi(s')]\\
+\end{eqnarray*}
 
-\section{Laplace Approximation}
-It works well
 
-\section{Regularized Logistic Regression}
-
-\begin{align*}
-	-\log p(\boldsymbol{w}|\boldsymbol{x}) &= -\underbrace{\log p(\boldsymbol{x}|\boldsymbol{w})}_{likelihood} - \underbrace{\log p(\boldsymbol{w})}_{Prior} + \text{const.} \\
-	&= \sum\limits_j \log \left( 1 + \exp(-y_j \boldsymbol{w}^\top \boldsymbol{x}_j) \right) + \sum\limits_i \frac{q_i (w_i - m_i)^2}{2} + \text{const.}'
-\end{align*}
+%\begin{align*}
+%	q_\pi(s, a) &= \mathbb{E}_{\pi}[G_t|S_t = s, A_t=a]\\ 
+%	&= \mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1}|S_t = s, A_t=a]\\ 
+%	&= \sum_{s'}\mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] P(S_{t+1}=s'|S_t=s, A_t=a)\\ 
+%	&= \sum_{s'}\mathbb{E}_{\pi}[R_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] \mathcal{P}_{ss'}^a + \gamma\sum_{s'}\mathbb{E}_{\pi}[G_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] \mathcal{P}_{ss'}^a \\ 
+%	&= \sum_{s'}\mathbb{E}_{\pi}[R_{t+1}|S_t = s, A_t=a, S_{t+1}=s'] \mathcal{P}_{ss'}^a + \gamma\sum_{s'}\mathbb{E}_{\pi}[G_{t+1}|S_{t+1}=s'] \mathcal{P}_{ss'}^a \\ 
+%	&= \sum_{s'} \sum_r r p(s',r|s,a) + \gamma\sum_{s'}v_\pi(s') \mathcal{P}_{ss'}^a \\ 
+%	&= \sum_{s'}\sum_r r p(s',r|s,a) + \gamma\sum_{s'}\sum_{a'}q_\pi(s',a')\pi(a'|s') \mathcal{P}_{ss'}^a
+%\end{align*}
+%
+%\section{Laplace Approximation}
+%It works well
+%
+%\section{Regularized Logistic Regression}
+%
+%\begin{align*}
+%	-\log p(\boldsymbol{w}|\boldsymbol{x}) &= -\underbrace{\log p(\boldsymbol{x}|\boldsymbol{w})}_{likelihood} - \underbrace{\log p(\boldsymbol{w})}_{Prior} + \text{const.} \\
+%	&= \sum\limits_j \log \left( 1 + \exp(-y_j \boldsymbol{w}^\top \boldsymbol{x}_j) \right) + \sum\limits_i \frac{q_i (w_i - m_i)^2}{2} + \text{const.}'
+%\end{align*}
 
 \end{appendices}

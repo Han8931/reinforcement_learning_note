@@ -1,0 +1,32 @@
+\section{Multi-Armed Bandits}
+
+%$k$-armed bandit problem:
+%\begin{itemize}
+%	\item You are given $k$ different options or actions
+%\end{itemize}
+
+Bandit problems are stateless. Each arm has a fixed distribution of rewards. It does not depend on which arms were pulled previously. The goal is to explore the reward distributions of all arms and then keep pulling the best one.
+
+Markov decision processes are a temporal extension of bandit problems: pulling an arm influences the future rewards. Technically, there is a state that changes by pulling an arm. The reward distributions depend on that state.
+
+You can view bandit problems as Markov decision processes where all states are terminal. In that case, all decision sequences have a length of 1 and subsequent pulls don't influence each other.
+
+\begin{itemize}
+	\item When the lever of a slot machine is pulled it gives a random reward coming from a probability distribution specific to that machine.
+	\item Although the machines look identical, their reward probability distributions are different. 
+	\item In each turn, gamblers need to decide whether to play the machine that has given the highest average reward so far, or to try another machine. 
+\end{itemize}
+
+In our $k$-armed bandit problem, each of the $k$ actions has an expected or mean reward given that that action is selected: let us call this the \textit{value} of that action. We denote the action selected on time step $t$ as $A_t$, and the corresponding reward as $R_t$. The value then of an arbitrary action $a$, denoted $q_*(a)$, is the expected reward given that $a$ is selected:
+$$q_*(a) = \mathbb{E}[R_t|A_t=a].$$
+Since we do not know which action is the best, we have to estimate the value of actions $a$ at time step $t$, $Q_t(a)$.
+
+\subsection{Action-value Methods}
+
+One natural way to estimate this is by averaging the rewards actually received: $Q_t(a)$ is sum of rewards when $a$ taken prior $t$ over number of times $a$ taken prior to $t$:
+\begin{align*}
+	Q_t(a) = \frac{\sum_{t=1}^{t-1}R_i \cdot \mathds{1}_{A_i=a}}{\sum_{t=1}^{t-1}\mathds{1}_{A_i=a}}
+\end{align*}
+Then, the simplest action selection rule is to select one of the actions with the highest estimated value, which is a greedy action selection method represented as follows:
+$$A_t=\argmax_{a}Q_t(a).$$
+This approach always exploits current knowledge to maximize immediate reward; it spends no time at all sampling apparently inferior actions to see if they might really be better. A simple alternative is to behave greedily most of the time, but every once in a while, instead select randomly from among all the actions. This near greedy action selection rule is called $\epsilon$-greedy method. In the limit as the number of steps increases, every action will be sampled an infinite number of times, which ensures all the $Q_t(a)$ converge to $q_*(a)$.

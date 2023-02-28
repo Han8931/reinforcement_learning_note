@@ -1,4 +1,20 @@
 \chapter{Introduction}
+Reinforcement learning (RL) is learning what to do so as to maximize a numerical reward signal. The learner is not told which actions to take, but instaed must discover which actions yield the most reward by trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards. 
+
+Important features of RL:
+
+\begin{itemize}
+	\item Trial-and-error search
+	\item Delayed reward
+	\item RL uses training information that \textit{evaluates} the actions taken rather than \textit{instructs} by giving correct actions.
+		\begin{itemize}
+			\item Evaluative feedback, not about best or worst.
+		\end{itemize}
+\end{itemize}
+
+%These two characteristics --\textbf{} and \textbf{}-- are the two most important distinguishing features of reinforcement learning.
+
+
 \section{Markov Chain}
 \begin{itemize}
 	\item Reachable: $i\to j$
@@ -17,178 +33,11 @@
 			\item Recurrent
 			\item Aperiodic
 		\end{itemize}
-	\item Steady-state probability distribution.
+	%\item Steady-state probability distribution.
 \end{itemize}
 
-$$p_n = qP^n$$
+%$$p_n = qP^n$$
 
-\section{Markov Decision Process}
-
-The general framework of MDPs (representing environments as MDPs) allows us to model virtually any complex sequential decision-making problem under uncertainty in a way that RL agents can interact with and learn to solve solely through experience. 
-
-Components of RL:
-\begin{itemize}
-	\item Agent
-	\item Action
-	\item Environment
-	\item State
-	\item The knowledge of the state is fully observable or partially observable.
-	\item Reward
-	\item Episodic task: from an initial state to a terminal state.
-	\item Continuing task: infinite horizon
-	\item Policy
-\end{itemize}
-
-
-\begin{definition}[Markov Property]
-	A state $S_t$ is \textbf{Markov} if and only if 
-	$$P[S_{t+1}|S_t, A_t] = P[S_{t+1}|S_t, A_t, S_{t-1},A_{t-1},...]$$
-\end{definition}
-
-\begin{definition}[Transition Function]
-	$$p(s'|s,a) = P(S_t=s'|S_{t-1}=s,A_{t-1}=a)$$
-\end{definition}
-\begin{itemize}
-	\item The way the environment changes as a response to actions is referred to as the state-transition probabilities, or more simply, the transition function, and is denoted by $T(s,a,s')$.
-	\item $\sum_{s'\in S}p(s'|s,a) = 1, \forall s \in S, \forall a\in A(s)$
-\end{itemize}
-
-\begin{definition}[Reward Function]
-	$$r(s,a) =\mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a] $$
-\end{definition}
-\begin{itemize}
-	\item The reward function is defined as a function that takes in a state-action pair.
-	\item It is the expectation of reward at time step $t$, given the state-action pair in the previous time step.
-	\item It can also be defined as a function that takes a full transition tuple $s,a,s'$.
-		$$r(s,a,s') =\mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a,S_{t}=s]$$
-	\item $R_t\in \mathcal{R}\in \mathbb{R}$
-\end{itemize}
-
-\begin{definition}[Discount Factor, $\gamma$]
-	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{t} $$
-\end{definition}
-\begin{itemize}
-	\item $G_t = \sum_{k=0}^{\infty}\gamma^k R_{t+k+1}$
-	\item $G_t = R_{t+1}+\gamma G_{t+1}$
-	\item $\gamma=0$: myopic evaluation
-	\item $\gamma=1$: far-sighted evaluation
-	\item Uncertainty about the future that may not be fully observed
-	\item Mathematically convenient to discount rewards. 
-	\item Avoid infinite returns in cyclic Markov processes.
-\end{itemize}
-
-\subsection{The State-Value Function}
-
-\begin{definition}[The State-Value Function, $V$]
-	The state value function $v(s)$ of an Markov Reward Process is the expected return starting from state $s$
-		$$v_{\pi}(s) &= \mathbb{E}_\pi[G_t|S_t=s]$$
-\end{definition}
-
-\begin{itemize}
-	\item The value of a state $s$ is the expection over policy $\pi$.
-	\item Policies are universal plans, which provides all possible plans for all states. 
-		\begin{itemize}
-			\item Plans are not enough in stochastic environments.
-			\item Policy can be stochastic or deterministic.
-			\item A policy is a function that prescribes actions to take for a given non-terminal state.
-		\end{itemize}
-	\item If we are given a policy and the MDP, we should be able to calculate the expected return starting from every single state. 
-\end{itemize}
-
-\begin{align*}
-	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
-	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
-\end{align*}
-\begin{itemize}
-	\item \textit{Bellman equation}
-\end{itemize}
-
-\subsection{The Action-Value Function}
-\begin{itemize}
-	\item Another critical question that we often need to ask is not merely about the value of a state but the value of taking action $a$ at a state $s$.
-	\item Which action is better under each policy?
-	\item The action-value function, also known as $Q$-function or $Q^\pi(s,a)$, captures precisely this.
-		\begin{itemize}
-			\item The expected return if the agent follows policy $\pi$ after taking action $a$ in state $s$.
-		\end{itemize}
-\end{itemize}
-
-\begin{definition}[The Action-Value Function, $Q$]
-	The action-value function $q_{\pi}(s,a)$ is the expected return starting from state $s$, tacking action $a$ under policy $\pi$
-	$$q_{\pi}(s,a) &= \mathbb{E}_\pi[G_t|S_t=s, A_t=a]$$
-\end{definition}
-
-\begin{itemize}
-	\item The Bellman equation for action values is given by
-	\begin{align*}
-		q_{\pi}(s,a) &= \mathbb{E}_\pi[G_t|S_t=s, A_t=a]\\
-		& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s, A_t=a]\\
-		& = \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
-	\end{align*}
-	\item Notice that we do not weight over actions because we are interested only in a specific action.
-\end{itemize}
-
-\subsection{The Action-Advantage Function}
-
-\begin{definition}[The Action-Advantage Function, $A$]
-	$$a_{\pi}(s,a) &= q_\pi(s,a)-v_\pi(s)$$
-\end{definition}
-
-\begin{itemize}
-	\item The advantage function describes how much better it is to take action $a$ instead of following policy $\pi$. In other words, the advantage of choosing action $a$ over the default action.
-\end{itemize}
-
-\subsection{Optimality}
-
-\begin{definition}[Optimal State-Value Function]
-	The optimal state-value function $v_{*}(s)$ is the maximum value over all policies
-	$$v_{*}(s) = \max_{\pi} v_{\pi}(s)$$
-\end{definition}
-
-\begin{itemize}
-	\item The optimal state-value function can be obtained as follows:
-		$$v_{*}(s) = \max_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_*(s')]$$
-\end{itemize}
-
-\begin{definition}[Optimal Action-Value Function]
-	The optimal action-value function $q_{*}(s, a)$ is the maximum value over all policies
-	$$q_{*}(s,a) = \max_{\pi} q_{\pi}(s,a)$$
-\end{definition}
-\begin{itemize}
-	\item The optimal state-value function can be obtained as follows:
-		$$q_{*}(s,a) = \max_a \sum_{s',r}p(s',r|s,a)[r + \gamma \max_a q_*(s',a')]$$
-	\item The optimal value function specifies the best possible performance in the MDP.
-	\item The MDP is solved when we know the optimal value function
-\end{itemize}
-
-\begin{theorem}[Optimal Policy Theorem]
-	$$\pi\geq \pi' \quad\textrm{if}\quad v_\pi(s) \geq v_{\pi'}(s), \forall s$$
-	For any Markov Decision Process:
-	\begin{itemize}
-		\item There exists an optimal policy $\pi_*$ that is better than or equal to all other policies, $\pi_*\geq \pi, \forall \pi$
-		\item All optimal policies achieve the optimal value function, $v_{\pi_*}(s) = v_*(s)$
-		\item All optimal policies achieve the optimal action-value function, $q_{\pi_*}(s,a) = q_{*}(s,a)$
-	\end{itemize}
-\end{theorem}
-
-An optimal policy can be found by maximizing over $q_*(s,a)$, 
-\begin{align*}
-	\pi_*(a|s) = 
-	\begin{cases} 
-		&1 \quad \textrm{if } a = \argmaxE_{a\in \mathcal{A}}q_*(s,a)\\
-		&0 \quad \textrm{otherwise}
-	\end{cases}
-\end{align*}
-\begin{itemize}
-	\item There is always a deterministic optimal policy for any MDP
-	\item If we know $q_*(s,a)$, we immediately have the optimal policy 
-		\begin{itemize}
-			\item Q-learning: learns Q values first
-			\item Policy gradient: learns optimal policy without learning Q values
-		\end{itemize}
-\end{itemize}
 
 %\subsection{Bellman Optimility Equation for $v_*$ and $q_*$}
 %\begin{itemize}
@@ -198,16 +47,3 @@ An optimal policy can be found by maximizing over $q_*(s,a)$,
 %	\item $q_*(s,a) = \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a \max_{a'} q_*(s', a')$
 %\end{itemize}
 
-\section{Multi-Armed Bandits}
-
-Bandit problems are stateless. Each arm has a fixed distribution of rewards. It does not depend on which arms were pulled previously. The goal is to explore the reward distributions of all arms and then keep pulling the best one.
-
-Markov decision processes are a temporal extension of bandit problems: pulling an arm influences the future rewards. Technically, there is a state that changes by pulling an arm. The reward distributions depend on that state.
-
-You can view bandit problems as Markov decision processes where all states are terminal. In that case, all decision sequences have a length of 1 and subsequent pulls don't influence each other.
-
-\begin{itemize}
-	\item When the lever of a slot machine is pulled it gives a random reward coming from a probability distribution specific to that machine.
-	\item Although the machines look identical, their reward probability distributions are different. 
-	\item In each turn, gamblers need to decide whether to play the machine that has given the highest average reward so far, or to try another machine. 
-\end{itemize}

@@ -1,0 +1,113 @@
+\chapter{Policy Gradient}
+\chapter{Policy Gradient}
+We will use a gradient ascent algorithm:
+\begin{align*}
+	J(\theta) &=  \mathbb{E}_{\tau\sim \pi_\theta(\tau)}[r(\tau)]\\
+	&= \int \pi_\theta(\tau) r(\tau)
+	\label{eq:cost_fn}
+\end{align*}
+It is a expected reward under the policy $\pi_\theta$.
+
+$$\theta \leftarrow \theta + \eta \nabla_\theta J(\theta)$$
+
+Note that by using REINFORCE algorithm which can be expressed as follows:
+$$\nabla_\theta \pi_\theta(\tau) = \pi_\theta \frac{\nabla_\theta \pi_\theta(\tau)}{\pi_\theta(\tau)} = \pi_\theta \nabla_\theta \log \pi_\theta(\tau)$$
+
+We can express $J(\theta)$ as follows:
+\begin{align*}
+    \nabla_\theta J(\theta) &= \int \nabla_\theta\pi_\theta(\tau) r(\tau) = \int \pi_\theta \nabla_\theta \log \pi_\theta(\tau)r(\tau)\\
+	&= \mathbb{E}_{\tau\sim \pi_\theta(\tau)}[\nabla_\theta \log \pi_\theta(\tau)r(\tau)] 
+\end{align*}
+Note that $\nabla_\theta \log \pi_\theta(\tau)$ is the maximum loglikelihood of trajectory, because gradient is the maximum direction of the function. This expectation can be estimated by Monte-Carlo method. 
+
+\section{Natural Policy Gradient}
+\subsection{KL-divergence between perturbed distributions}
+Let $p(x; \theta)$ be some family of probability distributions over $x$ parameterized by a vector of real numbers $\theta$. We're interested in knowing how much the distribution changes when we perturb the parameter vector from a fixed $\theta_t$ to some new value $\theta_t+\delta \theta$. As a measure of change in probability distribution, we can use the KL-divergence measure. Specifically, we want to measure $D_{KL}(p(x;\theta_t)|| p(x;\theta_t+\delta \theta)$, but we want to write it in a form amenable to the gradient-based update formulation. We can do this by taking it's second-order Taylor expansion around $\theta_t$. During the derivation, we'll find that a lot of terms in the expansion disappear leaving us with a very simple expression that's perfect for our purposes. 
+
+Looking first at the full KL-divergence, we see that the term we want to 
+
+\begin{align*}
+	D_{KL}(p(x;\theta_t)||p(x;\theta_t+\delta \theta)) &= \int p(x;\theta_t)\log \frac{p(x;\theta_t)}{p(x;\theta_t+\delta \theta)} dx\\
+	&= \int p(x;\theta_t)\log p(x;\theta_t) dx - \int p(x;\theta_t)\log p(x;\theta_t+\delta \theta) dx
+\end{align*}
+Note that the second-order Taylor series expansion is
+\begin{align*}
+	f(\theta) \approx f(\theta_t) + \nabla f(\theta_t)^T\delta\theta + \frac{1}{2} \delta\theta^T\nabla^2f(\theta_t)\delta\theta,
+\end{align*}
+where $\theta=\theta_t+\delta\theta$, or equivalently $\delta\theta = \theta-\theta_t$. Applying that expansion to the pertinent term in the $KL$-divergence expression, we get
+\begin{align*}
+	\log p(x;\theta_t+\delta \theta) &\approx \log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \deltaf\theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta.
+\end{align*}
+Pugging this second-order Taylor expansion back into the above expression for the $D_{KL}$ gives
+
+\begin{align*}
+	D_{KL}&(p(x;\theta_t)||p(x;\theta_t+\delta \theta))\\ &= \int p(x;\theta_t)\log p(x;\theta_t) dx - \int p(x;\theta_t)\log p(x;\theta_t+\delta \theta) dx\\
+	&\approx \int p(x;\theta_t)\log p(x;\theta_t) dx\\
+	&\quad - \int p(x;\theta_t)\Bigg(\log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \deltaf\theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta \Bigg)dx\\
+	&= 0 - \underbrace{\int p(x;\theta_t)\Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T dx \deltaf\theta}_{=0} - \frac{1}{2}\delta\theta^T\Bigg(\int p(x;\theta_t) \nabla^2 \log p(x;\theta_t) dx\Bigg) \delta\theta\\
+	&= -\frac{1}{2}\delta\theta^T\Bigg(\int p(x;\theta_t) \nabla^2 \log p(x;\theta_t) dx\Bigg) \delta\theta.
+\end{align*}
+
+The Hessian can be computed as follows:
+\begin{align*}
+	\frac{\partial^2}{\partial \theta_t^{i}\partial \theta_t^{j}}[\log p(x;\theta_t)] &= \frac{\partial}{\partial \theta_t^{i}}\Bigg(\frac{\frac{\partial}{\partial \theta_t^{j}}  p(x;\theta_t)}{p(x;\theta_t)}\Bigg)\\
+	&= \frac{p(x;\theta_t)\frac{\partial^2}{\partial \theta_t^{i}\partial \theta_t^{j}} p(x;\theta_t) - \frac{\partial}{\partial \theta_t^{i}}p(x;\theta_t)\frac{\partial}{\partial \theta_t^{j}}p(x;\theta_t)}{p(x;\theta_t)^2}\\
+	&= \frac{1}{p(x;\theta_t)}\frac{\partial^2}{\partial \theta_t^{i}\partial \theta_t^{j}} p(x;\theta_t) - \Bigg(\frac{\frac{\partial}{\partial \theta_t^{i}}p(x;\theta_t)}{p(x;\theta_t)}\Bigg)\Bigg(\frac{\frac{\partial}{\partial \theta_t^{j}}p(x;\theta_t)}{p(x;\theta_t)}\Bigg).
+\end{align*}
+The second term is an element of the outer product between $\nabla \log p(x;\theta_t)$ and itself. In matrix form, this becomes 
+\begin{align*}
+	\nabla^2 \log p(x;\theta_t) = \frac{1}{p(x;\theta_t)}\nabla^2 p(x;\theta_t) - \nabla \log p(x;\theta_t) \nabla \log  p(x;\theta_t)^T. 
+\end{align*}
+Finally, we get
+\begin{align*}
+	D_{KL}&(p(x;\theta_t)||p(x;\theta_t+\delta \theta))\\ &\approx -\frac{1}{2}\delta\theta^T\int p(x;\theta_t) \nabla^2 \log p(x;\theta_t) dx \delta\theta\\
+	&= \frac{1}{2}\delta\theta^T\Bigg(\int \nabla^2 \log p(x;\theta_t) dx\Bigg) \delta\theta \\
+	&\quad + \frac{1}{2}\delta\theta^T \Bigg(\int p(x;\theta_t) [\nabla \log p(x;\theta_t) \nabla \log  p(x;\theta_t)^T]dx\Bigg) \delta\theta \\
+	&= \frac{1}{2}\delta\theta^T \underbrace{\Bigg(\int p(x;\theta_t) [\nabla \log p(x;\theta_t) \nabla \log  p(x;\theta_t)^T]dx\Bigg)}_{G(\theta_t)} \delta\theta.
+\end{align*}
+The central matrix here $G(\theta_t)$ is known as the \textbf{Fisher Information matrix} and can has been thoroughly studied within the field of Information Geometry as the natural Riemannian structure on a manifold of probability distributions. As such it defines a natural norm on perturbations to probability distributions, which was our original motivation for examning the second-order Taylor expansion of the KL-divergence in the first place. 
+
+\begin{align*}
+	\theta_{t+1} = \theta_t - \eta_t G(\theta_t)^{-1}\nabla f(\theta_t).
+\end{align*}
+
+
+\section{Proximal Policy Optimization}
+
+PPO objective is 
+
+$$ \theta_{k+1} = \underset{\theta}{\operatorname{argmax}} \underset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}} [L(s, a, \theta_k, \theta)],$$
+where $L$ is given by
+$$L(s, a, \theta_k, \theta) = \min \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)} A^{\pi_{\theta_k}}(s,a), \textrm{ Clip}\Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)}, 1-\varepsilon, 1+\varepsilon\Bigg) A^{\pi_{\theta_k}}(s,a)\Bigg).$$
+Roughly, $\varepsilon$ is a hyperparameter which says how far away the new policy is allowed to go from the old one. A simpler expression of the above expression is
+\begin{align}
+	L(s, a, \theta_k, \theta) = \min \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)} A^{\pi_{\theta_k}}(s,a), g(\varepsilon, A^{\pi_{\theta_k}}(s,a)) \Bigg),
+	\label{eq:ppo_objective}
+\end{align}
+where 
+\begin{align}
+	g(\varepsilon,A) = 
+	\begin{cases}
+		(1+\varepsilon)A & A\geq 0\\
+		(1-\varepsilon)A & A< 0.
+	\end{cases}
+	\label{eq:ppo_clip}
+\end{align}
+
+\paragraph{Positive Advantage:} Suppose the advantage for that state-action pair is positive, in which case its contribution to the objective reduces to
+\begin{align}
+	L(s, a, \theta_k, \theta) = \min \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)}, 1+\varepsilon \Bigg) A^{\pi_{\theta_k}}(s,a).
+	\label{eq:ppo_positive}
+\end{align}
+Because the advantage is positive, the objective will increase if the action becomes more likely that is, if $\pi_{\theta}(a|s)$ increases. But the min in this term puts a limit to how much the objective can increase. Once $\pi_{\theta}(a|s) > (1+\epsilon) \pi_{\theta_k}(a|s)$, the min kicks in and this term hits a ceiling of $(1+\epsilon) A^{\pi_{\theta_k}}(s,a)$. Thus, the new policy does not benefit by going far away from the old policy.
+
+\paragraph{Negative Advantage:} Suppose the advantage for that state-action pair is negative, in which case its contribution to the objective reduces to
+\begin{align}
+	L(s, a, \theta_k, \theta) = \min \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)}, 1-\varepsilon \Bigg) A^{\pi_{\theta_k}}(s,a).
+	\label{eq:ppo_negative}
+\end{align}
+
+Because the advantage is negative, the objective will increase if the action becomes less likely—that is, if $\pi_{\theta}(a|s)$ decreases. But the max in this term puts a limit to how much the objective can increase. Once $\pi_{\theta}(a|s) < (1-\epsilon) \pi_{\theta_k}(a|s)$, the max kicks in and this term hits a ceiling of $(1-\epsilon) A^{\pi_{\theta_k}}(s,a)$. Thus, again, the new policy does not benefit by going far away from the old policy.
+
+What we have seen so far is that clipping serves as a regularizer by removing incentives for the policy to change dramatically, and the hyperparameter $\epsilon$ corresponds to how far away the new policy can go from the old while still profiting the objective.
+

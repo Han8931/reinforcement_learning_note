@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  28 FEB 2023 22:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  28 FEB 2023 23:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -536,7 +536,7 @@ File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box106
 ) (./main.aux
 (./sections/intro.aux) (./sections/mba.aux) (./sections/mdp.aux)
-(./appendix/appendix.aux))
+(./sections/policy_gradient.aux) (./appendix/appendix.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -750,13 +750,13 @@ Chapter 2.
 
 
 ] [5]
-<./images/backup_vpi.png, id=128, 341.275pt x 255.95625pt>
+<./images/backup_vpi.png, id=163, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
 Package pdftex.def Info: ./images/backup_vpi.png  used on input line 114.
 (pdftex.def)             Requested size: 102.38329pt x 76.78746pt.
  [6 <./images/backup_vpi.png>] [7]
-<./images/optimal_action.pdf, id=140, 354.80164pt x 170.62769pt>
+<./images/optimal_action.pdf, id=176, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
 Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 210.
@@ -765,7 +765,139 @@ Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 210.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8]) [9 <./images/optimal_action.pdf>] (./main.bbl) [10
+[8]) [9 <./images/optimal_action.pdf>]
+\openout2 = `./sections/policy_gradient.aux'.
+
+ (./sections/policy_gradient.tex
+Chapter 3.
+[10
+
+
+
+
+]
+Chapter 4.
+[11
+
+]
+! Undefined control sequence.
+<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
+                                                  \theta + \frac {1}{2}\delt...
+l.40 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
+                                                  \theta + \frac {1}{2}\delt...
+l.40 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
+                                                  \theta + \frac {1}{2}\delt...
+l.49 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...p(x;\theta _t)}\Bigg )^T dx \deltaf 
+                                                  \theta 
+l.49 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
+                                                  \theta + \frac {1}{2}\delt...
+l.49 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...p(x;\theta _t)}\Bigg )^T dx \deltaf 
+                                                  \theta 
+l.49 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[12]
+! Undefined control sequence.
+<recently read> \mathbbm 
+                         
+l.79 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+                                                   [L(s, a, \theta_k, \theta...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \mathbbm 
+                    {E}
+l.79 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+                                                   [L(s, a, \theta_k, \theta...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \mathbbm 
+                    {E}
+l.79 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+                                                   [L(s, a, \theta_k, \theta...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! Package amsmath Error: Multiple \label's: label '{eq:cost_fn}' will be lost.
+
+See the amsmath package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86 \end{align}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[13]) [14] (./main.bbl
+
+LaTeX Warning: Empty `thebibliography' environment on input line 3.
+
+) [15
 
 
 
@@ -773,29 +905,29 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ]
 \openout2 = `./appendix/appendix.aux'.
 
-
-(./appendix/appendix.tex [11
-
+ (./appendix/appendix.tex [16
 
 
-] [12]
+
+] [17]
 Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  [][][] []
  []
 
-) [13] (./main.aux (./sections/intro.aux) (./sections/mba.aux)
-(./sections/mdp.aux) (./appendix/appendix.aux))
+[18]) [19] (./main.aux (./sections/intro.aux) (./sections/mba.aux)
+(./sections/mdp.aux) (./sections/policy_gradient.aux) (./appendix/appendix.aux)
+)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DCC68A8DAB6627E9EF3193510A7FE5C8;1926.
+(rerunfilecheck)             Checksum: E02DA550DD21562E57E41B874EF56BC1;3125.
  ) 
 Here is how much of TeX's memory you used:
- 16870 strings out of 478238
- 274950 string characters out of 5850455
+ 16960 strings out of 478238
+ 276796 string characters out of 5850455
  643703 words of memory out of 5000000
- 34624 multiletter control sequences out of 15000+600000
- 499822 words of font info for 170 fonts, out of 8000000 for 9000
+ 34656 multiletter control sequences out of 15000+600000
+ 500722 words of font info for 187 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,16n,65p,1001b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,19n,65p,1001b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -813,16 +945,16 @@ x1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr
 /share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-di
 st/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fonts/type1/
 public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
-/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><
-/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texm
-f-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
-uper/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.p
+/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><
+/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
+f-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
+uper/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.p
 fb>
-Output written on main.pdf (15 pages, 432686 bytes).
+Output written on main.pdf (21 pages, 448074 bytes).
 PDF statistics:
- 302 PDF objects out of 1000 (max. 8388607)
- 229 compressed objects within 3 object streams
- 43 named destinations out of 1000 (max. 500000)
- 56435 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 366 PDF objects out of 1000 (max. 8388607)
+ 287 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
+ 55979 words of extra memory for PDF output out of 61914 (max. 10000000)
 

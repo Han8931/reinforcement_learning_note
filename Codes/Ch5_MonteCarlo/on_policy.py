@@ -7,6 +7,7 @@ from policy_eval import base_policy, choose_action, policy_evaluation
 import pdb
 
 def get_eps_greedy(actions, eps, a_best):
+    """Build epsilon-greedy policy"""
     prob_a = {}
     n_a = len(actions)
     for a in actions:
@@ -49,8 +50,7 @@ def on_policy_first_visit_mc(env, n_iter, eps, gamma):
                 Q[s][a] = Q_n[s][a] * Q[s][a] + G
                 Q_n[s][a] += 1
                 Q[s][a] /= Q_n[s][a]
-                a_best = max(Q[s].items(),
-                             key=operator.itemgetter(1))[0]
+                a_best = max(Q[s].items(), key=operator.itemgetter(1))[0]
                 policy[s] = get_eps_greedy(actions, eps, a_best)
 
     return policy, Q, Q_n

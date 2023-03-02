@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  2 MAR 2023 22:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  2 MAR 2023 22:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -698,22 +698,23 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc)
-\tf@toc=\write4
-\openout4 = `main.toc'.
-
-
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.51 \newpage
-              [1
+l.23 ...sline {chapter}{Appendix}{17}{appendix*.6}
+                                                  % [1
 
-] [2]
+])
+\tf@toc=\write4
+\openout4 = `main.toc'.
+
+ [2]
 \openout2 = `./sections/intro.aux'.
 
- (./sections/intro.tex
+
+(./sections/intro.tex
 Chapter 1.
 [1
 
@@ -751,13 +752,13 @@ Chapter 2.
 
 
 ] [5]
-<./images/backup_vpi.png, id=173, 341.275pt x 255.95625pt>
+<./images/backup_vpi.png, id=188, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
 Package pdftex.def Info: ./images/backup_vpi.png  used on input line 114.
 (pdftex.def)             Requested size: 102.38329pt x 76.78746pt.
  [6 <./images/backup_vpi.png>] [7]
-<./images/optimal_action.pdf, id=185, 354.80164pt x 170.62769pt>
+<./images/optimal_action.pdf, id=200, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
 Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 210.
@@ -771,17 +772,47 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
  (./sections/monte_carlo.tex
 Chapter 3.
-) [10
+[10
 
 
 
 
 ]
+Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
+(microtype)             (new value: 9.0pt) on input line 20.
+Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
+(microtype)             (new value: 5.0pt) on input line 20.
+
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 $$\[
+         P(a_t^{*}) = 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$$
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.21 ... 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$
+                                                  $
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+) [11]
 \openout2 = `./sections/policy_gradient.aux'.
 
  (./sections/policy_gradient.tex
 Chapter 4.
-[11
+[12
 
 
 
@@ -853,7 +884,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[12]
+[13]
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
@@ -900,11 +931,11 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[13]) [14] (./main.bbl
+[14]) [15] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [15
+) [16
 
 
 
@@ -912,27 +943,27 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 ]
 \openout2 = `./appendix/appendix.aux'.
 
- (./appendix/appendix.tex [16
+ (./appendix/appendix.tex [17
 
 
 
-] [17]
+] [18]
 Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  [][][] []
  []
 
-[18]) [19] (./main.aux (./sections/intro.aux) (./sections/mba.aux)
+[19]) [20] (./main.aux (./sections/intro.aux) (./sections/mba.aux)
 (./sections/mdp.aux) (./sections/monte_carlo.aux)
 (./sections/policy_gradient.aux) (./appendix/appendix.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 673296CF01D8F92F5A75DB624B815436;3355.
+(rerunfilecheck)             Checksum: DCFFC59B8129E735A6A18386E97E4D6A;3752.
  ) 
 Here is how much of TeX's memory you used:
- 16995 strings out of 478238
- 277977 string characters out of 5850455
+ 17079 strings out of 478238
+ 279046 string characters out of 5850455
  643703 words of memory out of 5000000
- 34678 multiletter control sequences out of 15000+600000
- 500862 words of font info for 189 fonts, out of 8000000 for 9000
+ 34720 multiletter control sequences out of 15000+600000
+ 506534 words of font info for 219 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,19n,65p,1001b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
@@ -940,28 +971,32 @@ exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
-sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-
-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfb
-x1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr
-/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-di
-st/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fonts/type1/
-public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
-/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><
-/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
-f-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
-uper/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.p
-fb>
-Output written on main.pdf (22 pages, 448873 bytes).
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/doublestroke/dsrom10.p
+fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
+share/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dis
+t/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/
+sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></
+usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf
+-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-su
+per/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pf
+b></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/t
+exmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts
+/type1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/c
+m-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt120
+0.pfb>
+Output written on main.pdf (23 pages, 504304 bytes).
 PDF statistics:
- 376 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 55987 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 423 PDF objects out of 1000 (max. 8388607)
+ 331 compressed objects within 4 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 66251 words of extra memory for PDF output out of 74296 (max. 10000000)
 

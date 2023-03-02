@@ -4,3 +4,29 @@
 The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
 
 Intuitively, we care about the value function associated with $\pi$ because we might want or need to know ``how good it is to be in a certain state'', if the agent behaves in the environment according to the policy $\pi$.
+
+\section{On-Policy vs. Off-Policyj}
+The more episodes are collected, the better because the estimates of the functions will be. However, there is a problem. If the algorithm for policy improvement always updates the policy greedily, meaning it takes only actions leading to immediate reward, actions and states not on the greedy path will not be sampled sufficiently, and potentially better rewards would stay hidden from the learning process.
+
+Essentially, we are forced to make a choice between making the best decision given the current information or start exploring and finding more information. This is also known as the Exploration vs. Exploitation Dilemma.
+
+We are looking for something like a middle ground between those. Full-on exploration would mean that we would need a lot of time to collect the needed information, and full-on exploitation would make the agent stuck into a local reward maximum. There are two approaches to ensure all actions are sampled sufficiently called on-policy and off-policy methods.
+
+
+
+\section{On Policy}
+On-policy methods solve the exploration vs exploitation dilemma by including randomness in the form of a policy that is soft, meaning that non-greedy actions are selected with some probability. These policies are called $\epsilon$-greedy policies as they select random actions with an $\epsilon$ probability and follow the optimal action with $1-\epsilon$ probability
+
+Since the probability of selecting from the action space randomly is $\epsilon$, the probability of selecting any particular non-optimal (non-greedy) action is $\epsilon/|\mathcal{A}(s)|$. The probability of following the optimal action will always be slightly higher, however, because we have a $1 - \epsilon$ probability of selecting it outright and $\epsilon/ |\mathcal{A}(s)|$ probability of selecting it from sampling the action space \footnote{Since the greedy (or optimal) action can be selected by either 1-$\epsilon$ or $\epsilon/ |\mathcal{A}(s)|$}:
+$$\[P(a_t^{*}) = 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$$
+It is also worth noting that because the optimal action will be sampled more often than the others making on-policy algorithms will generally converge faster but they also have the risk of trapping the agent into a local optimum of the function.
+
+%On-Policy learning algorithms are the algorithms that evaluate and improve the same policy which is being used to select actions. That means we will try to evaluate and improve the same policy that the agent is already using for action selection. In short , [Target Policy == Behavior Policy]. Some examples of On-Policy algorithms are Policy Iteration, Value Iteration, Monte Carlo for On-Policy, Sarsa, etc.
+
+\section{Off Policy}
+
+Off-policy methods offer a different solution to the exploration vs. exploitation problem. While on-Policy algorithms try to improve the same $\epsilon$-greedy policy that is used for exploration, off-policy approaches have two policies: a behavior policy and a target policy. The behavioral policy b is used for exploration and episode generation, and the target or goal policy $\pi$ is used for function estimation and improvement.
+
+This works because the target policy $\pi$ gets a ``balanced'' view of the environment and can learn from potential mistakes of $b$ while still keeping track of the good actions and trying to find better ones. However, one thing to remember is that in Off-policy learning, we have a distribution mismatch between the one we are trying to estimate and the one we are sampling from. That is why a technique called importance sampling is often used to facilitate this mismatch.
+
+%Off-Policy learning algorithms evaluate and improve a policy that is different from Policy that is used for action selection.

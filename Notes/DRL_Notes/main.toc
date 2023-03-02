@@ -10,14 +10,17 @@
 \contentsline {section}{\numberline {2.2}Optimality}{8}{section.2.2}%
 \contentsline {chapter}{\numberline {3}Monte Carlo Method}{10}{chapter.3}%
 \contentsline {section}{\numberline {3.1}First Visit v.s., Every Visit}{10}{section.3.1}%
-\contentsline {chapter}{\numberline {4}Policy Gradient}{11}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Natural Policy Gradient}{11}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}KL-divergence between perturbed distributions}{11}{subsection.4.1.1}%
-\contentsline {section}{\numberline {4.2}Proximal Policy Optimization}{13}{section.4.2}%
-\contentsline {paragraph}{Positive Advantage:}{14}{section*.2}%
-\contentsline {paragraph}{Negative Advantage:}{14}{section*.3}%
-\contentsline {chapter}{Appendices}{16}{section*.5}%
-\contentsline {chapter}{Appendix}{16}{appendix*.6}%
-\contentsline {section}{\numberline {A.1}Bellman Equation}{16}{section.1..1}%
-\contentsline {section}{\numberline {B.2}Fisher Information}{18}{section.1..2}%
-\contentsline {section}{\numberline {C.3}Score Function}{19}{section.1..3}%
+\contentsline {section}{\numberline {3.2}On-Policy vs. Off-Policyj}{10}{section.3.2}%
+\contentsline {section}{\numberline {3.3}On Policy}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Off Policy}{11}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Policy Gradient}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Natural Policy Gradient}{12}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}KL-divergence between perturbed distributions}{12}{subsection.4.1.1}%
+\contentsline {section}{\numberline {4.2}Proximal Policy Optimization}{14}{section.4.2}%
+\contentsline {paragraph}{Positive Advantage:}{15}{section*.2}%
+\contentsline {paragraph}{Negative Advantage:}{15}{section*.3}%
+\contentsline {chapter}{Appendices}{17}{section*.5}%
+\contentsline {chapter}{Appendix}{17}{appendix*.6}%
+\contentsline {section}{\numberline {A.1}Bellman Equation}{17}{section.1..1}%
+\contentsline {section}{\numberline {B.2}Fisher Information}{19}{section.1..2}%
+\contentsline {section}{\numberline {C.3}Score Function}{20}{section.1..3}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  28 FEB 2023 23:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  2 MAR 2023 22:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -536,7 +536,8 @@ File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box106
 ) (./main.aux
 (./sections/intro.aux) (./sections/mba.aux) (./sections/mdp.aux)
-(./sections/policy_gradient.aux) (./appendix/appendix.aux))
+(./sections/monte_carlo.aux) (./sections/policy_gradient.aux)
+(./appendix/appendix.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -709,7 +710,7 @@ been already used, duplicate ignored
 l.51 \newpage
               [1
 
-]
+] [2]
 \openout2 = `./sections/intro.aux'.
 
  (./sections/intro.tex
@@ -750,13 +751,13 @@ Chapter 2.
 
 
 ] [5]
-<./images/backup_vpi.png, id=163, 341.275pt x 255.95625pt>
+<./images/backup_vpi.png, id=173, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
 Package pdftex.def Info: ./images/backup_vpi.png  used on input line 114.
 (pdftex.def)             Requested size: 102.38329pt x 76.78746pt.
  [6 <./images/backup_vpi.png>] [7]
-<./images/optimal_action.pdf, id=176, 354.80164pt x 170.62769pt>
+<./images/optimal_action.pdf, id=185, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
 Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 210.
@@ -766,24 +767,30 @@ Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 210.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [8]) [9 <./images/optimal_action.pdf>]
+\openout2 = `./sections/monte_carlo.aux'.
+
+ (./sections/monte_carlo.tex
+Chapter 3.
+) [10
+
+
+
+
+]
 \openout2 = `./sections/policy_gradient.aux'.
 
  (./sections/policy_gradient.tex
-Chapter 3.
-[10
-
-
-
-
-]
 Chapter 4.
 [11
 
+
+
+
 ]
 ! Undefined control sequence.
 <argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
                                                   \theta + \frac {1}{2}\delt...
-l.40 \end{align*}
+l.39 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -794,7 +801,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
                                                   \theta + \frac {1}{2}\delt...
-l.40 \end{align*}
+l.39 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -805,7 +812,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
                                                   \theta + \frac {1}{2}\delt...
-l.49 \end{align*}
+l.48 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -816,7 +823,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...p(x;\theta _t)}\Bigg )^T dx \deltaf 
                                                   \theta 
-l.49 \end{align*}
+l.48 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -827,7 +834,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
                                                   \theta + \frac {1}{2}\delt...
-l.49 \end{align*}
+l.48 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -838,7 +845,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...p(x;\theta _t)}\Bigg )^T dx \deltaf 
                                                   \theta 
-l.49 \end{align*}
+l.48 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -850,7 +857,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
-l.79 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.78 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -861,7 +868,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \mathbbm 
                     {E}
-l.79 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.78 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -872,7 +879,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \mathbbm 
                     {E}
-l.79 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.78 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -887,7 +894,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.86 \end{align}
+l.85 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -915,17 +922,17 @@ Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  []
 
 [18]) [19] (./main.aux (./sections/intro.aux) (./sections/mba.aux)
-(./sections/mdp.aux) (./sections/policy_gradient.aux) (./appendix/appendix.aux)
-)
+(./sections/mdp.aux) (./sections/monte_carlo.aux)
+(./sections/policy_gradient.aux) (./appendix/appendix.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E02DA550DD21562E57E41B874EF56BC1;3125.
+(rerunfilecheck)             Checksum: 673296CF01D8F92F5A75DB624B815436;3355.
  ) 
 Here is how much of TeX's memory you used:
- 16960 strings out of 478238
- 276796 string characters out of 5850455
+ 16995 strings out of 478238
+ 277977 string characters out of 5850455
  643703 words of memory out of 5000000
- 34656 multiletter control sequences out of 15000+600000
- 500722 words of font info for 187 fonts, out of 8000000 for 9000
+ 34678 multiletter control sequences out of 15000+600000
+ 500862 words of font info for 189 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,19n,65p,1001b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
@@ -951,10 +958,10 @@ f-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/ty
 pe1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
 uper/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.p
 fb>
-Output written on main.pdf (21 pages, 448074 bytes).
+Output written on main.pdf (22 pages, 448873 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 287 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 500000)
- 55979 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 296 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 55987 words of extra memory for PDF output out of 61914 (max. 10000000)
 

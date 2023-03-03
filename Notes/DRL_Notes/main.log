@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  2 MAR 2023 23:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  3 MAR 2023 21:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -535,7 +535,7 @@ File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count322
 \l__pdf_internal_box=\box106
 ) (./main.aux
-(./sections/intro.aux) (./sections/mba.aux) (./sections/mdp.aux)
+(./sections/intro.aux) (./sections/mab.aux) (./sections/mdp.aux)
 (./sections/monte_carlo.aux) (./sections/policy_gradient.aux)
 (./appendix/appendix.aux))
 \openout1 = `main.aux'.
@@ -703,7 +703,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.23 ...sline {chapter}{Appendix}{17}{appendix*.6}
+l.23 ...urbed distributions}{15}{subsection.4.1.1}
                                                   % [1
 
 ])
@@ -721,9 +721,9 @@ Chapter 1.
 
 
 ]) [2]
-\openout2 = `./sections/mba.aux'.
+\openout2 = `./sections/mab.aux'.
 
- (./sections/mba.tex
+ (./sections/mab.tex
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 2
 9.
 
@@ -736,52 +736,58 @@ Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/8'
 (microtype)             (new value: 8.0pt) on input line 29.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/6'
 (microtype)             (new value: 6.0pt) on input line 29.
-) [3
+ [3
 
 
 
-]
+]) [4]
 \openout2 = `./sections/mdp.aux'.
 
 
 (./sections/mdp.tex
 Chapter 2.
-[4
+<./images/mdp.png, id=207, 878.0805pt x 336.0555pt>
+File: ./images/mdp.png Graphic file (type png)
+<use ./images/mdp.png>
+Package pdftex.def Info: ./images/mdp.png  used on input line 7.
+(pdftex.def)             Requested size: 263.42618pt x 100.81741pt.
+[5
 
 
 
 
-] [5]
-<./images/backup_vpi.png, id=188, 341.275pt x 255.95625pt>
+ <./images/mdp.png (PNG copy)>] [6]
+<./images/backup_vpi.png, id=223, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
-Package pdftex.def Info: ./images/backup_vpi.png  used on input line 114.
+Package pdftex.def Info: ./images/backup_vpi.png  used on input line 123.
 (pdftex.def)             Requested size: 102.38329pt x 76.78746pt.
- [6 <./images/backup_vpi.png>] [7]
-<./images/optimal_action.pdf, id=200, 354.80164pt x 170.62769pt>
-File: ./images/optimal_action.pdf Graphic file (type pdf)
-<use ./images/optimal_action.pdf>
-Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 210.
-(pdftex.def)             Requested size: 177.40038pt x 85.31363pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8]) [9 <./images/optimal_action.pdf>]
+[7] [8 <./images/backup_vpi.png>] [9]
+<./images/optimal_action.pdf, id=242, 354.80164pt x 170.62769pt>
+File: ./images/optimal_action.pdf Graphic file (type pdf)
+<use ./images/optimal_action.pdf>
+Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 219.
+(pdftex.def)             Requested size: 177.40038pt x 85.31363pt.
+ [10 <./images/optimal_action.pdf>])
+[11]
 \openout2 = `./sections/monte_carlo.aux'.
 
  (./sections/monte_carlo.tex
 Chapter 3.
-[10
+[12
 
 
 
 
 ]
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
-(microtype)             (new value: 9.0pt) on input line 20.
+(microtype)             (new value: 9.0pt) on input line 29.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
-(microtype)             (new value: 5.0pt) on input line 20.
+(microtype)             (new value: 5.0pt) on input line 29.
 
 
 ! LaTeX Error: Bad math environment delimiter.
@@ -790,7 +796,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.21 $$\[
+l.30 $$\[
          P(a_t^{*}) = 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$$
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -799,7 +805,7 @@ or  <return>  to continue without it.
 ! Missing \endgroup inserted.
 <inserted text> 
                 \endgroup 
-l.21 ... 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$
+l.30 ... 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$
                                                   $
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -807,12 +813,56 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-) [11]
+
+Overfull \hbox (30.78894pt too wide) in paragraph at lines 39--40
+[]\T1/cmr/m/n/10.95 (-20) Given a start-ing state $\OML/cmm/m/it/10.95 S[]$\T1/
+cmr/m/n/10.95 (-20) , the prob-a-bil-ity of the sub-se-quent state-action tra-j
+ec-tory, $\OML/cmm/m/it/10.95 A[]; S[]; A[]; []  ; S[]$\T1/cmr/m/n/10.95 (-20) 
+,
+ []
+
+! Undefined control sequence.
+<argument> ..._t,A_t)\pi (A_{t+1}|S_{t+1})\ldotsp 
+                                                  (S_T|S_{T-1},A_{T-1})\\ &=...
+l.43 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ..._t,A_t)\pi (A_{t+1}|S_{t+1})\ldotsp 
+                                                  (S_T|S_{T-1},A_{T-1})\\ &=...
+l.43 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[13]) [14]
 \openout2 = `./sections/policy_gradient.aux'.
 
  (./sections/policy_gradient.tex
 Chapter 4.
-[12
+
+! Package amsmath Error: Multiple \label's: label '{eq:importance_sampling_rati
+o}' will be lost.
+
+See the amsmath package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \end{align*}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[15
 
 
 
@@ -884,7 +934,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[13]
+[16]
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
@@ -931,11 +981,11 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[14]) [15] (./main.bbl
+[17]) [18] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [16
+) [19
 
 
 
@@ -943,29 +993,29 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 ]
 \openout2 = `./appendix/appendix.aux'.
 
- (./appendix/appendix.tex [17
+ (./appendix/appendix.tex [20
 
 
 
-] [18]
+] [21]
 Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  [][][] []
  []
 
-[19]) [20] (./main.aux (./sections/intro.aux) (./sections/mba.aux)
+[22]) [23] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
 (./sections/mdp.aux) (./sections/monte_carlo.aux)
 (./sections/policy_gradient.aux) (./appendix/appendix.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D0CD458A4D069564E1DA0B06E5E078B5;3737.
+(rerunfilecheck)             Checksum: 7E97C1F402C0DD23919C1C812D5D048E;4965.
  ) 
 Here is how much of TeX's memory you used:
- 17079 strings out of 478238
- 279046 string characters out of 5850455
+ 17109 strings out of 478238
+ 279474 string characters out of 5850455
  643703 words of memory out of 5000000
- 34720 multiletter control sequences out of 15000+600000
- 506534 words of font info for 219 fonts, out of 8000000 for 9000
+ 34736 multiletter control sequences out of 15000+600000
+ 506732 words of font info for 221 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,19n,65p,1001b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,19n,65p,1047b,548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -993,10 +1043,10 @@ exmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts
 /type1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/c
 m-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt120
 0.pfb>
-Output written on main.pdf (23 pages, 503994 bytes).
+Output written on main.pdf (26 pages, 569111 bytes).
 PDF statistics:
- 423 PDF objects out of 1000 (max. 8388607)
- 331 compressed objects within 4 object streams
- 66 named destinations out of 1000 (max. 500000)
- 66251 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 471 PDF objects out of 1000 (max. 8388607)
+ 375 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 500000)
+ 66304 words of extra memory for PDF output out of 74296 (max. 10000000)
 

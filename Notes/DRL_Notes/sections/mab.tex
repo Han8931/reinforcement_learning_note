@@ -30,3 +30,23 @@ One natural way to estimate this is by averaging the rewards actually received: 
 Then, the simplest action selection rule is to select one of the actions with the highest estimated value, which is a greedy action selection method represented as follows:
 $$A_t=\argmax_{a}Q_t(a).$$
 This approach always exploits current knowledge to maximize immediate reward; it spends no time at all sampling apparently inferior actions to see if they might really be better. A simple alternative is to behave greedily most of the time, but every once in a while, instead select randomly from among all the actions. This near greedy action selection rule is called $\epsilon$-greedy method. In the limit as the number of steps increases, every action will be sampled an infinite number of times, which ensures all the $Q_t(a)$ converge to $q_*(a)$.
+
+\subsection{Incremental Implementation of The Action-value Methods}
+\begin{align*}
+	Q_{n+1} &= \frac{1}{n}\sum_{i=1}^{n}R_i\\
+	&= \frac{1}{n} \Bigg(R_n + \sum_{i=1}^{n-1}R_i \Bigg)\\
+	&= \frac{1}{n} \Bigg(R_n + (n-1)\frac{1}{n-1} \sum_{i=1}^{n-1}R_i \Bigg)\\
+	&= \frac{1}{n} \Bigg(R_n + (n-1)Q_n \Bigg)\\
+	&=  Q_n + \frac{1}{n} \Big[R_n - Q_n \Big]
+\end{align*}
+\begin{itemize}
+	\item $Q_n$: Old estimate
+	\item $Q_{n+1}$: New estimate
+	\item $R_{n}$: New reward
+\end{itemize}
+
+This is an incremental formulas for updating averages with small, constant computation required to process each new reward. This update rule can be expressed in a general form:
+$$NewEstimate \leftarrow OldEstimate + StepSize \underbrace{\Big[Target - OldEstimate \Big]}_{error}.$$
+The target is presumed to indicate a desirable direction in which to move, though it may be noisy.
+
+

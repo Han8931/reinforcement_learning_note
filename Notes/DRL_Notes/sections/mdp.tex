@@ -2,6 +2,14 @@
 
 The general framework of MDPs (representing environments as MDPs) allows us to model virtually any complex sequential decision-making problem under uncertainty in a way that RL agents can interact with and learn to solve solely through experience. 
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{./images/mdp.png}
+	\caption{The agent-environment interaction in a Markov decision process.}
+	\label{fig:mdp_ill}
+\end{figure}
+
+
 Components of RL:
 \begin{itemize}
 	\item An agent
@@ -78,7 +86,7 @@ Components of RL:
 \section{Policies and Value Functions}
 \subsection{The State-Value Functions}
 
-Almost all reinforcement learning algorithms involve estimating \textit{value functions}-functions of states (or of state-action pairs) that estimate how good it is for the agent to be in a given state (or how good it is to perform a given action in a given state). The notion of ``how good'' here is defined in terms of future rewards that can be expected, or, to be precise, in terms of expected return. Of course, the rewards the agent can expect to receive in the futhre depend on what actions it will take. Accordingly, value functions are defined with respect to particular ways of action, called policies. 
+Almost all reinforcement learning algorithms involve estimating \textit{value functions}-functions of states (or of state-action pairs) that estimate how good it is for the agent to be in a given state (or how good it is to perform a given action in a given state). The notion of ``how good'' here is defined in terms of future rewards that can be expected, or, to be precise, in terms of \textbf{expected return}. Of course, the rewards the agent can expect to receive in the futhre depend on what actions it will take. Accordingly, value functions are defined with respect to particular ways of action, called policies. 
 
 Formally, a policy is a mapping from states to probablities of selecting each possible action. It can be defined 
 $$\pi(a|s)$$
@@ -97,6 +105,7 @@ $$\pi(a|s)$$
 			\item Policy can be stochastic or deterministic.
 			\item A policy is a function that prescribes actions to take for a given non-terminal state.
 		\end{itemize}
+	\item Reward: one-step signal that an agent gets/ Return: total discounted rewards/ Value function: expected return. 
 	\item If we are given a policy and the MDP, we should be able to calculate the expected return starting from every single state. 
 \end{itemize}
 

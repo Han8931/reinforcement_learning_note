@@ -3,26 +3,12 @@ import operator
 import gym
 
 from foodtruck import FoodTruck
+from policies import get_eps_greedy, get_random_policy
 from policy_eval import base_policy, choose_action, policy_evaluation
+from mc import get_trajectory
 import pdb
 
-def get_eps_greedy(actions, eps, a_best):
-    """Build epsilon-greedy policy"""
-    prob_a = {}
-    n_a = len(actions)
-    for a in actions:
-        if a == a_best:
-            prob_a[a] = 1 - eps + eps/n_a
-        else:
-            prob_a[a] = eps/n_a
-    return prob_a
-
-def get_random_policy(states, actions):
-    policy = {}
-    n_a = len(actions)
-    for s in states:
-        policy[s] = {a: 1/n_a for a in actions}
-    return policy
+act_key = lambda elem : elem[1]
 
 def on_policy_first_visit_mc(env, n_iter, eps, gamma):
     np.random.seed(0)
@@ -47,18 +33,19 @@ def on_policy_first_visit_mc(env, n_iter, eps, gamma):
                 if (s, a) == (s_j, a_j):
                     first_visit = False
             if first_visit:
+                # I don't understand this part...
                 Q[s][a] = Q_n[s][a] * Q[s][a] + G
                 Q_n[s][a] += 1
                 Q[s][a] /= Q_n[s][a]
-                a_best = max(Q[s].items(), key=operator.itemgetter(1))[0]
+                a_best = max(Q[s].items(), key=act_key)[0]
                 policy[s] = get_eps_greedy(actions, eps, a_best)
 
     return policy, Q, Q_n
 
-
-
-
 if __name__ == "__main__":
     foodtruck = FoodTruck()
     policy, Q, Q_n = on_policy_first_visit_mc(foodtruck, 300000, 0.05, 1)
+    print(policy)
+    print(Q)
+    print(Q_n)
 

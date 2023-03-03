@@ -1,5 +1,14 @@
 \chapter{Monte Carlo Method}
 
+\section{Intro}
+
+\begin{itemize}
+	\item Prediction problem: refers to the problem of evaluating policies, of estimating value functions given a policy (learning to predict returns).
+	\item Control problem: problem of finding optimal policies. Usually solved by the pattern of generalized policy iteration (GPI), where the competing processes of policy evaluation and policy improvement progressively move policies towards optimality.
+	\item Policy evaluation: refers to algorithms that solve the prediction problem.
+	\item Policy improvement: algorithms that make new policies that improve on an original policy by making it greedier than the original with respect to the value function of that original policy. 
+\end{itemize}
+
 \section{First Visit vs. Every Visit}
 The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
 
@@ -25,8 +34,53 @@ It is also worth noting that because the optimal action will be sampled more oft
 
 \section{Off Policy}
 
-Off-policy methods offer a different solution to the exploration vs. exploitation problem. While on-Policy algorithms try to improve the same $\epsilon$-greedy policy that is used for exploration, off-policy approaches have two policies: a behavior policy and a target policy. The behavioral policy b is used for exploration and episode generation, and the target or goal policy $\pi$ is used for function estimation and improvement.
+All learning contol methods face a dilemma: They seek to learn action values conditional on subsequent \textit{optimal} behavior, but they need to behave non-optimally in order to explore all actions (to find the optimal actions). How can they learn about the optimal policy while behaving according to an exploratory policy? The on-policy approach in the preceding section is actually a compromise. It learns action values not for the optimal policy, but for a near-optimal policy that still explores. A more straightforward approach is to use two policies, one that is learned about and that becomes the optimal policy, and one that is more exploratory and is used to generate behavior. The policy being learned about is called the \textit{target policy}, and the policy used to generate behavior is called the \textit{behavior policy}. In this case we say that learning is from data ``off'' the target policy, and the overall process is termed \textit{off-policy learning}.
 
-This works because the target policy $\pi$ gets a ``balanced'' view of the environment and can learn from potential mistakes of $b$ while still keeping track of the good actions and trying to find better ones. However, one thing to remember is that in Off-policy learning, we have a distribution mismatch between the one we are trying to estimate and the one we are sampling from. That is why a technique called importance sampling is often used to facilitate this mismatch.
+Given a starting state $S_t$, the probability of the subsequent state-action trajectory, $A_t, S_{t+1}, A_{t+1},\cdots,S_T$, occuring under any policy $\pi$ is 
+\begin{align*}
+	P(A_t, S_{t+1}, A_{t+1},\cdots,S_T)&= \pi(A_t|S_t)p(S_{t+1}|S_t,A_t)\pi(A_{t+1}|S_{t+1})\ldotsp(S_T|S_{T-1},A_{T-1})\\ 
+	&= \prod_{k=t}^{T-1}\pi(A_k|S_k)p(S_{k+1}|S_k,A_k),
+\end{align*}
+where $p$ here is the state-transition probability function. Thus, the relative probability of the trajectory under the target and behavior policies is 
+
+\begin{align*}
+	\rho_{t:T-1} &=  \frac{\prod_{k=t}^{T-1}\pi(A_k|S_k)p(S_{k+1}|S_k,A_k)}{ \prod_{k=t}^{T-1}b(A_k|S_k)p(S_{k+1}|S_k,A_k)}\\
+	&= \prod_{k=t}^{T-1}\frac{\pi(A_k|S_k)}{b(A_k|S_k)}.
+	\label{eq:importance_sampling_ratio}
+\end{align*}
+The importance sampling ratio ends up depending only on the two polices and the sequence, not on the MDP (state-transition probability).
+
+\begin{align*}
+	\mathbb{E}[G_t|S_t=s] = v_b(s).
+\end{align*}
+
+Recall that we wish to 
+\begin{align*}
+	\mathbb{E}[\rho_{t:T-1} G_t|S_t=s] = v_\pi(s).
+\end{align*}
+
+%Off-policy methods offer a different solution to the exploration vs. exploitation problem. While on-Policy algorithms try to improve the same $\epsilon$-greedy policy that is used for exploration, off-policy approaches have two policies: a behavior policy and a target policy. The behavioral policy b is used for exploration and episode generation, and the target or goal policy $\pi$ is used for function estimation and improvement.
+%
+%This works because the target policy $\pi$ gets a ``balanced'' view of the environment and can learn from potential mistakes of $b$ while still keeping track of the good actions and trying to find better ones. However, one thing to remember is that in Off-policy learning, we have a distribution mismatch between the one we are trying to estimate and the one we are sampling from. That is why a technique called importance sampling is often used to facilitate this mismatch.
 
 %Off-Policy learning algorithms evaluate and improve a policy that is different from Policy that is used for action selection.
+
+\section{Temporal-Difference Learninig}
+
+TD learning is a combination of Monte-Carlo method and dynamic programming ideas. It learns directly from raw experience without a model of the environment's dynamics. 
+
+
+Constant-$\alpha$ MC:
+$$V(S_t) \leftarrow V(S_t)+ \alpha \Big[G_t-V(S_t)\Big] $$
+
+One-step TD (or TD(0)):
+$$V(S_t) \leftarrow V(S_t)+ \alpha \Big[\underbrace{R_{t+1}+\gamma V(S_{t+1})-V(S_t)}_{\text{TD error}}\Big] $$
+
+\subsection{Sarsa: On-policy TD Control}
+$$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})-Q(S_t, A_t)\Big] $$
+
+
+\subsection{Q-learning: Off-policy TD Control}
+
+$$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma \max_a Q(S_{t+1}, a)-Q(S_t, A_t)\Big] $$
+

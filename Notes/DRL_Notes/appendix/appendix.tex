@@ -121,4 +121,22 @@ In statistics, \textit{the score (or informant) is the gradient of the log-likel
 
 Since the score is a function of the observations that are subject to sampling error, it lends itself to a test statistic known as score test in which the parameter is held at a particular value. Further, the ratio of two likelihood functions evaluated at two distinct parameter values can be understood as a definite integral of the score function.[2]
 
+\section{Incremental Monte-Carlo}
+Incremental Mean:
+\begin{align}
+	\mu_k &= \frac{1}{k}\sum_{j=1}^k x_j\\
+	&= \frac{1}{k}\Big(x_k+(k-1)\frac{1}{(k-1)}\sum_{j=1}^{k-1} x_j\Big)\\
+	&= \frac{1}{k}\Big(x_k+(k-1)\mu_{k-1}\Big)\\
+	&= \mu_{k-1}+\frac{1}{k}(x_k-\mu_{k-1})
+	\label{eq:incremental_mean}
+\end{align}
+
+Incremental MC:
+\begin{itemize}
+	\item $N_{n+1}(S_t^n) = N_{n}(S_t^n) + 1$ for rest $N_{n+1}(s) = N_{n}(s)$
+	\item $V_{n+1}(S_t) = V_{n}(S_t)+\frac{G_{t:T}^n -V_n(S_t)}{N_n(S_t)}$ for rest $V_{n+1}(s)= V_n(s)$ 
+	\item $V_{n+1}(S_t) = V_{n}(S_t)+\alpha({G_{t:T}^n -V_n(S_t)})$ for rest $V_{n+1}(s)= V_n(s)$ 
+\end{itemize}
+
 \end{appendices}
+

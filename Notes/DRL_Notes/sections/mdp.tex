@@ -35,6 +35,10 @@ Components of RL:
 	A state $S_t$ is \textbf{Markov} if and only if 
 	$$P[S_{t+1}|S_t, A_t] = P[S_{t+1}|S_t, A_t, S_{t-1},A_{t-1},...]$$
 \end{definition}
+\begin{itemize}
+	\item Actions: a mechanism to influence the environment
+	\item State: specific configurations of the environment
+\end{itemize}
 
 \begin{definition}[Transition Function]
 	$$p(s',r|s,a) = P(S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a)$$
@@ -52,6 +56,7 @@ Components of RL:
 	\end{align*}
 \end{definition}
 \begin{itemize}
+	\item $R_t\in \mathcal{R} \subset \mathbb{R}.$ Note that negative reward is still reward.
 	\item The expected reward function is defined as a function that takes in a state-action pair.
 	\item It is the expectation of reward at time step $t$, given the state-action pair in the previous time step.
 	\item It can also be defined as a function that takes a full transition tuple $s,a,s'$.

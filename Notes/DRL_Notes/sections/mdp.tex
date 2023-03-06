@@ -171,12 +171,14 @@ $$\pi(a|s)$$
 	\item Notice that we do not weight over actions because we are interested only in a specific action.
 	\item The state-value function can be expressed by using the action-value function as follows:
 	\item The derivation is given in \Cref{appendix:bellman_equation}
+
+The state-value function can be decomposed as follows:
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
 	&= \sum_{g_t} g_t\cdot P[G_t|S_t=s]\\
 	&= \sum_{g_t} g_t\cdot P[G_t,S_t=s]/P[S_t=s]\\
 	&= \sum_{g_t} g_t\cdot \sum_a P[G_t,S_t=s, A_t=a]/P[S_t=s]\\
-	&= \sum_{g_t} g_t\cdot \sum_a \Big[P[G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Bi]/P[S_t=s]\\
+	&= \sum_{g_t} g_t\cdot \sum_a \Big[P[G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Big]/P[S_t=s]\\
 	%&= \sum_{g_t} g_t \sum_a P(G_t|S_t=s, A_t=a) P(A_t=a|S_t=s)\\
 	&= \sum_{g_t} g_t \sum_a P[G_t, A_t=a|S_t=s] P[A_t=a|S_t=s]\\
 	&= \sum_{a} \sum_{g_t} g_t P[G_t|S_t=s, A_t=a] P[A_t=a|S_t=s]\\

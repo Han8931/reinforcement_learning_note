@@ -20,6 +20,7 @@ We can express $J(\theta)$ as follows:
 Note that $\nabla_\theta \log \pi_\theta(\tau)$ is the maximum loglikelihood of trajectory, because gradient is the maximum direction of the function. This expectation can be estimated by Monte-Carlo method. 
 
 \section{Natural Policy Gradient}
+reference: Nathan Ratliff, Information Geometry and Natural Gradients. 
 \subsection{KL-divergence between perturbed distributions}
 Let $p(x; \theta)$ be some family of probability distributions over $x$ parameterized by a vector of real numbers $\theta$. We're interested in knowing how much the distribution changes when we perturb the parameter vector from a fixed $\theta_t$ to some new value $\theta_t+\delta \theta$. As a measure of change in probability distribution, we can use the KL-divergence measure. Specifically, we want to measure $D_{KL}(p(x;\theta_t)|| p(x;\theta_t+\delta \theta)$, but we want to write it in a form amenable to the gradient-based update formulation. We can do this by taking it's second-order Taylor expansion around $\theta_t$. During the derivation, we'll find that a lot of terms in the expansion disappear leaving us with a very simple expression that's perfect for our purposes. 
 
@@ -37,15 +38,20 @@ where $\theta=\theta_t+\delta\theta$, or equivalently $\delta\theta = \theta-\th
 \begin{align*}
 	\log p(x;\theta_t+\delta \theta) &\approx \log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \deltaf\theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta.
 \end{align*}
-Pugging this second-order Taylor expansion back into the above expression for the $D_{KL}$ gives
+Plugging this second-order Taylor expansion back into the above expression for the $D_{KL}$ gives
 
 \begin{align*}
 	D_{KL}&(p(x;\theta_t)||p(x;\theta_t+\delta \theta))\\ &= \int p(x;\theta_t)\log p(x;\theta_t) dx - \int p(x;\theta_t)\log p(x;\theta_t+\delta \theta) dx\\
 	&\approx \int p(x;\theta_t)\log p(x;\theta_t) dx\\
-	&\quad - \int p(x;\theta_t)\Bigg(\log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \deltaf\theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta \Bigg)dx\\
-	&= 0 - \underbrace{\int p(x;\theta_t)\Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T dx \deltaf\theta}_{=0} - \frac{1}{2}\delta\theta^T\Bigg(\int p(x;\theta_t) \nabla^2 \log p(x;\theta_t) dx\Bigg) \delta\theta\\
+	&\quad - \int p(x;\theta_t)\Bigg(\log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \delta \theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta \Bigg)dx\\
+	&=\int p(x;\theta_t)\log\frac{ p(x;\theta_t)}{p(x;\theta_t)} dx - \underbrace{\int p(x;\theta_t)\Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T dx }_{=0} - \frac{1}{2}\delta\theta^T\Bigg(\int p(x;\theta_t) \nabla^2 \log p(x;\theta_t) dx\Bigg) \delta\theta\\
 	&= -\frac{1}{2}\delta\theta^T\Bigg(\int p(x;\theta_t) \nabla^2 \log p(x;\theta_t) dx\Bigg) \delta\theta.
 \end{align*}
+
+$\int \nabla p(x;\theta_t)$ is zero since 
+\begin{align*}
+\int \nabla p(x;\theta_t) = \nabla\int  p(x;\theta_t) = \nabla 1 = 0
+\end{align*} 
 
 The Hessian can be computed as follows:
 \begin{align*}

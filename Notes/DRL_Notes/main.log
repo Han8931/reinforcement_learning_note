@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  7 MAR 2023 00:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  7 MAR 2023 01:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -763,39 +763,16 @@ File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
 Package pdftex.def Info: ./images/backup_vpi.png  used on input line 144.
 (pdftex.def)             Requested size: 102.38329pt x 76.78746pt.
- [8]
-! Undefined control sequence.
-<argument> ...G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Bi 
-                                                  ]/P[S_t=s]\\ &= \sum _{g_t...
-l.184 \end{align*}
-                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Bi 
-                                                  ]/P[S_t=s]\\ &= \sum _{g_t...
-l.184 \end{align*}
-                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[9 <./images/backup_vpi.png>]
+ [8] [9 <./images/backup_vpi.png>]
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
-(microtype)             (new value: 9.0pt) on input line 186.
+(microtype)             (new value: 9.0pt) on input line 188.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
-(microtype)             (new value: 5.0pt) on input line 186.
+(microtype)             (new value: 5.0pt) on input line 188.
 
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
-l.186 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
+l.188 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
                                                   ,
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -806,7 +783,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...tprotrusion  $\mathbbm {E}[\mathbbm 
                                                   {E}[X|Y]] = \sum _{y}\Big ...
-l.186 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
+l.188 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
                                                   ,
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -817,7 +794,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ... \ p(X=x|Y)\Big ] p(Y=y) = \mathbbm 
                                                   {E}[X]$
-l.186 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
+l.188 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
                                                   ,
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -829,7 +806,7 @@ and I'll forget about whatever was undefined.
 <./images/optimal_action.pdf, id=300, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
-Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 245.
+Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 247.
 (pdftex.def)             Requested size: 177.40038pt x 85.31363pt.
  [11 <./images/optimal_action.pdf>]) [12]
 \openout2 = `./sections/dynamic_programming.aux'.
@@ -955,7 +932,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
                                                   \theta + \frac {1}{2}\delt...
-l.39 \end{align*}
+l.40 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -966,7 +943,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
                                                   \theta + \frac {1}{2}\delt...
-l.39 \end{align*}
+l.40 \end{align*}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -974,55 +951,16 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
-                                                  \theta + \frac {1}{2}\delt...
-l.48 \end{align*}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> ...p(x;\theta _t)}\Bigg )^T dx \deltaf 
-                                                  \theta 
-l.48 \end{align*}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
-                                                  \theta + \frac {1}{2}\delt...
-l.48 \end{align*}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...p(x;\theta _t)}\Bigg )^T dx \deltaf 
-                                                  \theta 
-l.48 \end{align*}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+Overfull \hbox (28.27066pt too wide) detected at line 49
+[]
+ []
 
 [21]
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
-l.78 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.84 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1033,7 +971,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \mathbbm 
                     {E}
-l.78 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.84 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1044,7 +982,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \mathbbm 
                     {E}
-l.78 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.84 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1059,7 +997,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.85 \end{align}
+l.91 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1094,10 +1032,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 3A0A5B151F6EB2F279928079F9897FCA;6529.
  ) 
 Here is how much of TeX's memory you used:
- 17250 strings out of 478238
- 283339 string characters out of 5850455
+ 17249 strings out of 478238
+ 283337 string characters out of 5850455
  643703 words of memory out of 5000000
- 34813 multiletter control sequences out of 15000+600000
+ 34812 multiletter control sequences out of 15000+600000
  507087 words of font info for 226 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,19n,65p,1047b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1128,7 +1066,7 @@ are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
 fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
 ti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (32 pages, 605163 bytes).
+Output written on main.pdf (32 pages, 605599 bytes).
 PDF statistics:
  573 PDF objects out of 1000 (max. 8388607)
  468 compressed objects within 5 object streams

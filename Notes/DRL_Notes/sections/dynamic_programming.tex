@@ -9,6 +9,11 @@ Then the policy $\pi'$ must be as good as, or better than $\pi$. Equivalently, i
 	v_\pi'(s)\geq v_\pi(s).	
 \end{align*}
 
+\begin{theorem}[Policy Improvement Theorem]
+	$q_\pi(s, \pi'(s))\geq v_\pi(s)$, then $v_\pi'(s)\geq v_\pi(s)$.	
+\end{theorem}
+Proof.
+
 \begin{align*}
 	v_\pi(s)&\leq q_\pi(s, \pi'(s))	\\
 	&= \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s, A_t=\pi'(s)]\\
@@ -18,7 +23,8 @@ Then the policy $\pi'$ must be as good as, or better than $\pi$. Equivalently, i
 	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 v_\pi(S_{t+2})|\,S_t=s]\\
 	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 v_\pi(S_{t+3})|\,S_t=s]\\
 	&\vdots\\
-	&\leq\\
+	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 R_{t+4}+\ldots|\,S_t=s]\\
+	&= \mathbb{E}_{\pi'}[G_t|\,S_t=s]\\
 	&= v_{\pi'}(s).
 	%\label{eq:policy_improvement_theorem}
 \end{align*}
@@ -46,3 +52,6 @@ Then the policy $\pi'$ must be as good as, or better than $\pi$. Equivalently, i
 		\end{align*}
 	\item The greedy policy takes the action that looks best in the short term according to $v_\pi$.
 \end{itemize}
+
+\section{Value Iteration}
+$$v_{k+1}(s)=\max_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_k(s')].$$ 

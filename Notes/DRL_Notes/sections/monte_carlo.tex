@@ -1,14 +1,5 @@
 \chapter{Monte Carlo Method}
 
-\section{Intro}
-
-\begin{itemize}
-	\item Prediction problem: refers to the problem of evaluating policies, of estimating value functions given a policy (learning to predict returns).
-	\item Control problem: problem of finding optimal policies. Usually solved by the pattern of generalized policy iteration (GPI), where the competing processes of policy evaluation and policy improvement progressively move policies towards optimality.
-	\item Policy evaluation: refers to algorithms that solve the prediction problem.
-	\item Policy improvement: algorithms that make new policies that improve on an original policy by making it greedier than the original with respect to the value function of that original policy. 
-\end{itemize}
-
 \section{First Visit vs. Every Visit}
 The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
 

@@ -86,6 +86,14 @@ The ratio $\frac{p(b)}{p(a)}$ tells us how likely to observe some results under 
 %	-\log p(\boldsymbol{w}|\boldsymbol{x}) &= -\underbrace{\log p(\boldsymbol{x}|\boldsymbol{w})}_{likelihood} - \underbrace{\log p(\boldsymbol{w})}_{Prior} + \text{const.} \\
 %	&= \sum\limits_j \log \left( 1 + \exp(-y_j \boldsymbol{w}^\top \boldsymbol{x}_j) \right) + \sum\limits_i \frac{q_i (w_i - m_i)^2}{2} + \text{const.}'
 %\end{align*}
+Useful factorization of conditional probability:
+\begin{align}
+P[A,B|C]&=\frac{P[A,B,C]}{P[C]} \\
+&= \frac{P[A,B,C]}{P[C]} \frac{P[B,C]}{P[B,C]}\\
+&= \frac{P[A,B,C]}{P[B,C]} \frac{P[B,C]}{P[C]}\\
+&= P[A|B,C] P[B|C]
+\end{align}
+
 
 \section{Fisher Information}
 Suppose we have a model parameterized by parameter vector $\theta$ that models a distribution $p(x;\theta)$. In frequentist statistics, the way we learn $\theta$ is to maximize the likelihood of $p(x;\theta)$. To assess the goodness of our estimate of $\theta$ we define a \textbf{score function} as follows:

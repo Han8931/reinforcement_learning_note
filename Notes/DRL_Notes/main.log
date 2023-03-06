@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  6 MAR 2023 22:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  7 MAR 2023 00:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -704,7 +704,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.23 ...f-policy TD Control}{16}{subsection.4.5.2}
+l.23 ...mberline {4.4}Off Policy}{16}{section.4.4}
                                                   % [1
 
 ])
@@ -721,7 +721,7 @@ Chapter 1.
 
 
 
-]) [2]
+] [2]) [3]
 \openout2 = `./sections/mab.aux'.
 
  (./sections/mab.tex
@@ -737,66 +737,122 @@ Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/8'
 (microtype)             (new value: 8.0pt) on input line 29.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/6'
 (microtype)             (new value: 6.0pt) on input line 29.
- [3
+ [4
 
 
 
-]) [4]
+]) [5]
 \openout2 = `./sections/mdp.aux'.
 
 
 (./sections/mdp.tex
 Chapter 2.
-<./images/mdp.png, id=237, 878.0805pt x 336.0555pt>
+<./images/mdp.png, id=256, 878.0805pt x 336.0555pt>
 File: ./images/mdp.png Graphic file (type png)
 <use ./images/mdp.png>
 Package pdftex.def Info: ./images/mdp.png  used on input line 7.
 (pdftex.def)             Requested size: 263.42618pt x 100.81741pt.
-[5
+[6
 
 
 
 
- <./images/mdp.png (PNG copy)>] [6]
-<./images/backup_vpi.png, id=253, 341.275pt x 255.95625pt>
+ <./images/mdp.png (PNG copy)>] [7]
+<./images/backup_vpi.png, id=273, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
-Package pdftex.def Info: ./images/backup_vpi.png  used on input line 135.
+Package pdftex.def Info: ./images/backup_vpi.png  used on input line 144.
 (pdftex.def)             Requested size: 102.38329pt x 76.78746pt.
- [7] [8 <./images/backup_vpi.png>]
-[9]
-<./images/optimal_action.pdf, id=272, 354.80164pt x 170.62769pt>
+ [8]
+! Undefined control sequence.
+<argument> ...G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Bi 
+                                                  ]/P[S_t=s]\\ &= \sum _{g_t...
+l.184 \end{align*}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Bi 
+                                                  ]/P[S_t=s]\\ &= \sum _{g_t...
+l.184 \end{align*}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[9 <./images/backup_vpi.png>]
+Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
+(microtype)             (new value: 9.0pt) on input line 186.
+Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
+(microtype)             (new value: 5.0pt) on input line 186.
+
+! Undefined control sequence.
+<recently read> \mathbbm 
+                         
+l.186 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
+                                                  ,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...tprotrusion  $\mathbbm {E}[\mathbbm 
+                                                  {E}[X|Y]] = \sum _{y}\Big ...
+l.186 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
+                                                  ,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ... \ p(X=x|Y)\Big ] p(Y=y) = \mathbbm 
+                                                  {E}[X]$
+l.186 ...\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$}
+                                                  ,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[10]
+<./images/optimal_action.pdf, id=300, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
-Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 231.
+Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 245.
 (pdftex.def)             Requested size: 177.40038pt x 85.31363pt.
- [10 <./images/optimal_action.pdf>]) [11]
+ [11 <./images/optimal_action.pdf>]) [12]
 \openout2 = `./sections/dynamic_programming.aux'.
 
 
 (./sections/dynamic_programming.tex
 Chapter 3.
-[12
+[13
 
 
 
 
-]) [13]
+]) [14]
 \openout2 = `./sections/monte_carlo.aux'.
 
  (./sections/monte_carlo.tex
 Chapter 4.
-[14
+[15
 
 
 
 
 ]
-Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
-(microtype)             (new value: 9.0pt) on input line 21.
-Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
-(microtype)             (new value: 5.0pt) on input line 21.
-
 
 ! LaTeX Error: Bad math environment delimiter.
 
@@ -851,12 +907,12 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[15]) [16]
+[16]) [17]
 \openout2 = `./sections/deep_rl.aux'.
 
  (./sections/deep_rl.tex
 Chapter 5.
-) [17
+) [18
 
 
 
@@ -866,7 +922,7 @@ Chapter 5.
 
  (./sections/dqn.tex
 Chapter 6.
-) [18
+) [19
 
 
 
@@ -890,7 +946,7 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[19
+[20
 
 
 
@@ -962,7 +1018,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[20]
+[21]
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
@@ -1009,11 +1065,11 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[21]) [22] (./main.bbl
+[22]) [23] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [23
+) [24
 
 
 
@@ -1021,61 +1077,61 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 ]
 \openout2 = `./appendix/appendix.aux'.
 
- (./appendix/appendix.tex [24
+ (./appendix/appendix.tex [25
 
 
 
-] [25]
+] [26]
 Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  [][][] []
  []
 
-[26] [27]) [28] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
+[27] [28]) [29] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
 (./sections/mdp.aux) (./sections/dynamic_programming.aux)
 (./sections/monte_carlo.aux) (./sections/deep_rl.aux) (./sections/dqn.aux)
 (./sections/policy_gradient.aux) (./appendix/appendix.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7B9CF95A9CF511E1FFF34805DBD200E8;6008.
+(rerunfilecheck)             Checksum: 3A0A5B151F6EB2F279928079F9897FCA;6529.
  ) 
 Here is how much of TeX's memory you used:
- 17234 strings out of 478238
- 283125 string characters out of 5850455
+ 17250 strings out of 478238
+ 283339 string characters out of 5850455
  643703 words of memory out of 5000000
- 34809 multiletter control sequences out of 15000+600000
- 506998 words of font info for 225 fonts, out of 8000000 for 9000
+ 34813 multiletter control sequences out of 15000+600000
+ 507087 words of font info for 226 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,19n,65p,1047b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,19n,65p,1047b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/doublestroke/dsrom10.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
-share/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dis
-t/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/
-sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></
-usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf
--dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-su
-per/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pf
-b></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/t
-exmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts
-/type1/public/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/c
-m-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt120
-0.pfb>
-Output written on main.pdf (31 pages, 583115 bytes).
+/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9
+.pfb></usr/share/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texm
+f-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
+uper/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.p
+fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/
+texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/font
+s/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm09
+00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
+ti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (32 pages, 605163 bytes).
 PDF statistics:
- 539 PDF objects out of 1000 (max. 8388607)
- 437 compressed objects within 5 object streams
- 99 named destinations out of 1000 (max. 500000)
- 66352 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 573 PDF objects out of 1000 (max. 8388607)
+ 468 compressed objects within 5 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 66376 words of extra memory for PDF output out of 74296 (max. 10000000)
 

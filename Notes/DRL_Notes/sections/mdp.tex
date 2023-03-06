@@ -49,6 +49,13 @@ Components of RL:
 	\item $p(s'|s,a)=P(S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a)=\sum_{r\in \mathcal{R}}p(s',r|s,a)$
 \end{itemize}
 
+\begin{definition}[Reward Hypothesis]
+	All goals can be described by the maximization of expected cumulative reward.
+\end{definition}
+\begin{itemize}
+	\item That all of what we mean by goals and purposes can be well thought of as athe maximization of the expected value of the cumulative sum of a received scalar signal (called reward).
+\end{itemize}
+
 \begin{definition}[Reward Function]
 	\begin{align*}
 		r(s,a)&= \mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a]\\
@@ -64,8 +71,10 @@ Components of RL:
 			r(s,a,s')&= \mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a,S_{t}=s]\\
 			&= \sum_{r\in \mathcal{R}}\frac{p(s',r|s,a)}{p(s'|s,a)}
 		\end{align*}
-	\item \textbf{Reward Hypothesis}: That all of what we mean by goals and purposes can be well thought of as athe maximization of the expected value of the cumulative sum of a received scalar signal (called reward).
 \end{itemize}
+
+
+
 
 \begin{definition}[Discount Factor, $\gamma$]
 	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{t} $$
@@ -164,12 +173,17 @@ $$\pi(a|s)$$
 	\item The derivation is given in \Cref{appendix:bellman_equation}
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
-	&= \sum_{g_t} g_t\cdot P(G_t|S_t=s)\\
-	&= \sum_{g_t} g_t \sum_a P(G_t|S_t=s, A_t=a) P(A_t=a|S_t=s)\\
-	&= \sum_{a} \sum_{g_t} g_t P(G_t|S_t=s, A_t=a) P(A_t=a|S_t=s)\\
+	&= \sum_{g_t} g_t\cdot P[G_t|S_t=s]\\
+	&= \sum_{g_t} g_t\cdot P[G_t,S_t=s]/P[S_t=s]\\
+	&= \sum_{g_t} g_t\cdot \sum_a P[G_t,S_t=s, A_t=a]/P[S_t=s]\\
+	&= \sum_{g_t} g_t\cdot \sum_a \Big[P[G_t|S_t=s, A_t=a]P[S_t=s, A_t=a]\Bi]/P[S_t=s]\\
+	%&= \sum_{g_t} g_t \sum_a P(G_t|S_t=s, A_t=a) P(A_t=a|S_t=s)\\
+	&= \sum_{g_t} g_t \sum_a P[G_t, A_t=a|S_t=s] P[A_t=a|S_t=s]\\
+	&= \sum_{a} \sum_{g_t} g_t P[G_t|S_t=s, A_t=a] P[A_t=a|S_t=s]\\
 	&= \sum_{a} q_\pi(s,a) \pi(a|s)
 \end{align*}
-Note that the expectation is parameerized $\pi$ as written in $\mathbb{E}_{\pi}$. We can also prove it by the \textit{Law of Total Expectation},
+Note that the expectation is parameerized $\pi$ as written in $\mathbb{E}_{\pi}$. We can also prove it by the \textit{Law of Total Expectation} \footnote{
+$\mathbbm{E}[\mathbbm{E}[X|Y]] = \sum_{y}\Big[\sum_{x}x\cdot\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$},
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
 	&= \mathbb{E}[\mathbb{E}_{\pi}[G_t|S_t=s, A_t=a]]\\

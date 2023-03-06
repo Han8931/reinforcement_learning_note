@@ -1,5 +1,29 @@
 \chapter{Dynamic Programming}
 
+Let $\pi$ and $\pi'$ be any pair of deterministic policies such that, for all $s\in \mathcal{S}$, 
+\begin{align*}
+	q_\pi(s, \pi'(s))\geq v_\pi(s).	
+\end{align*}
+Then the policy $\pi'$ must be as good as, or better than $\pi$. Equivalently, it must obtain the following inequality for all states $s\in \mathcal{S}$:
+\begin{align*}
+	v_\pi'(s)\geq v_\pi(s).	
+\end{align*}
+
+\begin{align*}
+	v_\pi(s)&\leq q_\pi(s, \pi'(s))	\\
+	&= \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s, A_t=\pi'(s)]\\
+	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s]\\
+	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma q_\pi(S_{t+1}, \pi'(S_{t+1}))|S_t=s]\\
+	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma \mathbb{E}_{\pi'}[R_{t+2}+\gamma v_\pi(S_{t+2})|S_{t+1}, A_{t+1}=\pi'(S_{t+1})]\,|\,S_t=s]\\
+	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 v_\pi(S_{t+2})|\,S_t=s]\\
+	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 v_\pi(S_{t+3})|\,S_t=s]\\
+	&\vdots\\
+	&\leq\\
+	&= v_{\pi'}(s).
+	%\label{eq:policy_improvement_theorem}
+\end{align*}
+
+
 \section{Policy Evaluation}
 \begin{itemize}
 	\item Prediction problem: refers to the problem of \textbf{evaluating policies} (sipmly, rating policies), of estimating value functions given a policy (learning to predict returns).
@@ -15,6 +39,10 @@
 
 \section{Policy Improvement}
 \begin{itemize}
-	\item Policy improvement: algorithms that make new policies that improve on an original policy by making it greedier than the original with respect to the value function of that original policy. 
-		$$\pi'(s) = \argmax_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')].$$
+	\item Policy improvement: algorithms that make new policies that improve on an original policy by making it greedier than the original with respect to the value function of that original policy. The following approach considers all possible actions at each state and selects the best according to $q_\pi(s,a)$ in a greedy way. 
+		\begin{align*}
+			\pi'(s) &= \argmax_a q_\pi(s,a)\\
+			&= \argmax_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')].
+		\end{align*}
+	\item The greedy policy takes the action that looks best in the short term according to $v_\pi$.
 \end{itemize}

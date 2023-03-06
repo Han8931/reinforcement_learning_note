@@ -1,0 +1,31 @@
+\chapter{Deep Reinforcement Learning}
+
+Three challenges in DRL:
+\begin{itemize}
+	\item Sequential feedback
+	\item Evaluative feedback
+	\item Sampled feedback
+\end{itemize}
+
+Select:
+\begin{enumerate}
+	\item A value function to approximate.
+	\item A neural network architecture
+		\begin{itemize}
+			\item e.g., value (single output node) or action (multiple output nodes)
+		\end{itemize}
+	\item What to optimize
+	\item Policy evaluation algorithm
+	\item Exploration strategy
+	\item A loss function
+	\item Optimization method
+\end{enumerate}
+
+Some considerations:
+\begin{itemize}
+	\item Non-stationary target
+	\item Data correlated with time
+		\begin{itemize}
+			\item Samples in a batch are correleated, given that most of these samples come from the same trajectory and policy. It breaks the i.i.d. assumptions. 
+		\end{itemize}
+\end{itemize}

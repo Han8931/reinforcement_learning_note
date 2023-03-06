@@ -6,6 +6,8 @@ A level-1 auxiliary file: ./sections/mab.aux
 A level-1 auxiliary file: ./sections/mdp.aux
 A level-1 auxiliary file: ./sections/dynamic_programming.aux
 A level-1 auxiliary file: ./sections/monte_carlo.aux
+A level-1 auxiliary file: ./sections/deep_rl.aux
+A level-1 auxiliary file: ./sections/dqn.aux
 A level-1 auxiliary file: ./sections/policy_gradient.aux
 The style file: unsrt.bst
 A level-1 auxiliary file: ./appendix/appendix.aux
@@ -13,7 +15,7 @@ I found no \citation commands---while reading file main.aux
 Database file #1: references.bib
 You've used 0 entries,
             1791 wiz_defined-function locations,
-            452 strings with 3685 characters,
+            454 strings with 3725 characters,
 and the built_in function-call counts, 18 in all, are:
 = -- 0
 > -- 0

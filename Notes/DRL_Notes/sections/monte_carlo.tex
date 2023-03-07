@@ -2,9 +2,11 @@
 Our goal is to estimate value functions and find optimal policies. 
 
 \section{First Visit vs. Every Visit}
-The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
+Suppose we wish to estimate $v_\pi(s)$, the value of a state $s$ under policy $\pi$, given a set of episodes obtained by following $\pi$ and passing through $s$. Each occurrence of state $s$ in an episode is called a viist to $s$. The first-visit MC method estimates $v_\pi(s)$ as \textbf{the average of the returns} following \textbf{first visits} to $s$, whereas the every-visit MC method averages the returns following all visits to $s$.
 
-Intuitively, we care about the value function associated with $\pi$ because we might want or need to know ``how good it is to be in a certain state'', if the agent behaves in the environment according to the policy $\pi$.
+%The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
+%
+%Intuitively, we care about the value function associated with $\pi$ because we might want or need to know ``how good it is to be in a certain state'', if the agent behaves in the environment according to the policy $\pi$.
 
 \section{On-Policy vs. Off-Policy}
 The more episodes are collected, the better because the estimates of the functions will be. However, there is a problem. If the algorithm for policy improvement always updates the policy greedily, meaning it takes only actions leading to immediate reward, actions and states not on the greedy path will not be sampled sufficiently, and potentially better rewards would stay hidden from the learning process.

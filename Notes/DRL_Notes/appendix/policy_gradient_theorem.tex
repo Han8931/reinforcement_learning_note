@@ -1,0 +1,65 @@
+\section{Policy Gradient Theorem}
+
+Function approximation is essential to reinforcement learning, but the standard approach of approximating a value function and determining a policy from it has so far proven theoretically intractable. In this paper we explore an alternative approach in which the policy is explicitly represented by its own function approximator, independent of the value function, and is updated according to the gradient of expected reward with respect to the policy parameters. Williams's REINFORCE method and actor-critic methods are examples of this approach.
+
+
+We consider the standard reinforcement learning framework, in which a learning agent interacts with a Markov decision process (MDP). 
+
+\begin{itemize}
+	\item The state, action, and reward at each time $t\in \{0, 1, 2, \cdots\}$ are denoted $s_t\in \mathcal{S}$, $a_t\in \mathcal{A}$, and $r_t\in \mathbbm{R}$.
+	\item The environment's dynamics are characterized by state transition probabilities and expected rewards:
+		\begin{align*}
+			\mathcal{P}_{ss'}^a &= P(s_{t+1}=s'|s_t=s,a_t=a)\\
+			\mathcal{R}_{s}^a &= \mathbbm{E}(r_{t+1}|s_t=s,a_t=a), \forall s, s' \in \mathcal{S}, a\in \mathcal{A}
+		\end{align*}
+\end{itemize}
+
+With function approximation, two ways of formultaing the agent's objective are useful: One is the average reward formulation, in which policies are ranked according to their long-term expected reward per-step, $\rho(\pi)$:
+$$\rho(\pi) = \lim_{n\to\infty} \frac{1}{n}\mathbbm{E}[r_1 + r_2,\cdots,+r_n|\pi] = \sum_s d^\pi(s)\sum_a \pi(a|s)\mathcal{R}_s^a,$$
+where $d^\pi(s) = \lim_{t\to \infty}P(s_t=s|s_0,\pi)$ is the stationary distribution of states under $\pi$, which we assume exists and is independent of $s_0$ for all policies. Imagine that you can travel along the Markov chain's states forever, and eventually, as the time progresses, the probability of you ending up with one state becomes unchanges. This is the stationary probability that the $s_t=s$ when starting from $s_0$ and following policy $\pi_\theta$ for $t$ steps. With the average reward formultion, the state-action value function is defined as 
+$$Q^\pi(s,a) = \sum_{t=1}^{\infty}\mathbbm{E}[r_t-\rho(\pi)|s_0=s, a_0=a, \pi], \forall s\in \mathcal{S}, a\in \mathcal{A}.$$
+
+
+\subsection{Proof of Policy Gradient Theorem}
+\begin{align*}
+	J(\theta) &= \sum_{s \in \mathcal{S}} d^\pi(s) V^\pi(s)\\ 
+	&= \sum_{s \in \mathcal{S}} d^\pi(s) \sum_{a \in \mathcal{A}} \pi_\theta(a \vert s) Q^\pi(s, a),
+\end{align*}
+where $d_\pi(s)$ is the stationary distribution of Markov chain for $\pi_\theta$ (on-policy state distribution under $\pi$). Imagine that you can travel along the Markov chain's states forever, and eventually, as the time progresses, the probability of you ending up with one state becomes unchanged, this is the stationary probability for $\pi_\theta$.
+\begin{align*}
+	\nabla_\theta V^\pi(s) &= \nabla_\theta \sum_{a\in \mahtcal{A}}\pi_\theta(a|s)Q^\pi(s,a)\\
+	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \nabla_\theta Q^\pi(s,a)\\
+	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \nabla_\theta \sum_{s',r} P(s',r|s,a)(r+V^\pi(s'))\\
+	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \sum_{s',r} P(s',r|s,a) \nabla_\theta V^\pi(s') \quad P(s',r|s,a) \textrm{ and } r \textrm{ is not a function of } \theta\\
+	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
+\end{align*}
+This equation has a recursive from. Let's consider a visitation sequence and transition probability from state $s$ to state $x$ with polict $\pi_\theta$ after $k$ steps asr: 
+$$\rho^\pi(s\to x, k)$$
+\begin{itemize}
+	\item This is a state transition probability with a policy $\pi_\theta$
+	\item When $k=0$, $\rho^\pi(s\to s, k=0) = 1$ 
+	\item When $k=1$, $\rho^\pi(s\to s', k=1) = \sum_a \pi_\theta(a|s)P(s'|s,a)$ 
+	\item $\rho^\pi(s\to x, k+1)=\sum_{s'}\rho^\pi(s\to s', k)\rho^\pi(s'\to x, 1)$, where $s'$ is the step right behind the state $x$ (intermediate step). 
+\end{itemize}
+
+\begin{align*}
+	\nabla_\theta V^\pi(s) &= \underbrace{\sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a)}_{\doteq \phi(s)} + \pi_\theta(a|s) \sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
+	&= \phi(s) + \sum_a \pi_\theta(a|s)\sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
+	&= \phi(s) + \sum_{s'} \sum_a \pi_\theta(a|s)P(s'|s,a) \nabla_\theta V^\pi(s') \\
+	&= \phi(s) + \sum_{s'}\rho^\pi(s\to s', k=1) \nabla_\theta V^\pi(s') \\
+	&= \phi(s) + \sum_{s'}\rho^\pi(s\to s', k=1) \Bigg[\phi(s') + \sum_{s''}\rho^\pi(s'\to s'', k=1) \nabla_\theta V^\pi(s'') \Bigg]\\
+	&= \phi(s) + \sum_{s'}\rho^\pi(s\to s', 1)\phi(s') + \sum_{s''}\sum_{s'}\rho^\pi(s\to s', 1)\rho^\pi(s'\to s'', k=1) \nabla_\theta V^\pi(s'') \\
+	&= \phi(s) + \sum_{s'}\rho^\pi(s\to s', 1)\phi(s') + \sum_{s''}\rho^\pi(s\to s'', 2)\nabla_\theta V^\pi(s'') \\
+	& \quad \quad \vdots\\
+	&= \sum_{x\in \mathcal{S}}\sum_{k=0}^{\infty}\rho^\pi(s\to x, k)\phi(x)
+\end{align*}
+We can rewrite the above equation as
+\begin{align*}
+	\nabla_\theta J(\theta) &= \nabla_\theta V^\pi(s)\\
+	&= \sum_{x\in \mathcal{S}}\underbrace{\sum_{k=0}^{\infty}\rho^\pi(s_0\to s, k)}_{\doteq \eta(s)}\phi(x)\\
+	&= \sum_s \eta(s)\phi(s)\\
+	&= \underbrace{\sum_s \eta(s)}_{\textrm{Constant}}\sum_s \underbrace{\frac{\eta(s)}{\sum_s \eta(s)}}_{\textrm{Normalization}}\phi(s)\\
+	&\propto \sum_s \frac{\eta(s)}{\sum_s \eta(s)}\phi(s)\\
+	&= \sum_s d^\pi(s)\sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a)\\
+	&= \mathbbm{E}_{\pi}[\nabla_\theta \ln\pi_\theta(a|s)Q^\pi(s,a)]
+\end{align*}

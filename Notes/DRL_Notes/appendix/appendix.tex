@@ -146,5 +146,63 @@ Incremental MC:
 	\item $V_{n+1}(S_t) = V_{n}(S_t)+\alpha({G_{t:T}^n -V_n(S_t)})$ for rest $V_{n+1}(s)= V_n(s)$ 
 \end{itemize}
 
+\section{Derivative of Softmax}
+
+Softmax function is given by
+\begin{align*}
+	S(x_{i}) = \frac{e^{x_i}}{\sum_{k=1}^K e^{x_k}} \;\;\;\text{ for } i = 1, \dots, K
+\end{align*}
+
+The derivative of softmax function is
+\begin{align*}
+\frac{\partial S_i}{\partial x_j} = 
+\begin{cases}S_i(1-S_j) &\text{ if } i=j \\
+-S_jS_i &\text{ if } i \neq j
+\end{cases}
+\end{align*}
+
+\begin{itemize} 
+	\item Diagoal elements: $S_i(1-S_j)$
+	\item Off-diagonal elements: $-S_jS_i$:
+\end{itemize}
+
+
+The Jacobian matrix ($j\times i$) for softmax is 
+\begin{align*}
+	\frac{\partial S}{\partial x} =
+\begin{bmatrix}
+\frac{\partial S_{1}}{\partial x_{1}} & \frac{\partial S_{1}}{\partial x_{2}} & \cdots & \frac{\partial S_{1}}{\partial x_{K}} \\
+\frac{\partial S_{2}}{\partial x_{1}} & \frac{\partial S_{2}}{\partial x_{2}} & \cdots & \frac{\partial S_{K}}{\partial x_{K}} \\
+\vdots & \vdots & \cdots & \vdots \\
+\frac{\partial S_{K}}{\partial x_{1}} & \frac{\partial S_{K}}{\partial x_{2}} & \cdots & \frac{\partial S_{K}}{\partial x_{K}} \\
+	\end{bmatrix}
+\end{align*}
+
+The matrix can be expressed as follows:
+
+\begin{align*}
+\begin{bmatrix}
+	S(x_1)-S(x_1)S(x_1) & \ldots & 0-S(x_1)S(x_N)\\
+	\ldots & S(x_j)-S(x_j)S(x_i) & \ldots\\
+	0-S(x_N)S(x_1)& \ldots & 0-S(x_N)S(x_N)
+\end{bmatrix} =  \\
+\begin{bmatrix}
+	S(x_1) & \ldots & 0\\
+	\ldots & S(x_j) & \ldots\\
+	0& \ldots & S(x_N)
+\end{bmatrix} - 
+\begin{bmatrix}
+	S(x_1)S(x_1) & \ldots & S(x_1)S(x_N)\\
+	\ldots & S(x_j)S(x_i) & \ldots\\
+	S(x_N)S(x_1)& \ldots & S(x_N)S(x_N)
+\end{bmatrix}
+\end{align*}
+This can be 
+
+\begin{lstlisting}[language=Python]
+np.diag(S) - np.outer(S, S)
+\end{lstlisting}
+
+
 \end{appendices}
 

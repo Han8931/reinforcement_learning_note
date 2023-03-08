@@ -92,6 +92,8 @@ So, the ratio $\rho_{t:T-1}$ transforms the returns
 	\mathbb{E}[\rho_{t:T-1} G_t|S_t=s] = v_\pi(s).
 \end{align*}
 
+
+
 %Off-policy methods offer a different solution to the exploration vs. exploitation problem. While on-Policy algorithms try to improve the same $\epsilon$-greedy policy that is used for exploration, off-policy approaches have two policies: a behavior policy and a target policy. The behavioral policy b is used for exploration and episode generation, and the target or goal policy $\pi$ is used for function estimation and improvement.
 %
 %This works because the target policy $\pi$ gets a ``balanced'' view of the environment and can learn from potential mistakes of $b$ while still keeping track of the good actions and trying to find better ones. However, one thing to remember is that in Off-policy learning, we have a distribution mismatch between the one we are trying to estimate and the one we are sampling from. That is why a technique called importance sampling is often used to facilitate this mismatch.

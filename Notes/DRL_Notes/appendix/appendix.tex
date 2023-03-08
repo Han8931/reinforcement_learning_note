@@ -56,13 +56,13 @@ q_\pi(s,a) &=& \mathbb{E}_\pi[G_t|S_t=s,A_t=a]\\
 \end{eqnarray*}
 
 \section{Importance Sampling}
-You have two distributions, P(A) and P(B), and you have a sequence sampled from A. You can estimate an expectation of A, 
+You have two distributions, $P(A)$ and $P(B)$, and you have a sequence sampled from $A$. You can estimate an expectation of $A$, 
 
-$$E[A] = \sum p(a)h(a).$$
+$$\mathbb{E}[A] = \sum p(a)h(a).$$
 
 Can we use the above equation for estimating an expectation of B? Yes.
 
-$$E[B] = \sum \frac{p(b)}{p(a)}h(a).$$
+$$\mathbb{E}[B] = \sum \frac{p(b)}{p(a)}h(a).$$
 The ratio $\frac{p(b)}{p(a)}$ tells us how likely to observe some results under $p(b)$ compared to $p(a)$.
 
 

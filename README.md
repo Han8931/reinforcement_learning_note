@@ -5,6 +5,7 @@ References:
 - Reinforcement Learning, Richard S. Sutton and Andrew G. Barto
 - [Grokking Deep Reinforcement Learning, Miguel Morales](https://github.com/mimoralea/gdrl)
 - [Introduction to Reinforcement Learning with David Silver](https://www.deepmind.com/learning-resources/introduction-to-reinforcement-learning-with-david-silver)
+- [PyTorch-1.x-Reinforcement-Learning-Cookbook](https://github.com/PacktPublishing/PyTorch-1.x-Reinforcement-Learning-Cookbook)
 
 
 

@@ -19,6 +19,40 @@ We can express $J(\theta)$ as follows:
 \end{align*}
 Note that $\nabla_\theta \log \pi_\theta(\tau)$ is the maximum loglikelihood of trajectory, because gradient is the maximum direction of the function. This expectation can be estimated by Monte-Carlo method. 
 
+We just sample trajectories using current policy and adjust the likelihood of trajectories by episodic rewards. 
+\begin{align*}
+	\pi_\theta(\tau) &=  p_\theta(s_1,a_1,s_2,a_2,\cdots,s_T,a_T) = p(s_1) \prod_{t=1}^{T}\pi_\theta(a_t|s_t)p(s_{t+1}|s_t,a_t)
+\end{align*}
+Note that the product term looks causing gradient explosion or vanishing problems for a long sequence problem, but it turns into a multiplication as below by the log-derivative trick, so it can avoid the issues. 
+
+In general, the agent has no access to $p(s_1)$ and $p(s_{t+1}|s_t,a_t)$ (we don't know trainsition robability.).
+\begin{align*}
+	\nabla_\theta \log \pi_\theta(\tau) &= \nabla_\theta\Bigg[\log p(s_1) + \sum_{t=1}^{T}(\log \pi_\theta(a_t|s_t)+\log p(s_{t+1}|s_t,a_t))\Bigg]\\
+	&= \sum_{t=1}^{T}\nabla_\theta\log \pi_\theta(a_t|s_t)\\
+	r(\tau) &= \sum_{t=1}^{T}r(s_t,a_t)
+\end{align*}
+
+By using the above equations, we can re-express the gradient of the cost function as
+\begin{align*}
+	\nabla_\theta J(\theta) &= \int \nabla_\theta \pi_\theta(\tau) r(\tau) = \int \pi_\theta \nabla_\theta \log \pi_\theta(\tau)\\
+	&= \mathbbm{E}_{\tau\sim \pi_\theta(\tau)}[\nabla_\theta \log \pi_\theta(\tau)r(\tau)] \\
+	&= \mathbbm{E}_{\tau\sim \pi_\theta(\tau)}\Bigg[\Bigg(\sum_{t=1}^{T}\nabla_\theta\log \pi_\theta(a_t|s_t)\Bigg)\Bigg(\sum_{t=1}^{T}r(s_t,a_t)\Bigg)\Bigg]
+\end{align*}
+
+By using Monte-Carlo method, we can replace the expectation by sampling multiple trajectories in practice:
+\begin{align*}
+	\nabla_\theta J(\theta) &\approx  \frac{1}{N}\sum_{i=1}^{N}\Bigg[\Bigg(\sum_{t=1}^{T}\nabla_\theta\log \pi_\theta(\mathbf{a}_{i,t}|\mathbf{s}_{i,t})\Bigg)\Bigg(\sum_{t=1}^{T}r(\mathbf{s}_{i,t}, \mathbf{a}_{i,t})\Bigg)\Bigg]
+\end{align*}
+
+\subsection{Causality}
+\begin{align*}
+	\nabla_\theta J(\theta) &\approx  \frac{1}{N}\sum_{i=1}^{N}\Bigg[\sum_{t=1}^{T}\nabla_\theta\log \pi_\theta(a_{i,t}|s_{i,t})\sum_{t=1}^{T}r(s_{i,t},a_{i,t})\Bigg]\\
+	&= \frac{1}{N}\sum_{i=1}^{N}\sum_{t=1}^{T}\Bigg[\nabla_\theta\log \pi_\theta(a_{i,t}|s_{i,t})\sum_{t'=1}^{T}r(s_{i,t'},a_{i,t'})\Bigg]\\
+	&= \frac{1}{N}\sum_{i=1}^{N}\sum_{t=1}^{T}\Bigg[\nabla_\theta\log \pi_\theta(a_{i,t}|s_{i,t})\sum_{t'=t}^{T}r(s_{i,t'},a_{i,t'})\Bigg] \quad \textrm{by causality}
+\end{align*}
+
+
+
 \section{Natural Policy Gradient}
 reference: Nathan Ratliff, Information Geometry and Natural Gradients. 
 \subsection{KL-divergence between perturbed distributions}

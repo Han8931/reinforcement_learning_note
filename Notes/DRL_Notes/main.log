@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  8 MAR 2023 01:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.22)  9 MAR 2023 21:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -791,7 +791,7 @@ Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/6'
 
 (./sections/mdp.tex
 Chapter 2.
-<./images/mdp.png, id=271, 878.0805pt x 336.0555pt>
+<./images/mdp.png, id=276, 878.0805pt x 336.0555pt>
 File: ./images/mdp.png Graphic file (type png)
 <use ./images/mdp.png>
 Package pdftex.def Info: ./images/mdp.png  used on input line 7.
@@ -802,7 +802,7 @@ Package pdftex.def Info: ./images/mdp.png  used on input line 7.
 
 
  <./images/mdp.png (PNG copy)>] [7]
-<./images/backup_vpi.png, id=288, 341.275pt x 255.95625pt>
+<./images/backup_vpi.png, id=293, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
 Package pdftex.def Info: ./images/backup_vpi.png  used on input line 144.
@@ -847,7 +847,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [10]
-<./images/optimal_action.pdf, id=315, 354.80164pt x 170.62769pt>
+<./images/optimal_action.pdf, id=320, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
 Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 247.
@@ -974,8 +974,8 @@ or  <return>  to continue without it.
 
 ]
 ! Undefined control sequence.
-<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
-                                                  \theta + \frac {1}{2}\delt...
+<argument> ...g \pi _\theta (\tau )\\ &= \mathbbm 
+                                                  {E}_{\tau \sim \pi _\theta...
 l.40 \end{align*}
                  
 The control sequence at the end of the top line
@@ -985,8 +985,30 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
-                                                  \theta + \frac {1}{2}\delt...
+<argument> ...eta (\tau )r(\tau )] \\ &= \mathbbm 
+                                                  {E}_{\tau \sim \pi _\theta...
+l.40 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...g \pi _\theta (\tau )\\ &= \mathbbm 
+                                                  {E}_{\tau \sim \pi _\theta...
+l.40 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...eta (\tau )r(\tau )] \\ &= \mathbbm 
+                                                  {E}_{\tau \sim \pi _\theta...
 l.40 \end{align*}
                  
 The control sequence at the end of the top line
@@ -996,15 +1018,42 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (28.27066pt too wide) detected at line 49
-[]
- []
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 47.
 
 [21]
 ! Undefined control sequence.
+<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
+                                                  \theta + \frac {1}{2}\delt...
+l.74 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...)}{p(x;\theta _t)}\Bigg )^T \deltaf 
+                                                  \theta + \frac {1}{2}\delt...
+l.74 \end{align*}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (28.27066pt too wide) detected at line 83
+[]
+ []
+
+[22]
+! Undefined control sequence.
 <recently read> \mathbbm 
                          
-l.84 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.118 ...rset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1015,7 +1064,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \mathbbm 
                     {E}
-l.84 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.118 ...rset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1026,7 +1075,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \mathbbm 
                     {E}
-l.84 ...erset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
+l.118 ...rset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}}
                                                    [L(s, a, \theta_k, \theta...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1041,17 +1090,17 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.91 \end{align}
-                
+l.125 \end{align}
+                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[22]) [23] (./main.bbl
+[23]) [24] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [24
+) [25
 
 
 
@@ -1059,16 +1108,16 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 ]
 \openout2 = `./appendix/appendix.aux'.
 
- (./appendix/appendix.tex [25
+ (./appendix/appendix.tex [26
 
 
 
-] [26]
+] [27]
 Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  [][][] []
  []
 
-[27] [28] [29] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+[28] [29] [30] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (./appendix/policy_gradient_theorem.tex
@@ -1112,7 +1161,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[30]
+[31]
 ! Undefined control sequence.
 l.20 $$Q^\pi(s,a) = \sum_{t=1}^{\infty}\mathbbm
                                                {E}[r_t-\rho(\pi)|s_0=s, a_0=...
@@ -1259,7 +1308,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[31]
+[32]
 ! Undefined control sequence.
 <argument> ...um _s d^\pi (s)\sum _{a\in \mahtcal 
                                                   {A}}\nabla _\theta \pi _\t...
@@ -1304,53 +1353,54 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [32] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
+)) [33] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
 (./sections/mdp.aux) (./sections/dynamic_programming.aux)
 (./sections/monte_carlo.aux) (./sections/deep_rl.aux) (./sections/dqn.aux)
 (./sections/policy_gradient.aux) (./appendix/appendix.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B2F003F54E50A5267AA6BEB6EBE7923F;7113.
+(rerunfilecheck)             Checksum: 1C79B6C5EB552FFC26C38B22F481ED29;7218.
  ) 
 Here is how much of TeX's memory you used:
- 19512 strings out of 478238
- 312704 string characters out of 5850455
+ 19517 strings out of 478238
+ 312761 string characters out of 5850455
  852468 words of memory out of 5000000
- 37038 multiletter control sequences out of 15000+600000
- 507727 words of font info for 229 fonts, out of 8000000 for 9000
+ 37039 multiletter control sequences out of 15000+600000
+ 507778 words of font info for 230 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,19n,65p,1047b,1408s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
-/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9
-.pfb></usr/share/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texm
-f-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
-uper/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.p
-fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/
-texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/font
-s/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/
-cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm09
-00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
-ti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></us
-r/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (35 pages, 645504 bytes).
+s/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmex
+tra/cmex9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.p
+fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-
+super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.
+pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share
+/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/fon
+ts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public
+/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0
+800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist
+/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/s
+fsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></u
+sr/share/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf-
+dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (36 pages, 658710 bytes).
 PDF statistics:
- 608 PDF objects out of 1000 (max. 8388607)
- 498 compressed objects within 5 object streams
- 117 named destinations out of 1000 (max. 500000)
- 67424 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 623 PDF objects out of 1000 (max. 8388607)
+ 509 compressed objects within 6 object streams
+ 119 named destinations out of 1000 (max. 500000)
+ 67432 words of extra memory for PDF output out of 74296 (max. 10000000)
 

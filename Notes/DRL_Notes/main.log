@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.16)  9 MAR 2023 13:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.16)  9 MAR 2023 16:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -791,7 +791,7 @@ Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/6'
 
 (./sections/mdp.tex
 Chapter 2.
-<./images/mdp.png, id=281, 878.0805pt x 336.0555pt>
+<./images/mdp.png, id=286, 878.0805pt x 336.0555pt>
 File: ./images/mdp.png Graphic file (type png)
 <use ./images/mdp.png>
 Package pdftex.def Info: ./images/mdp.png  used on input line 7.
@@ -802,7 +802,7 @@ Package pdftex.def Info: ./images/mdp.png  used on input line 7.
 
 
  <./images/mdp.png (PNG copy)>] [7]
-<./images/backup_vpi.png, id=298, 341.275pt x 255.95625pt>
+<./images/backup_vpi.png, id=303, 341.275pt x 255.95625pt>
 File: ./images/backup_vpi.png Graphic file (type png)
 <use ./images/backup_vpi.png>
 Package pdftex.def Info: ./images/backup_vpi.png  used on input line 144.
@@ -847,7 +847,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [10]
-<./images/optimal_action.pdf, id=325, 354.80164pt x 170.62769pt>
+<./images/optimal_action.pdf, id=331, 354.80164pt x 170.62769pt>
 File: ./images/optimal_action.pdf Graphic file (type pdf)
 <use ./images/optimal_action.pdf>
 Package pdftex.def Info: ./images/optimal_action.pdf  used on input line 247.
@@ -928,12 +928,12 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[17]) [18]
+[17] [18]) [19]
 \openout2 = `./sections/deep_rl.aux'.
 
  (./sections/deep_rl.tex
 Chapter 5.
-) [19
+) [20
 
 
 
@@ -943,7 +943,7 @@ Chapter 5.
 
  (./sections/dqn.tex
 Chapter 6.
-) [20
+) [21
 
 
 
@@ -967,7 +967,7 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[21
+[22
 
 
 
@@ -1000,7 +1000,7 @@ Overfull \hbox (28.27066pt too wide) detected at line 49
 []
  []
 
-[22]
+[23]
 ! Undefined control sequence.
 <recently read> \mathbbm 
                          
@@ -1047,11 +1047,11 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[23]) [24] (./main.bbl
+[24]) [25] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [25
+) [26
 
 
 
@@ -1059,16 +1059,16 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 ]
 \openout2 = `./appendix/appendix.aux'.
 
- (./appendix/appendix.tex [26
+ (./appendix/appendix.tex [27
 
 
 
-] [27]
+] [28]
 Overfull \hbox (36.24277pt too wide) in alignment at lines 45--56
  [][][] []
  []
 
-[28] [29] [30] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+[29] [30] [31] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (./appendix/policy_gradient_theorem.tex
@@ -1112,7 +1112,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[31]
+[32]
 ! Undefined control sequence.
 l.20 $$Q^\pi(s,a) = \sum_{t=1}^{\infty}\mathbbm
                                                {E}[r_t-\rho(\pi)|s_0=s, a_0=...
@@ -1259,7 +1259,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[32]
+[33]
 ! Undefined control sequence.
 <argument> ...um _s d^\pi (s)\sum _{a\in \mahtcal 
                                                   {A}}\nabla _\theta \pi _\t...
@@ -1304,18 +1304,18 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [33] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
+)) [34] (./main.aux (./sections/intro.aux) (./sections/mab.aux)
 (./sections/mdp.aux) (./sections/dynamic_programming.aux)
 (./sections/monte_carlo.aux) (./sections/deep_rl.aux) (./sections/dqn.aux)
 (./sections/policy_gradient.aux) (./appendix/appendix.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 0B83DE72FE4912403759C0D49A015317;7461.
+(rerunfilecheck)             Checksum: 052F5B566C9D03C3DB1D46822358CA42;7611.
  ) 
 Here is how much of TeX's memory you used:
- 19521 strings out of 478238
- 312866 string characters out of 5850455
+ 19524 strings out of 478238
+ 312907 string characters out of 5850455
  852561 words of memory out of 5000000
- 37042 multiletter control sequences out of 15000+600000
+ 37043 multiletter control sequences out of 15000+600000
  507790 words of font info for 230 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,19n,65p,1047b,1408s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1347,10 +1347,10 @@ fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/cm-super/sfsl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
 ti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></us
 r/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (36 pages, 649093 bytes).
+Output written on main.pdf (37 pages, 652534 bytes).
 PDF statistics:
- 624 PDF objects out of 1000 (max. 8388607)
- 512 compressed objects within 6 object streams
- 120 named destinations out of 1000 (max. 500000)
- 67440 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 637 PDF objects out of 1000 (max. 8388607)
+ 524 compressed objects within 6 object streams
+ 122 named destinations out of 1000 (max. 500000)
+ 67448 words of extra memory for PDF output out of 74296 (max. 10000000)
 

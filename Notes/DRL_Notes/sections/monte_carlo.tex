@@ -58,7 +58,7 @@ We are looking for something like a middle ground between those. Full-on explora
 \subsection{On Policy}
 On-policy methods solve the exploration vs exploitation dilemma by including randomness in the form of a policy that is soft, meaning that non-greedy actions are selected with some probability. These policies are called $\epsilon$-greedy policies as they select random actions with an $\epsilon$ probability and follow the optimal action with $1-\epsilon$ probability
 
-Since the probability of selecting from the action space randomly is $\epsilon$, the probability of selecting any particular non-optimal (non-greedy) action is $\epsilon/|\mathcal{A}(s)|$. The probability of following the optimal action will always be slightly higher, however, because we have a $1 - \epsilon$ probability of selecting it outright and $\epsilon/ |\mathcal{A}(s)|$ probability of selecting it from sampling the action space \footnote{Since the greedy (or optimal) action can be selected by either 1-$\epsilon$ or $\epsilon/ |\mathcal{A}(s)|$}:
+Since the probability of selecting from the action space randomly is $\epsilon$, the probability of selecting any particular non-optimal (non-greedy) action is $\epsilon/|\mathcal{A}(s)|$. The probability of following the optimal action will always be slightly higher, however, because we have a $1 - \epsilon$ probability of selecting it outright and $\epsilon/ |\mathcal{A}(s)|$ probability of selecting it from sampling the action space \footnote{Since the greedy (or optimal) action can be selected by either 1-$\epsilon$ or $\epsilon/ |\mathcal{A}(s)|$, $a_1=\epsilon/\mathcal{A}(s),a_2=\epsilon/\mathcal{A}(s),\cdots,a_{best}=1-\epsilon+\epsilon/\mathcal{A}(s),a_n = \epsilon/\mathcal{A}(s)$}
 $$\[P(a_t^{*}) = 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$$
 It is also worth noting that because the optimal action will be sampled more often than the others making on-policy algorithms will generally converge faster but they also have the risk of trapping the agent into a local optimum of the function.
 
@@ -111,16 +111,32 @@ $$V(S_t) \leftarrow V(S_t)+ \alpha \Big[G_t-V(S_t)\Big] $$
 One-step TD (or TD(0)):
 $$V(S_t) \leftarrow V(S_t)+ \alpha \Big[\underbrace{R_{t+1}+\gamma V(S_{t+1})-V(S_t)}_{\text{TD error}}\Big] $$
 
-\subsection{Sarsa: On-policy TD Control}
-$$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})-Q(S_t, A_t)\Big] $$
-
 
 \subsection{Q-learning: Off-policy TD Control}
 
 $$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma \max_a Q(S_{t+1}, a)-Q(S_t, A_t)\Big] $$
 
 \begin{itemize}
+	\item Off-policy. For instance, we can sample an action $A_t$ from a $\epsilon$-greedy policy. 
+	\item Update Q for each step.
 	\item Maximization bias in $Q$-learning
 \end{itemize}
 
+\subsection{Sarsa: On-policy TD Control}
+$$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})-Q(S_t, A_t)\Big] $$
+\begin{itemize}
+	\item On-policy agorithm, unlike $Q$-learning, we sample both $A_t$ and $A_{t+1}$ from another policy like $\epsilon$-greedy policy. 
+\end{itemize}
 
+
+\subsection{Double Q-learning}
+
+Randomly select $Q_1$ or $Q_2$.
+
+$$Q_1(S_t, A_t) \leftarrow Q_1(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma \max_a Q_2(S_{t+1}, a^*)-Q_1(S_t, A_t)\Big], $$
+where $a^*$ is 
+$$a^* = \argmax_a Q_1(s',a).$$
+
+$$Q_2(S_t, A_t) \leftarrow Q_2(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma \max_a Q_1(S_{t+1}, a^*)-Q_2(S_t, A_t)\Big], $$
+where $a^*$ is 
+$$a^* = \argmax_a Q_2(s',a).$$

@@ -24,23 +24,24 @@
 \contentsline {subsection}{\numberline {4.3.1}On Policy}{16}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Off Policy}{17}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}Temporal-Difference Learninig}{18}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Sarsa: On-policy TD Control}{18}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Q-learning: Off-policy TD Control}{18}{subsection.4.4.2}%
-\contentsline {chapter}{\numberline {5}Deep Reinforcement Learning}{19}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Deep Q-Network}{20}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Policy Gradient}{21}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Natural Policy Gradient}{21}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}KL-divergence between perturbed distributions}{21}{subsection.7.1.1}%
-\contentsline {section}{\numberline {7.2}Proximal Policy Optimization}{23}{section.7.2}%
-\contentsline {paragraph}{Positive Advantage:}{24}{section*.2}%
-\contentsline {paragraph}{Negative Advantage:}{24}{section*.3}%
-\contentsline {chapter}{Appendices}{26}{section*.5}%
-\contentsline {chapter}{Appendix}{26}{appendix*.6}%
-\contentsline {section}{\numberline {A.1}Bellman Equation}{26}{section.1..1}%
-\contentsline {section}{\numberline {B.2}Importance Sampling}{28}{section.1..2}%
-\contentsline {section}{\numberline {C.3}Fisher Information}{29}{section.1..3}%
-\contentsline {section}{\numberline {D.4}Score Function}{29}{section.1..4}%
-\contentsline {section}{\numberline {E.5}Incremental Monte-Carlo}{30}{section.1..5}%
-\contentsline {section}{\numberline {F.6}Derivative of Softmax}{30}{section.1..6}%
-\contentsline {section}{\numberline {G.7}Policy Gradient Theorem}{31}{section.1..7}%
-\contentsline {subsection}{\numberline {G.7.1}Proof of Policy Gradient Theorem}{32}{subsection.1..7.1}%
+\contentsline {subsection}{\numberline {4.4.1}Q-learning: Off-policy TD Control}{18}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Sarsa: On-policy TD Control}{18}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Double Q-learning}{18}{subsection.4.4.3}%
+\contentsline {chapter}{\numberline {5}Deep Reinforcement Learning}{20}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Deep Q-Network}{21}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Policy Gradient}{22}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Natural Policy Gradient}{22}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}KL-divergence between perturbed distributions}{22}{subsection.7.1.1}%
+\contentsline {section}{\numberline {7.2}Proximal Policy Optimization}{24}{section.7.2}%
+\contentsline {paragraph}{Positive Advantage:}{25}{section*.2}%
+\contentsline {paragraph}{Negative Advantage:}{25}{section*.3}%
+\contentsline {chapter}{Appendices}{27}{section*.5}%
+\contentsline {chapter}{Appendix}{27}{appendix*.6}%
+\contentsline {section}{\numberline {A.1}Bellman Equation}{27}{section.1..1}%
+\contentsline {section}{\numberline {B.2}Importance Sampling}{29}{section.1..2}%
+\contentsline {section}{\numberline {C.3}Fisher Information}{30}{section.1..3}%
+\contentsline {section}{\numberline {D.4}Score Function}{30}{section.1..4}%
+\contentsline {section}{\numberline {E.5}Incremental Monte-Carlo}{31}{section.1..5}%
+\contentsline {section}{\numberline {F.6}Derivative of Softmax}{31}{section.1..6}%
+\contentsline {section}{\numberline {G.7}Policy Gradient Theorem}{32}{section.1..7}%
+\contentsline {subsection}{\numberline {G.7.1}Proof of Policy Gradient Theorem}{33}{subsection.1..7.1}%

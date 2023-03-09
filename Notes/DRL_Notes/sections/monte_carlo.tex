@@ -104,6 +104,8 @@ So, the ratio $\rho_{t:T-1}$ transforms the returns
 
 TD learning is a combination of Monte-Carlo method and dynamic programming ideas. It learns directly from raw experience without a model of the environment's dynamics. 
 
+One of the main drawbacks of MC methods is the fact that the agent has to wait until the end of an episode when it can obtain the actual $G_t$ before it can update the state-value function estimate $V_T(S_t)$.
+
 
 Constant-$\alpha$ MC:
 $$V(S_t) \leftarrow V(S_t)+ \alpha \Big[G_t-V(S_t)\Big] $$

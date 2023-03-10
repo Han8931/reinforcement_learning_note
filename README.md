@@ -3,7 +3,7 @@
 
 There are already many tutorials and good lectures about reinforcement learning (RL). However, I found that they are often too simple to cover the depth of RL or skip many explanations behind the formulas. This might be many concepts are too obvious or simple for them.  
 
-This is troublesome for someone like me who has weak math foundations but want to explore RL deeply. Thus, I am trying to explain things clearly with abundant examples and details. Also I want to emphasize that this note relies on many sources. I really appreciate them.  
+This is troublesome for someone like me who has weak math foundations but want to explore RL deeply. Thus, I am trying to explain things clearly with abundant examples and details. Also, many python RL implementations are relying on external libraries or too simple. Thus, I tried to focus on connecting a dot between theories and implementations. Finally, I want to emphasize that this note relies on many sources. I really appreciate them.  
 
 References:
 - [Mastering-Reinforcement-Learning-with-Python](https://github.com/PacktPublishing/Mastering-Reinforcement-Learning-with-Python)

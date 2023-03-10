@@ -1,9 +1,9 @@
 # Reinforcement Learning From Scratch
 
 
-There are already many tutorials and good lectures about reinforcement learning (RL). However, I found that they are often too simple to cover the depth of RL or skip many explanations behind the formulas. This might be many concepts are too obvious or simple for them.  
+There are already a number of excellent tutorials and lectures on Reinforcement Learning (RL) available, but I often find that these do not provide enough detail or explanation of the formulas behind them. This may be because a lot of the concepts are assumed to be obvious or straightforward. 
 
-This is troublesome for someone like me who has weak math foundations but want to explore RL deeply. Thus, I am trying to explain things clearly with abundant examples and details. Also, many python RL implementations are relying on external libraries or too simple. Thus, I tried to focus on connecting a dot between theories and implementations. Finally, I want to emphasize that this note relies on many sources. I really appreciate them.  
+This can be a problem for someone like me who has a weak background in mathematics, but wants to gain a comprehensive understanding of RL. To address this, I am attempting to explain the theory as clearly as possible, using plenty of examples and details. Moreover, many Python RL implementations rely heavily on external libraries or are overly simplistic. Thus, I am endeavoring to bridge the gap between theory and implementation. Finally, I want to acknowledge that this work is based on numerous sources, and I am forever indebted to them.
 
 References:
 - [Mastering-Reinforcement-Learning-with-Python](https://github.com/PacktPublishing/Mastering-Reinforcement-Learning-with-Python)

@@ -1,5 +1,8 @@
 Codes/pytorch_drl/
 Codes/MDRL/
+Codes/RLScratch/
+.rl_venv/
+.ipynb_checkpoints/
 Materials/
 materials/
 material/
@@ -7,3 +10,9 @@ RL_Notes/
 TextBook/
 *.swp
 *.svg
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc

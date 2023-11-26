@@ -1,7 +1,11 @@
+Codes/
+material/
 Codes/pytorch_drl/
 Codes/MDRL/
 Codes/GDRL/
 Codes/RLScratch/
+.rl_venv/
+.ipynb_checkpoints/
 Materials/
 materials/
 material/
@@ -18,5 +22,8 @@ TextBook/
 *.fls
 *.fdb_latexmk
 *.gz
-Codes/
-material/
+*.bbl
+*.blg
+*.log
+*.out
+*.toc

@@ -1,5 +1,6 @@
 Codes/pytorch_drl/
 Codes/MDRL/
+Codes/GDRL/
 Codes/RLScratch/
 Materials/
 materials/
@@ -8,3 +9,14 @@ RL_Notes/
 TextBook/
 *.swp
 *.svg
+*.aux
+*.log
+*.bbl
+*.blg
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.gz
+Codes/
+material/

@@ -239,7 +239,7 @@ Solving a reinforcement learning task means, roughly, finding a policy that achi
 \begin{itemize}
 	\item The optimal action-value function can be obtained as follows:
 		\begin{align*}
-		q_{*}(s,a) &= \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S+t=s, A_t=a]\\
+		q_{*}(s,a) &= \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s, A_t=a]\\
 		&= \sum_{s',r}p(s',r|s,a)[r + \gamma \max_a q_*(s',a')]
 		\end{align*}
 		\begin{figure}[h]

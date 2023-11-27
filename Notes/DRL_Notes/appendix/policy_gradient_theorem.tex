@@ -6,18 +6,18 @@ Function approximation is essential to reinforcement learning, but the standard 
 We consider the standard reinforcement learning framework, in which a learning agent interacts with a Markov decision process (MDP). 
 
 \begin{itemize}
-	\item The state, action, and reward at each time $t\in \{0, 1, 2, \cdots\}$ are denoted $s_t\in \mathcal{S}$, $a_t\in \mathcal{A}$, and $r_t\in \mathbbm{R}$.
+	\item The state, action, and reward at each time $t\in \{0, 1, 2, \cdots\}$ are denoted $s_t\in \mathcal{S}$, $a_t\in \mathcal{A}$, and $r_t\in \mathbb{R}$.
 	\item The environment's dynamics are characterized by state transition probabilities and expected rewards:
 		\begin{align*}
 			\mathcal{P}_{ss'}^a &= P(s_{t+1}=s'|s_t=s,a_t=a)\\
-			\mathcal{R}_{s}^a &= \mathbbm{E}(r_{t+1}|s_t=s,a_t=a), \forall s, s' \in \mathcal{S}, a\in \mathcal{A}
+			\mathcal{R}_{s}^a &= \mathbb{E}(r_{t+1}|s_t=s,a_t=a), \forall s, s' \in \mathcal{S}, a\in \mathcal{A}
 		\end{align*}
 \end{itemize}
 
 With function approximation, two ways of formultaing the agent's objective are useful: One is the average reward formulation, in which policies are ranked according to their long-term expected reward per-step, $\rho(\pi)$:
-$$\rho(\pi) = \lim_{n\to\infty} \frac{1}{n}\mathbbm{E}[r_1 + r_2,\cdots,+r_n|\pi] = \sum_s d^\pi(s)\sum_a \pi(a|s)\mathcal{R}_s^a,$$
+$$\rho(\pi) = \lim_{n\to\infty} \frac{1}{n}\mathbb{E}[r_1 + r_2,\cdots,+r_n|\pi] = \sum_s d^\pi(s)\sum_a \pi(a|s)\mathcal{R}_s^a,$$
 where $d^\pi(s) = \lim_{t\to \infty}P(s_t=s|s_0,\pi)$ is the stationary distribution of states under $\pi$, which we assume exists and is independent of $s_0$ for all policies. Imagine that you can travel along the Markov chain's states forever, and eventually, as the time progresses, the probability of you ending up with one state becomes unchanges. This is the stationary probability that the $s_t=s$ when starting from $s_0$ and following policy $\pi_\theta$ for $t$ steps. With the average reward formultion, the state-action value function is defined as 
-$$Q^\pi(s,a) = \sum_{t=1}^{\infty}\mathbbm{E}[r_t-\rho(\pi)|s_0=s, a_0=a, \pi], \forall s\in \mathcal{S}, a\in \mathcal{A}.$$
+$$Q^\pi(s,a) = \sum_{t=1}^{\infty}\mathbb{E}[r_t-\rho(\pi)|s_0=s, a_0=a, \pi], \forall s\in \mathcal{S}, a\in \mathcal{A}.$$
 
 
 \subsection{Proof of Policy Gradient Theorem}
@@ -27,11 +27,11 @@ $$Q^\pi(s,a) = \sum_{t=1}^{\infty}\mathbbm{E}[r_t-\rho(\pi)|s_0=s, a_0=a, \pi], 
 \end{align*}
 where $d_\pi(s)$ is the stationary distribution of Markov chain for $\pi_\theta$ (on-policy state distribution under $\pi$). Imagine that you can travel along the Markov chain's states forever, and eventually, as the time progresses, the probability of you ending up with one state becomes unchanged, this is the stationary probability for $\pi_\theta$.
 \begin{align*}
-	\nabla_\theta V^\pi(s) &= \nabla_\theta \sum_{a\in \mahtcal{A}}\pi_\theta(a|s)Q^\pi(s,a)\\
-	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \nabla_\theta Q^\pi(s,a)\\
-	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \nabla_\theta \sum_{s',r} P(s',r|s,a)(r+V^\pi(s'))\\
-	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \sum_{s',r} P(s',r|s,a) \nabla_\theta V^\pi(s') \quad P(s',r|s,a) \textrm{ and } r \textrm{ is not a function of } \theta\\
-	&= \sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
+	\nabla_\theta V^\pi(s) &= \nabla_\theta \sum_{a\in \mathcal{A}}\pi_\theta(a|s)Q^\pi(s,a)\\
+	&= \sum_{a\in \mathcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \nabla_\theta Q^\pi(s,a)\\
+	&= \sum_{a\in \mathcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \nabla_\theta \sum_{s',r} P(s',r|s,a)(r+V^\pi(s'))\\
+	&= \sum_{a\in \mathcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \sum_{s',r} P(s',r|s,a) \nabla_\theta V^\pi(s') \quad P(s',r|s,a) \textrm{ and } r \textrm{ is not a function of } \theta\\
+	&= \sum_{a\in \mathcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a) + \pi_\theta(a|s) \sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
 \end{align*}
 This equation has a recursive from. Let's consider a visitation sequence and transition probability from state $s$ to state $x$ with polict $\pi_\theta$ after $k$ steps asr: 
 $$\rho^\pi(s\to x, k)$$
@@ -43,7 +43,7 @@ $$\rho^\pi(s\to x, k)$$
 \end{itemize}
 
 \begin{align*}
-	\nabla_\theta V^\pi(s) &= \underbrace{\sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a)}_{\doteq \phi(s)} + \pi_\theta(a|s) \sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
+	\nabla_\theta V^\pi(s) &= \underbrace{\sum_{a\in \mathcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a)}_{\doteq \phi(s)} + \pi_\theta(a|s) \sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
 	&= \phi(s) + \sum_a \pi_\theta(a|s)\sum_{s'} P(s'|s,a) \nabla_\theta V^\pi(s') \\
 	&= \phi(s) + \sum_{s'} \sum_a \pi_\theta(a|s)P(s'|s,a) \nabla_\theta V^\pi(s') \\
 	&= \phi(s) + \sum_{s'}\rho^\pi(s\to s', k=1) \nabla_\theta V^\pi(s') \\
@@ -60,6 +60,6 @@ We can rewrite the above equation as
 	&= \sum_s \eta(s)\phi(s)\\
 	&= \underbrace{\sum_s \eta(s)}_{\textrm{Constant}}\sum_s \underbrace{\frac{\eta(s)}{\sum_s \eta(s)}}_{\textrm{Normalization}}\phi(s)\\
 	&\propto \sum_s \frac{\eta(s)}{\sum_s \eta(s)}\phi(s)\\
-	&= \sum_s d^\pi(s)\sum_{a\in \mahtcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a)\\
-	&= \mathbbm{E}_{\pi}[\nabla_\theta \ln\pi_\theta(a|s)Q^\pi(s,a)]
+	&= \sum_s d^\pi(s)\sum_{a\in \mathcal{A}}\nabla_\theta \pi_\theta(a|s)Q^\pi(s,a)\\
+	&= \mathbb{E}_{\pi}[\nabla_\theta \ln\pi_\theta(a|s)Q^\pi(s,a)]
 \end{align*}

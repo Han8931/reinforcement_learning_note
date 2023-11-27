@@ -81,7 +81,7 @@ Components of RL:
 \end{definition}
 
 \begin{itemize}
-	\item The sum of all rewards obtained during the course of an episode is referred to as the return, $G_t$.
+	\item The sum of all rewards obtained during the course of an episode is referred to as the \textit{return}, $G_t$.
 	\item Episodic tasks: $G_t = R_{t+1} + R_{t+2} + \cdots + R_{T}.$
 		\begin{itemize}
 			\item $G_t = R_{t+1}+\gamma G_{t+1}$
@@ -121,7 +121,7 @@ $$\pi(a|s)$$
 
 \begin{definition}[The State-Value Function, $V$]
 	The state value function $v(s)$ for policy $\pi$ of an Markov Reward Process is the expected return starting from state $s$
-	$$v_{\pi}(s) = \mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty r^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}$$
+	$$v_{\pi}(s) = \mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}$$
 \end{definition}
 
 \begin{itemize}
@@ -185,7 +185,7 @@ The state-value function can be decomposed as follows:
 	&= \sum_{a} q_\pi(s,a) \pi(a|s)
 \end{align*}
 Note that the expectation is parameerized $\pi$ as written in $\mathbb{E}_{\pi}$. We can also prove it by the \textit{Law of Total Expectation} \footnote{
-$\mathbbm{E}[\mathbbm{E}[X|Y]] = \sum_{y}\Big[\sum_{x}x\cdot\ p(X=x|Y)\Big] p(Y=y) = \mathbbm{E}[X]$},
+$\mathbb{E}[\mathbb{E}[X|Y]] = \sum_{y}\Big[\sum_{x}x\cdot\ p(X=x|Y)\Big] p(Y=y) = \mathbb{E}[X]$},
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
 	&= \mathbb{E}[\mathbb{E}_{\pi}[G_t|S_t=s, A_t=a]]\\

@@ -59,7 +59,7 @@ We are looking for something like a middle ground between those. Full-on explora
 On-policy methods solve the exploration vs exploitation dilemma by including randomness in the form of a policy that is soft, meaning that non-greedy actions are selected with some probability. These policies are called $\epsilon$-greedy policies as they select random actions with an $\epsilon$ probability and follow the optimal action with $1-\epsilon$ probability
 
 Since the probability of selecting from the action space randomly is $\epsilon$, the probability of selecting any particular non-optimal (non-greedy) action is $\epsilon/|\mathcal{A}(s)|$. The probability of following the optimal action will always be slightly higher, however, because we have a $1 - \epsilon$ probability of selecting it outright and $\epsilon/ |\mathcal{A}(s)|$ probability of selecting it from sampling the action space \footnote{Since the greedy (or optimal) action can be selected by either 1-$\epsilon$ or $\epsilon/ |\mathcal{A}(s)|$, $a_1=\epsilon/\mathcal{A}(s),a_2=\epsilon/\mathcal{A}(s),\cdots,a_{best}=1-\epsilon+\epsilon/\mathcal{A}(s),a_n = \epsilon/\mathcal{A}(s)$}
-$$\[P(a_t^{*}) = 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$$
+$$P(a_t^{*}) = 1 - \epsilon+\epsilon/ |\mathcal{A}(s)|.$$
 It is also worth noting that because the optimal action will be sampled more often than the others making on-policy algorithms will generally converge faster but they also have the risk of trapping the agent into a local optimum of the function.
 
 %On-Policy learning algorithms are the algorithms that evaluate and improve the same policy which is being used to select actions. That means we will try to evaluate and improve the same policy that the agent is already using for action selection. In short , [Target Policy == Behavior Policy]. Some examples of On-Policy algorithms are Policy Iteration, Value Iteration, Monte Carlo for On-Policy, Sarsa, etc.
@@ -70,7 +70,7 @@ All learning contol methods face a dilemma: They seek to learn action values con
 
 Given a starting state $S_t$, the probability of the subsequent state-action trajectory, $A_t, S_{t+1}, A_{t+1},\cdots,S_T$, occuring under any policy $\pi$ is 
 \begin{align*}
-	P(A_t, S_{t+1}, A_{t+1},\cdots,S_T)&= \pi(A_t|S_t)p(S_{t+1}|S_t,A_t)\pi(A_{t+1}|S_{t+1})\ldotsp(S_T|S_{T-1},A_{T-1})\\ 
+	P(A_t, S_{t+1}, A_{t+1},\cdots,S_T)&= \pi(A_t|S_t)p(S_{t+1}|S_t,A_t)\pi(A_{t+1}|S_{t+1})\cdots(S_T|S_{T-1},A_{T-1})\\ 
 	&= \prod_{k=t}^{T-1}\pi(A_k|S_k)p(S_{k+1}|S_k,A_k),
 \end{align*}
 where $p$ here is the state-transition probability function. Thus, the relative probability of the trajectory under the target and behavior policies is 

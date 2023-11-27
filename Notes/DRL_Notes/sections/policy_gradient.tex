@@ -35,8 +35,8 @@ In general, the agent has no access to $p(s_1)$ and $p(s_{t+1}|s_t,a_t)$ (we don
 By using the above equations, we can re-express the gradient of the cost function as
 \begin{align*}
 	\nabla_\theta J(\theta) &= \int \nabla_\theta \pi_\theta(\tau) r(\tau) = \int \pi_\theta \nabla_\theta \log \pi_\theta(\tau)\\
-	&= \mathbbm{E}_{\tau\sim \pi_\theta(\tau)}[\nabla_\theta \log \pi_\theta(\tau)r(\tau)] \\
-	&= \mathbbm{E}_{\tau\sim \pi_\theta(\tau)}\Bigg[\Bigg(\sum_{t=1}^{T}\nabla_\theta\log \pi_\theta(a_t|s_t)\Bigg)\Bigg(\sum_{t=1}^{T}r(s_t,a_t)\Bigg)\Bigg]
+	&= \mathbb{E}_{\tau\sim \pi_\theta(\tau)}[\nabla_\theta \log \pi_\theta(\tau)r(\tau)] \\
+	&= \mathbb{E}_{\tau\sim \pi_\theta(\tau)}\Bigg[\Bigg(\sum_{t=1}^{T}\nabla_\theta\log \pi_\theta(a_t|s_t)\Bigg)\Bigg(\sum_{t=1}^{T}r(s_t,a_t)\Bigg)\Bigg]
 \end{align*}
 
 By using Monte-Carlo method, we can replace the expectation by sampling multiple trajectories in practice:
@@ -70,7 +70,7 @@ Note that the second-order Taylor series expansion is
 \end{align*}
 where $\theta=\theta_t+\delta\theta$, or equivalently $\delta\theta = \theta-\theta_t$. Applying that expansion to the pertinent term in the $KL$-divergence expression, we get
 \begin{align*}
-	\log p(x;\theta_t+\delta \theta) &\approx \log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \deltaf\theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta.
+	\log p(x;\theta_t+\delta \theta) &\approx \log p(x;\theta_t) + \Bigg(\frac{\nabla p(x;\theta_t)}{p(x;\theta_t)}\Bigg)^T \delta \theta + \frac{1}{2}\delta\theta^T (\nabla^2 \log p(x;\theta_t))\delta\theta.
 \end{align*}
 Plugging this second-order Taylor expansion back into the above expression for the $D_{KL}$ gives
 
@@ -115,7 +115,7 @@ The central matrix here $G(\theta_t)$ is known as the \textbf{Fisher Information
 
 PPO objective is 
 
-$$ \theta_{k+1} = \underset{\theta}{\operatorname{argmax}} \underset{s,a\sim \pi_{\theta_k}}{\mathbbm{E}} [L(s, a, \theta_k, \theta)],$$
+$$ \theta_{k+1} = \underset{\theta}{\operatorname{argmax}} \underset{s,a\sim \pi_{\theta_k}}{\mathbb{E}} [L(s, a, \theta_k, \theta)],$$
 where $L$ is given by
 $$L(s, a, \theta_k, \theta) = \min \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)} A^{\pi_{\theta_k}}(s,a), \textrm{ Clip}\Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)}, 1-\varepsilon, 1+\varepsilon\Bigg) A^{\pi_{\theta_k}}(s,a)\Bigg).$$
 Roughly, $\varepsilon$ is a hyperparameter which says how far away the new policy is allowed to go from the old one. A simpler expression of the above expression is

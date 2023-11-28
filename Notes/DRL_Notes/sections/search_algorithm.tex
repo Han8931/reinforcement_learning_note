@@ -49,19 +49,47 @@ Backpropagate rewards, and the number of visit at a node.
 
 \section{Uniform Cost Search}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.4]{./images/search_alg/uniform_cost_search.pdf}
-\end{figure}
-
 You have three goal states, $G_1, G_2$, $G_3$. Your goal is to reach one of them. UCS is cheapest first search algorithm.
 
-\section{$A^*$ Search}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{./images/search_alg/uniform_sample_graph.pdf}
+\end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.4]{./images/search_alg/astar_search.pdf}
+	\includegraphics[scale=0.6]{./images/search_alg/uniform_cost_search.pdf}
+\end{figure}
+
+\newpage
+\section{$A^*$ Search}
+$A^*$ search algorithms is a variant of Dijkstra's algorithm, which incorporate additional \textit{heuristic} information about a graph. Unlike the Dijkstra's algorithm, you can specify a target node that you are interested in so that you don't have to compute all paths. 
+
+In addition, the $A^*$ algorithm is often preferred over Dijkstra's algorithm in scenarios where the cost of reaching a goal from a particular node is not only determined by the actual distance traveled but also influenced by a heuristic estimation of the remaining distance to the goal. 
+
+As I said, it exploits heuristics (or estimates). For instance, if we want to compute a shortest path to a certain location in a map, then a very reasonable heuristic way is to measure Euclidean distance. As you can see in \Cref{fig:astar_start}, we first initialize each node in the graph with our estimates. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.73]{./images/search_alg/astar_prob.pdf}
+	\caption{Initialize $A^*$ search algorithm with heuristics.}
+	\label{fig:astar_start}
+\end{figure}
+
+Then, we can explore as shown in \Cref{fig:astar_search}. For each visit, take a shortest path. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.60]{./images/search_alg/astar_search.pdf}
+	\label{fig:astar_search}
 \end{figure}
 
 Each number next to the nodes is called $A^*$ score, which is an estimate of cost to get to one of states. 
 
+Note that $A^*$ algorithm is typically explained with open set and closed sets, which are just sets for nodes to be evaluated and visited. 
+
+Open Set and Closed Set:
+\begin{itemize}
+	\item Open set contains nodes that need to be evaluated, 
+	\item Closed set contains nodes that have already been evaluated.
+\end{itemize}

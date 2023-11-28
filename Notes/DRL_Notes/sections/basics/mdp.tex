@@ -45,8 +45,8 @@ Components of RL:
 \end{definition}
 \begin{itemize}
 	\item The way the environment changes as a response to actions is referred to as the state-transition probabilities, or more simply, the transition function, and is denoted by $T(s,a,s')$.
-	\item $\sum_{r\in \mathcal{R}}\sum_{s'\in \mathcal{S}}p(s',r|s,a) = 1, \forall s \in \mathcal{S}, \forall a\in \mathcal{A}(s)$
-	\item $p(s'|s,a)=P(S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a)=\sum_{r\in \mathcal{R}}p(s',r|s,a)$
+	\item $\sum_{r\in \mathcal{R}}\sum_{s'\in \mathcal{S}}p(s',r|s,a) = 1, \quad \forall s \in \mathcal{S}, \forall a\in \mathcal{A}(s)$
+	\item $p(s'|s,a)=P(S_t=s'|S_{t-1}=s,A_{t-1}=a)=\sum_{r\in \mathcal{R}}p(s',r|s,a)$
 \end{itemize}
 
 \begin{definition}[Reward Hypothesis]
@@ -63,10 +63,13 @@ Components of RL:
 	\end{align*}
 \end{definition}
 \begin{itemize}
-	\item $R_t\in \mathcal{R} \subset \mathbb{R}.$ Note that negative reward is still reward.
+	\item $R_t\in \mathcal{R} \subset \mathbb{R}.$ 
+		\begin{itemize}
+			\item Note that negative reward is still reward.
+		\end{itemize}
 	\item The expected reward function is defined as a function that takes in a state-action pair.
 	\item It is the expectation of reward at time step $t$, given the state-action pair in the previous time step.
-	\item It can also be defined as a function that takes a full transition tuple $s,a,s'$.
+	\item The reward function can also be defined as a function that takes a full transition tuple $s,a,s'$.
 		\begin{align*}
 			r(s,a,s')&= \mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a,S_{t}=s]\\
 			&= \sum_{r\in \mathcal{R}}\frac{p(s',r|s,a)}{p(s'|s,a)}
@@ -105,46 +108,51 @@ Components of RL:
 				\begin{itemize}
 					\item What if an agent intends to move right, but ends up going left. Which action does the agent take?
 				\end{itemize}
-			\item Policies are the per-state action prescribtions.
+			\item Policies are the per-state action descriptions.
 			\item Policy can be stochastic or deterministic.
 			\item A policy is a function that prescribes actions to take for a given non-terminal state.
 		\end{itemize}
 \end{itemize}
 
-\subsection{The State-Value Functions}
-
-Almost all reinforcement learning algorithms involve estimating \textit{value functions}-functions of states (or of state-action pairs) that estimate how good it is for the agent to be in a given state (or how good it is to perform a given action in a given state). The notion of ``how good'' here is defined in terms of future rewards that can be expected, or, to be precise, in terms of \textbf{expected return}. Of course, the rewards the agent can expect to receive in the futhre depend on what actions it will take. Accordingly, value functions are defined with respect to particular ways of action, called policies. 
-
-Formally, a policy is a mapping from states to probablities of selecting each possible action. It can be defined 
+Formally, a policy is a mapping from states to probabilities of selecting each possible action. It can be defined 
 $$\pi(a|s)$$
 
+\subsection{The State-Value Functions}
+
+Almost all reinforcement learning algorithms involve estimating \textit{value functions}, functions of states (or of state-action pairs) that estimate how good it is for the agent to be in a given state (or how good it is to perform a given action in a given state). The notion of ``how good'' here is defined in terms of future rewards that can be expected, or, to be precise, in terms of \textbf{expected return}. Of course, the rewards the agent can expect to receive in the future depend on what actions it will take. Accordingly, value functions are defined with respect to particular ways of action, called policies. 
 
 \begin{definition}[The State-Value Function, $V$]
-	The state value function $v(s)$ for policy $\pi$ of an Markov Reward Process is the expected return starting from state $s$
+	The state-value function $v(s)$ for policy $\pi$ of an Markov Reward Process is the expected return starting from state $s$
 	$$v_{\pi}(s) = \mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}$$
 \end{definition}
 
 \begin{itemize}
-	\item The value of a state $s$ is the expection over policy $\pi$.
-	\item Reward: one-step signal that an agent gets/ Return: total discounted rewards/ Value function: expected return. 
+	\item The value of a state $s$ is the expectation over policy $\pi$.
+	\item Value function is the expected return. 
+		\begin{itemize}
+			\item Reward: one-step signal that an agent receives.
+			\item Return: total discounted rewards, which is the sum of rewards obtained from time $t$ onward.
+		\end{itemize}
 	\item If we are given a policy and the MDP, we should be able to calculate the expected return starting from every single state. 
 \end{itemize}
 
-\begin{itemize}
-	\item \textit{Bellman equation}
-\begin{align*}
+The state-value function satisfies the \textit{Bellman equation}, which expresses the relationship between the value of a state and the values of its successor states:
+\begin{align}
 	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
 	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
 	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
-	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
-\end{align*}
-\item Starting from state $s$, the root node at the top, the agent could take any of some set of actions -- three are shown in the diagram -- based on its policy $\pi$. From each of these, the environment could respond with one of several next states, $s'$ (two are shown in the figure), along with a reward, $r$, depending on its dynamics given by the function $p$. The Bellman equation averages over all the possibilities, weighting each by its probability of occuring. \textbf{It states that the value of the start state must equal (discounted) the value of the expected next state, plus the reward expected along the way}. 
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=0.3]{./images/backup_vpi.png}
-	\end{figure}
-\item The derivation details are given in \Cref{appendix:bellman_equation}
-\end{itemize}
+	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')],\, \forall s \in \mathcal{S}.
+	\label{eq:state_value_bellman}
+\end{align}
+For better understanding, let's look at the \Cref{fig:state_value_diagram}. Starting from state $s$, the root node at the top, the agent could take any of some set of actions (three actions are shown in the diagram), based on its policy $\pi$. From each of these, the environment could respond with one of several next states, $s'$ (two states are shown in the figure), along with a reward, $r$, depending on its dynamics given by the function $p$. The Bellman equation averages over all the possibilities, weighting each by its probability of occurring. \textbf{It states that the value of the start state must equal (discounted) the value of the expected next state, plus the reward expected along the way}. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{./images/backup_vpi.png}
+	\label{fig:state_value_diagram}
+\end{figure}
+The derivation of \Cref{eq:state_value_bellman} is given in \Cref{appendix:bellman_equation}. The state-value function is essential for understanding the value of different states in a Markov Decision Process (MDP) and is often used in various reinforcement learning algorithms, such as value iteration and policy iteration.
+
+
 
 \subsection{The Action-Value Function}
 \begin{itemize}
@@ -162,17 +170,18 @@ $$\pi(a|s)$$
 \end{definition}
 
 \begin{itemize}
-	\item The Bellman equation for action values is given by
+	\item The Bellman equation for the action-value function is given by
 	\begin{align*}
 		q_{\pi}(s,a) &= \mathbb{E}_\pi[G_t|S_t=s, A_t=a]\\
 		& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s, A_t=a]\\
 		& = \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
 	\end{align*}
 	\item Notice that we do not weight over actions because we are interested only in a specific action.
-	\item The state-value function can be expressed by using the action-value function as follows:
+	\item The action-value function is crucial for understanding the value of different state-action pairs in a Markov Decision Process (MDP) and is used in various reinforcement learning algorithms, such as Q-learning and deep Q-networks (DQN).
 	\item The derivation is given in \Cref{appendix:bellman_equation}
+\end{itemize}
 
-The state-value function can be decomposed as follows:
+The state-value function can be also expressed by using the action-value function as follows:
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
 	&= \sum_{g_t} g_t\cdot P[G_t|S_t=s]\\
@@ -184,7 +193,7 @@ The state-value function can be decomposed as follows:
 	&= \sum_{a} \sum_{g_t} g_t P[G_t|S_t=s, A_t=a] P[A_t=a|S_t=s]\\
 	&= \sum_{a} q_\pi(s,a) \pi(a|s)
 \end{align*}
-Note that the expectation is parameerized $\pi$ as written in $\mathbb{E}_{\pi}$. We can also prove it by the \textit{Law of Total Expectation} \footnote{
+Note that the expectation is parameerized $\pi$ as written in $\mathbb{E}_{\pi}$. We can also simply prove it by the \textit{Law of Total Expectation} \footnote{
 $\mathbb{E}[\mathbb{E}[X|Y]] = \sum_{y}\Big[\sum_{x}x\cdot\ p(X=x|Y)\Big] p(Y=y) = \mathbb{E}[X]$},
 \begin{align*}
 	v_\pi(s) &= \mathbb{E}_{\pi}[G_t|S_t = s]\\ 
@@ -192,8 +201,7 @@ $\mathbb{E}[\mathbb{E}[X|Y]] = \sum_{y}\Big[\sum_{x}x\cdot\ p(X=x|Y)\Big] p(Y=y)
 	&= \sum_{a} \mathbb{E}_{\pi}[G_t|S_t=s, A_t=a] P(A_t = a|S_t = s)\\
 	&= \sum_{a} q_\pi(s,a) \pi(a|s)
 \end{align*}
-An intuitive explantation of this derivation is that the expectation depends on an action $a\sim \pi(a|s)$. We want to estimate the expected total return by the sampled action (this is because the total return is the function of $a$, implicitly). Then we need to introduce an action variable $a$ and its probability in the expression as the second line of the equation. 
-\end{itemize}
+An intuitive explantation of this derivation is that the expectation depends on an action $a\sim \pi(a|s)$. We want to estimate the expected total return by the sampled action (this is because the total return is the function of $a$, implicitly). Then, we need to introduce an action variable $a$ and its probability in the expression as the second line of the equation. 
 
 \subsection{The Action-Advantage Function}
 
@@ -201,9 +209,7 @@ An intuitive explantation of this derivation is that the expectation depends on 
 	$$a_{\pi}(s,a) = q_\pi(s,a)-v_\pi(s)$$
 \end{definition}
 
-\begin{itemize}
-	\item The advantage function describes how much better it is to take action $a$ instead of following policy $\pi$. In other words, the advantage of choosing action $a$ over the default action.
-\end{itemize}
+The advantage function describes how much better it is to take action $a$ instead of following policy $\pi$. In other words, the advantage of choosing action $a$ over the default action, set by the policy.
 
 \section{Optimality}
 

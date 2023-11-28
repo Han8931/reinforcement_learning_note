@@ -1,11 +1,19 @@
 \chapter{Monte Carlo Methods}
-Our goal is to estimate value functions and find optimal policies. Monte-Carlo methods require only \textit{experience}--sample sequences of states, actions, and rewards from actual or simulated interaction with an environment. 
+% Our goal is to estimate value functions and find optimal policies. Monte-Carlo methods require only \textit{experience}--sample sequences of states, actions, and rewards from actual or simulated interaction with an environment. 
+Monte Carlo methods are a class of computational algorithms that rely on random sampling to obtain numerical results. In the context of reinforcement learning (RL), Monte Carlo methods are often used to estimate the value of states or state-action pairs in a Markov Decision Process (MDP).
+
 
 \section{Monte Carlo Prediction (Evaluation)}
 Recall that the value of a state is the expected return starting from that state. An obvious way to estimate it from experience, then, is simply to average the returns observed after visits to that state. As more returns are observed, the average should converge to the expected value. This idea is the core of Monte Carlo methods. 
 
 \subsection{First Visit vs. Every Visit}
-Suppose we wish to estimate $v_\pi(s)$, the value of a state $s$ under policy $\pi$, given a set of episodes obtained by following $\pi$ and passing through $s$. Each occurrence of state $s$ in an episode is called a viist to $s$. The first-visit MC method estimates $v_\pi(s)$ as \textbf{the average of the returns} following \textbf{first visits} to $s$, whereas the every-visit MC method averages the returns following all visits to $s$.
+Suppose we wish to estimate $v_\pi(s)$, the value of a state $s$ under policy $\pi$, given a set of episodes obtained by following $\pi$ and passing through $s$. Each occurrence of state $s$ in an episode is called a visit to $s$. 
+\begin{itemize}
+	% \item In the first-visit approach, the updates to the state values are based on the first time a state is visited in an episode. This means that if a state is encountered multiple times within an episode, only the return from the first occurrence of that state in the episode is considered for updating the state value.
+	\item \textit{The first-visit MC} method estimates $v_\pi(s)$ as the average of the returns following first visits to $s$, whereas \textit{the every-visit MC} method averages the returns following all visits to $s$.
+\end{itemize}
+
+% The first-visit MC method estimates $v_\pi(s)$ as \textbf{the average of the returns} following \textbf{first visits} to $s$, whereas the every-visit MC method averages the returns following all visits to $s$.
 
 Why do we care about first visit and every visit?
 \begin{itemize}
@@ -16,8 +24,27 @@ Why do we care about first visit and every visit?
 Both are valid approaches, but
 \begin{itemize}
 	\item First visit treats each trajectory as an independent and identically distributed sample of $v(s)$.
-	\item First visit uses only one return per state per episode.
-	\item Every visit averages the returns following all visits to a state, even if in the same episode.
+	\item For instance, we have two example episodes, 
+		\begin{itemize}
+			\item $A, 3\to A, 2\to B, -4\to A, 4\to B, -3$.
+			\item $B, -2\to A, 3\to B, -3$.
+		\end{itemize} 
+	\item Each number next to the states are reward. Let's say discount factor is 1, then the first visit MC computes a return by summing all the rewards ($G\leftarrow \gamma G + R_{t+1}$) coming after the first visit to the state $A$. Therefore, we can't have more than one summation_term for each episode for a state. Thus, we get
+
+	\begin{itemize}
+		\item For the first episode:$3+2-4+4-3=2$.
+		\item For the second episode:$3-3 = 0$.
+		\item Thus, $V(A) = (2+0)/2=1$.
+		\item Note: It must be noted that if an episode doesn't have an occurrence of `$A$', it won't be considered in the average. Hence if a 3rd episode is given like $B,3\to B,3\to terminate$ existed, still $V(A)$ 1.
+	\end{itemize}
+
+	\item Every visit MC: Here, we would be creating a new summation term adding all rewards coming after every occurrence of `$A$'(including that of $A$ as well).
+
+    From 1st episode=$(3+2-4+4-3)+(2-4+4-3)+(4-3)=2-1+1$
+    From 2nd episode=$(3-3)=0$
+
+As we got 4 summation terms, we will be averaging using $N=4$ \ie
+$V(A)=(2-1+1+0)/4=0.5$
 \end{itemize}
 %The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
 %

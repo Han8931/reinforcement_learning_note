@@ -67,7 +67,7 @@ $A^*$ search algorithms is a variant of Dijkstra's algorithm, which incorporate 
 
 In addition, the $A^*$ algorithm is often preferred over Dijkstra's algorithm in scenarios where the cost of reaching a goal from a particular node is not only determined by the actual distance traveled but also influenced by a heuristic estimation of the remaining distance to the goal. 
 
-As I said, it exploits heuristics (or estimates). For instance, if we want to compute a shortest path to a certain location in a map, then a very reasonable heuristic way is to measure Euclidean distance. As you can see in \Cref{fig:astar_start}, we first initialize each node in the graph with our estimates. 
+As I said, it exploits heuristics (or estimates). For instance, if we want to get a shortest path to a certain location in a map, then a very reasonable choice is to measure a distance roughly by using Euclidean distance. In \Cref{fig:astar_start}, we first initialize each node in the graph with our estimates. 
 
 \begin{figure}[h]
 	\centering

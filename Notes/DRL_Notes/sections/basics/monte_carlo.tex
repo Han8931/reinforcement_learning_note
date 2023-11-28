@@ -78,7 +78,7 @@ where $p$ here is the state-transition probability function. Thus, the relative 
 \begin{align*}
 	\rho_{t:T-1} &=  \frac{\prod_{k=t}^{T-1}\pi(A_k|S_k)p(S_{k+1}|S_k,A_k)}{ \prod_{k=t}^{T-1}b(A_k|S_k)p(S_{k+1}|S_k,A_k)}\\
 	&= \prod_{k=t}^{T-1}\frac{\pi(A_k|S_k)}{b(A_k|S_k)}.
-	\label{eq:importance_sampling_ratio}
+	% \label{eq:importance_sampling_ratio}
 \end{align*}
 The importance sampling ratio ends up depending only on the two polices and the sequence, not on the MDP (state-transition probability).
 

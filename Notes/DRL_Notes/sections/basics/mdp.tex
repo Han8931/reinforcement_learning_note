@@ -84,7 +84,7 @@ Components of RL:
 \end{definition}
 
 \begin{itemize}
-	\item The sum of all rewards obtained during the course of an episode is referred to as the \textit{return}, $G_t$.
+	\item \textbf{The sum of all rewards obtained during the course of an episode} is referred to as the \textit{return}, $G_t$.
 	\item Episodic tasks: $G_t = R_{t+1} + R_{t+2} + \cdots + R_{T}.$
 		\begin{itemize}
 			\item $G_t = R_{t+1}+\gamma G_{t+1}$
@@ -99,6 +99,34 @@ Components of RL:
 		\end{itemize}
 \end{itemize}
 
+\paragraph{A Simple Example:}
+\begin{itemize}
+	\item Environment:
+		\begin{itemize}
+			\item The grid world has 3 states: $S1$, $S2$, and $S3$.
+			\item The agent can take actions $A=\{left,right\}$.
+			\item The rewards are as follows:
+				\begin{itemize}
+					\item $R_{left}=−1$: penalty for moving left
+					\item $R_{right}=+1$: reward for moving right
+				\end{itemize}
+			\item The discount factor $\gamma$: 0.9.
+		\end{itemize}
+	\item Episode:
+		\begin{enumerate}
+			\item The agent starts in $S1$.
+			\item If the agent moves left, it incurs a penalty ($R_{left}=−1$), and the episode ends.
+			\item If the agent moves right, it receives a reward ($R_{right}=+1$), transitions to $S2$, and the episode continues.
+			\item In $S2$, the agent faces the same choices.
+			\item The episode ends when the agent either moves left or reaches $S3$.
+		\end{enumerate}
+	\item Return Calculation:
+		\begin{itemize}
+			\item Let's calculate the return for a sample trajectory: $\{S1,right,S2,right,S3\}$.
+			\item $G=R_{right}+\gamma R_{right}+\gamma^2R_{right}=2.71$ 
+			\item So, the return for this trajectory is 2.71.
+		\end{itemize}
+\end{itemize}
 
 \section{Policies and Value Functions}
 \begin{itemize}

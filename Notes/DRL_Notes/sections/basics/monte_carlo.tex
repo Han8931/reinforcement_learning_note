@@ -8,47 +8,44 @@ Recall that the value of a state is the expected return starting from that state
 
 \subsection{First Visit vs. Every Visit}
 Suppose we wish to estimate $v_\pi(s)$, the value of a state $s$ under policy $\pi$, given a set of episodes obtained by following $\pi$ and passing through $s$. Each occurrence of state $s$ in an episode is called a visit to $s$. 
-\begin{itemize}
-	% \item In the first-visit approach, the updates to the state values are based on the first time a state is visited in an episode. This means that if a state is encountered multiple times within an episode, only the return from the first occurrence of that state in the episode is considered for updating the state value.
-	\item \textit{The first-visit MC} method estimates $v_\pi(s)$ as the average of the returns following first visits to $s$, whereas \textit{the every-visit MC} method averages the returns following all visits to $s$.
-\end{itemize}
 
-% The first-visit MC method estimates $v_\pi(s)$ as \textbf{the average of the returns} following \textbf{first visits} to $s$, whereas the every-visit MC method averages the returns following all visits to $s$.
+\paragraph{The first-visit MC} method estimates $v_\pi(s)$ as the average of the returns following first visits to $s$, whereas \textit{the every-visit MC} method averages the returns following all visits to $s$.
 
-Why do we care about first visit and every visit?
 \begin{itemize}
-	\item This is about how to estimate the true value of state by averaging.
-	\item In other words, how to compute the average of the number of visits!
-\end{itemize}
-
-Both are valid approaches, but
-\begin{itemize}
-	\item First visit treats each trajectory as an independent and identically distributed sample of $v(s)$.
+	\item First visit MC treats each trajectory as an i.i.d., sample of $v(s)$.
 	\item For instance, we have two example episodes, 
 		\begin{itemize}
 			\item $A, 3\to A, 2\to B, -4\to A, 4\to B, -3$.
 			\item $B, -2\to A, 3\to B, -3$.
 		\end{itemize} 
-	\item Each number next to the states are reward. Let's say discount factor is 1, then the first visit MC computes a return by summing all the rewards ($G\leftarrow \gamma G + R_{t+1}$) coming after the first visit to the state $A$. Therefore, we can't have more than one summation_term for each episode for a state. Thus, we get
-
+	\item Each number next to the states are reward. Let's say discount factor is 1 and we want to compute $V(A)$, then the first visit MC computes a return by summing all the rewards ($G\leftarrow \gamma G + R_{t+1}$) coming after the first visit to the state $A$. Therefore, we can't have more than one summation term for each episode for a state. In sum,
 	\begin{itemize}
-		\item For the first episode:$3+2-4+4-3=2$.
-		\item For the second episode:$3-3 = 0$.
+		\item For the first episode: $3+2-4+4-3=2$.
+		\item For the second episode: $3-3=0$.
 		\item Thus, $V(A) = (2+0)/2=1$.
-		\item Note: It must be noted that if an episode doesn't have an occurrence of `$A$', it won't be considered in the average. Hence if a 3rd episode is given like $B,3\to B,3\to terminate$ existed, still $V(A)$ 1.
+		\item It must be noted that if an episode doesn't have an occurrence of `$A$', it won't be considered in the average. Hence if a 3rd episode is given like $B,3\to B,3\to terminate$ existed, still $V(A)=1$.
 	\end{itemize}
-
-	\item Every visit MC: Here, we would be creating a new summation term adding all rewards coming after every occurrence of `$A$'(including that of $A$ as well).
-
-    From 1st episode=$(3+2-4+4-3)+(2-4+4-3)+(4-3)=2-1+1$
-    From 2nd episode=$(3-3)=0$
-
-As we got 4 summation terms, we will be averaging using $N=4$ \ie
-$V(A)=(2-1+1+0)/4=0.5$
 \end{itemize}
-%The first-visit and the every-visit Monte-Carlo (MC) algorithms are both used to solve the prediction problem (or, also called, ``evaluation problem''), that is, the problem of estimating the \textbf{value function} associated with a given (as input to the algorithms) fixed (that is, it does not change during the execution of the algorithm) policy, denoted by $\pi$. In general, even if we are given the policy $\pi$, we are not necessarily able to find the exact corresponding value function, so these two algorithms are used to estimate the value function associated with $\pi$.
-%
-%Intuitively, we care about the value function associated with $\pi$ because we might want or need to know ``how good it is to be in a certain state'', if the agent behaves in the environment according to the policy $\pi$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{./images/first_visit_mc.png}
+	\caption{First-visit MC prediction algorithm.}
+	\label{fig:first_visit_mc}
+\end{figure}
+
+\paragraph{Every visit MC} method averages the returns following \textbf{all visits} to $s$.
+\begin{itemize}
+	\item Here, we would be creating a new summation term adding all rewards coming after every occurrence of `$A$'(including that of $A$ as well).
+		\begin{itemize}
+			\item From 1st episode: $(3+2-4+4-3)+(2-4+4-3)+(4-3)=2-1+1$
+			\item From 2nd episode: $(3-3)=0$
+			\item As we got 4 summation terms, we will be averaging using $N=4$ \ie
+			\item $V(A)=(2-1+1+0)/4=0.5$
+		\end{itemize}
+\end{itemize}
+
+
 
 \section{Monte Carlo Control}
 $$\pi_0\xrightarrow{\,E\,} q_{\pi_0} \xrightarrow{\,I\,} \pi_0\xrightarrow{\,E\,} q_{\pi_0}\xrightarrow{\,I\,}\cdots \xrightarrow{\,I\,} \pi_*\xrightarrow{\,E\,} q_{\pi_*},$$

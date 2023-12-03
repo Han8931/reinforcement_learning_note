@@ -5,6 +5,7 @@ Codes/MDRL/
 Codes/GDRL/
 Codes/RLScratch/
 .rl_venv/
+.venv/
 .ipynb_checkpoints/
 Materials/
 materials/

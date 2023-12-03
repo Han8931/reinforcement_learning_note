@@ -33,9 +33,9 @@ Expand successor node
 \subsection{Rollout (Random Simulation)}
 Simulation is completely random. In other words, we don't know how an agent reacts to an environment, so each successor state, the agent randomly decides which action to do till the termination. 
 \subsection{Backpropagation}
-Backpropagate rewards, and the number of visit at a node. 
+Backpropagate rewards (value), and the number of visit at a node. 
 \begin{itemize}
-	\item $t := t+1$: total score
+	\item $t$: total score
 	\item $n_k := n_k+1$
 \end{itemize}
 

@@ -27,6 +27,9 @@ One natural way to estimate this is by averaging the rewards actually received: 
 \begin{align*}
 	Q_t(a) = \frac{\sum_{t=1}^{t-1}R_i \cdot \mathds{1}_{A_i=a}}{\sum_{t=1}^{t-1}\mathds{1}_{A_i=a}}
 \end{align*}
+
+In other words, the average reward (action value) observed before the $n$-th selection of this action is $Q_n = (R_1+\dots+R_{n-1})/(n-1)$
+
 Then, the simplest action selection rule is to select one of the actions with the highest estimated value, which is a greedy action selection method represented as follows:
 $$A_t=\argmax_{a}Q_t(a).$$
 This approach always exploits current knowledge to maximize immediate reward; it spends no time at all sampling apparently inferior actions to see if they might really be better. A simple alternative is to behave greedily most of the time, but every once in a while, instead select randomly from among all the actions. This near greedy action selection rule is called $\epsilon$-greedy method. In the limit as the number of steps increases, every action will be sampled an infinite number of times, which ensures all the $Q_t(a)$ converge to $q_*(a)$.
@@ -47,7 +50,27 @@ This approach always exploits current knowledge to maximize immediate reward; it
 
 This is an incremental formulas for updating averages with small, constant computation required to process each new reward. This update rule can be expressed in a general form:
 $$NewEstimate \leftarrow OldEstimate + StepSize \underbrace{\Big[Target - OldEstimate \Big]}_{error}.$$
-The target is presumed to indicate a desirable direction in which to move, though it may be noisy.
+The target is presumed to indicate a desirable direction in which to move, though it may be noisy. So, we adjust our current estimate, $Q_n$, in the direction of the error that we calculate based on the latest observed reward, $R_n-Q_n$, with a step size of $1/n$   and obtain  a new estimate, $Q_{n+1}$ . 
+
+
+\begin{lstlisting}[language=Python]
+class GaussianBandit:
+    def __init__(self, mean=0, stdev=1):
+        self.mean = mean
+        self.stdev = stdev
+
+    def pull_lever(self):
+        reward = np.random.normal(self.mean, self.stdev)
+        return np.round(reward,1)
+
+slotA = GaussianBandit(5, 3)
+slotB = GaussianBandit(6, 2)
+slotC = GaussianBandit(1, 5)
+
+game = GaussianBanditGame([slotA, slotB, slotC])
+game.user_play()
+\end{lstlisting}
+
 
 
 

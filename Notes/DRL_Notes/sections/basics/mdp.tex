@@ -1,5 +1,25 @@
 \chapter{Markov Decision Process}
 
+\section{Markov Reward Process}
+% \label{sec:}
+In reinforcement learning, a MRP arises when you fix a policy π for your MDP. Then all the decision making is accounted for, and we have a MRP with the induced transition kernel
+
+\begin{align*}
+	v(s)&=\mathbb{E}[G_t|S_t=s]\\
+		&=\mathbb{E}[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s]\\
+		&= \sum_{s',r}p(s',r|s)[r+\gamma v(s')]
+\end{align*} 
+Bellman equation for MRP. In matrix form,
+$$v = PR+\gamma Pv.$$
+We can solve this system by
+$$v = (I-\gamma P)^{-1}PR$$
+
+An MRP is fully characterized by a $\langle S,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
+
+
+\section{Markov Decision Process}
+% \label{sec:}
+
 The general framework of MDPs (representing environments as MDPs) allows us to model virtually any complex sequential decision-making problem under uncertainty in a way that RL agents can interact with and learn to solve solely through experience. 
 
 \begin{figure}[h]
@@ -8,7 +28,6 @@ The general framework of MDPs (representing environments as MDPs) allows us to m
 	\caption{The agent-environment interaction in a Markov decision process.}
 	\label{fig:mdp_ill}
 \end{figure}
-
 
 Components of RL:
 \begin{itemize}
@@ -30,6 +49,8 @@ Components of RL:
 %	\item Continuing task: infinite horizon
 %\end{itemize}
 
+
+An MDP is fully characterized by a $\langle S A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
 
 \begin{definition}[Markov Property]
 	A state $S_t$ is \textbf{Markov} if and only if 
@@ -80,7 +101,7 @@ Components of RL:
 
 
 \begin{definition}[Discount Factor, $\gamma$]
-	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{t} $$
+	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{T} $$
 \end{definition}
 
 \begin{itemize}
@@ -151,7 +172,12 @@ Almost all reinforcement learning algorithms involve estimating \textit{value fu
 
 \begin{definition}[The State-Value Function, $V$]
 	The state-value function $v(s)$ for policy $\pi$ of an Markov Reward Process is the expected return starting from state $s$
-	$$v_{\pi}(s) = \mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}$$
+	\begin{align*}
+		v_{\pi}(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
+				   &= \mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}
+				   % &= \mathbb{E}_\pi \Bigg[R_{t+1}+\gamma G_{t+1}\sum_{k=1}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}\\
+	\end{align*}
+	$$$$
 \end{definition}
 
 \begin{itemize}
@@ -179,6 +205,16 @@ For better understanding, let's look at the \Cref{fig:state_value_diagram}. Star
 	\label{fig:state_value_diagram}
 \end{figure}
 The derivation of \Cref{eq:state_value_bellman} is given in \Cref{appendix:bellman_equation}. The state-value function is essential for understanding the value of different states in a Markov Decision Process (MDP) and is often used in various reinforcement learning algorithms, such as value iteration and policy iteration.
+
+% The Bellman equation for the state-value function can be expressed in matrix form as follows:
+% \begin{align}
+% 	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
+% 	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
+% 	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
+% 	% & = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')],\, \forall s \in \mathcal{S}.
+% 	% \label{eq:state_value_bellman}
+% \end{align}
+
 
 
 

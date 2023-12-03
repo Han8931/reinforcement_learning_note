@@ -48,6 +48,9 @@ Proof.
 		\end{itemize}
 \end{itemize}
 
+A single round of updates, $k$ , involves updating all the state values. The algorithm stops until 
+the changes in state values are sufficiently small in successive iterations.
+
 \section{Policy Improvement}
 Our reason for computing the value function for a policy is to help find better policies. The goal of policy improvement is to modify the policy to make it better with respect to the value function. This is done by selecting actions that are known to be better, according to the current value estimates.
 

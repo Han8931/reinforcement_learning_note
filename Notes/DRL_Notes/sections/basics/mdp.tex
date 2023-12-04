@@ -194,7 +194,7 @@ The state-value function satisfies the \textit{Bellman equation}, which expresse
 \begin{align}
 	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
 	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
+	% & = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
 	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')],\, \forall s \in \mathcal{S}.
 	\label{eq:state_value_bellman}
 \end{align}

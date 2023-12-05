@@ -4,7 +4,11 @@ Monte Carlo methods are a class of computational algorithms that rely on random 
 
 
 \section{Monte Carlo Prediction (Evaluation)}
-Recall that the value of a state is the expected return starting from that state. An obvious way to estimate it from experience, then, is simply to average the returns observed after visits to that state. As more returns are observed, the average should converge to the expected value. This idea is the core of Monte Carlo methods. 
+% Recall that the value of a state is the expected return starting from that state. An obvious way to estimate it from experience, then, is simply to average the returns observed after visits to that state. As more returns are observed, the average should converge to the expected value. This idea is the core of Monte Carlo methods. 
+The goal is to estimate the value of a policy, that is, to learn how much total reward to expect from a policy. 
+
+The most straightforward approach that comes to mind is one I already men- tioned: it’s to run several episodes with this policy collecting hundreds of trajectories, and then calculate averages for every state, just as we did in the bandit environments. This method of estimating value functions is called Monte Carlo prediction (MC).
+
 
 \subsection{First Visit vs. Every Visit}
 Suppose we wish to estimate $v_\pi(s)$, the value of a state $s$ under policy $\pi$, given a set of episodes obtained by following $\pi$ and passing through $s$. Each occurrence of state $s$ in an episode is called a visit to $s$. 

@@ -6,140 +6,53 @@ The main goal of $Q$-learning is to learn a policy, represented by the action-va
 
 $$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma \max_a Q(S_{t+1}, a)-Q(S_t, A_t)\Big] $$
 
-\begin{lstlisting}[language=Python]
-class DQN():
-    def __init__(self, n_state, n_action, n_hidden=50, lr=0.05):
-        self.criterion = torch.nn.MSELoss()
-
-        self.model = torch.nn.Sequential(
-                        torch.nn.Linear(n_state, n_hidden),
-                        torch.nn.ReLU(),
-                        torch.nn.Linear(n_hidden, n_action)
-                )
-
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr)
 
 
-    def update(self, s, y):
-        """
-        Update the weights of the DQN given a training sample
-        @param s: state
-        @param y: target value
-        """
-        y_pred = self.model(torch.tensor(s, dtype=torch.float32))
-        loss = self.criterion(y_pred, torch.tensor(y, dtype=torch.float32))
-        self.optimizer.zero_grad()
-        loss.backward()
-        self.optimizer.step()
 
 
-    def predict(self, s):
-        """
-        Compute the Q values of the state for all actions using the learning model
-        @param s: input state
-        @return: Q values of the state for all actions
-        """
+\section{A Few Considerations}
 
-        with torch.no_grad():
-            return self.model(torch.tensor(s, dtype=torch.float32))
+The I.I.D. assumption is violated. 
 
-    def replay(self, memory, replay_size, gamma):
-        """
-        Experience replay
-        @param memory: a list of experience
-        @param replay_size: the number of samples we use to update the model each time
-        @param gamma: the discount factor
-        """
-        if len(memory) >= replay_size:
-            replay_data = random.sample(memory, replay_size)
-            states = []
-            td_targets = []
-            for state, action, next_state, reward, is_done in replay_data:
-                states.append(state)
-                q_values = self.predict(state).tolist()
-                if is_done:
-                    q_values[action] = reward
-                else:
-                    q_values_next = self.predict(next_state)
-                    q_values[action] = reward + gamma * torch.max(q_values_next).item()
+\subsection{Non-Stationary Target}
+Policy changes over time
 
-                td_targets.append(q_values)
-
-            self.update(states, td_targets)
+\subsection{Correlated Samples}
+Samples are drawn from the same trajectory.
 
 
-def gen_epsilon_greedy_policy(estimator, epsilon, n_action):
-    def policy_function(state):
-        if random.random() < epsilon:
-            return random.randint(0, n_action - 1)
-        else:
-            q_values = estimator.predict(state)
-            return torch.argmax(q_values).item()
-    return policy_function
+\section{Solutions}
+\subsection{Using Target Networks}
+A straightforward way to make target values more stationary is to have a separate network that we can fix for multiple steps and reserve it for calculating more stationary targets. The network with this purpose in DQN is called the target network.
+
+\subsection{Experience Replay}
+
+Having a replay buffer allows the agent two critical things. 
+\begin{itemize}
+	\item First, the training process can use a more diverse mini-batch for performing updates. 
+	\item Second, the agent no longer has to fit the model to the same small mini-batch for multiple iterations. Adequately sampling a sufficiently large replay buffer yields a slow-moving target, so the agent can now sample and train on every time step with a lower risk of divergence.
+\end{itemize}
 
 
-def q_learning(env, estimator, n_episode, gamma=1.0, epsilon=0.1, epsilon_decay=.99):
-    """
-    Deep Q-Learning using DQN
-    @param env: Gym environment
-    @param estimator: DQN network object
-    @param n_episode: number of episodes
-    @param gamma: the discount factor
-    @param epsilon: parameter for epsilon_greedy
-    @param epsilon_decay: epsilon decreasing factor
-    """
-    for episode in range(n_episode):
-        policy = gen_epsilon_greedy_policy(estimator, epsilon, n_action)
-        state = env.reset()
-        if isinstance(state, tuple):
-            state = state[0]
-        is_done = False
+\section{Double DQN}
+\label{sec:double_dqn}
 
-        while not is_done:
-            action = policy(state)
-            next_state, reward, is_done, *_ = env.step(action)
-            total_reward_episode[episode] += reward
+ Q-learning tends to overestimate action- value functions. Our DQN agent is no different; we're using the same off-policy TD target, after all, with that max operator. The crux of the problem is simple: We’re taking the max of estimated values. Estimated values are often off-center, some higher than the true values, some lower, but the bottom line is that they’re off. The problem is that we’re always taking the max of these values, so we have a preference for higher values, even if they aren't correct. Our algorithms show a positive bias, and performance suffers.
 
-            modified_reward = next_state[0] + 0.5
+One way to better understand positive bias and how we can address it when using function approximation is by unwrapping the max operator in the target calculations. The max of a Q-function is the same as the Q-function of the argmax action.
 
-            if next_state[0] >= 0.5:
-                modified_reward += 100
-            elif next_state[0] >= 0.25:
-                modified_reward += 20
-            elif next_state[0] >= 0.1:
-                modified_reward += 10
-            elif next_state[0] >= 0:
-                modified_reward += 5
+\begin{itemize}
+	\item You create two action-value functions, $Q_A$ and $Q_B$.
+	\item You flip a coin to decide which action-value function to update. For example, $Q_A$ on heads, $Q_B$ on tails. 
+	\item If you got a heads and thus get to update $Q_A$: You select the action index to evaluate from $Q_B$, and evaluate it using the estimate $Q_A$ predicts. Then, you proceed to update $Q_A$ as usual, and leave $Q_B$ alone. 
+	\item If you got a tails and thus get to update $Q_B$, you do it the other way around: get the index from $Q_A$, and get the value estimate from $Q_B$. $Q_B$ gets updated, and $Q_A$ is left alone.
+\end{itemize}
 
-            q_values = estimator.predict(state).tolist()
+Instead of adding this overhead that’s a detriment to training speed, we can perform double learning with the other network we already have, which is the target network. However, instead of training both the online and target networks, we continue training only the online network, but use the target network to help us, in a sense, cross-validate the estimates.
 
-            if is_done:
-                q_values[action] = modified_reward
-                estimator.update(state, q_values)
-                break
-
-            q_values_next = estimator.predict(next_state)
-
-            q_values[action] = modified_reward + gamma * torch.max(q_values_next).item()
-
-            estimator.update(state, q_values)
-
-            state = next_state
+We want to be cautious as to which network to use for action selection and which network to use for action evaluation. Initially, we added the target network to stabilize training by avoiding chasing a moving target. To continue on this path, we want to make sure we use the network we’re training, the online network, for answering the first question. In other words, we use the online network to find the index of the best action. Then, we use the target network to ask the second question, that is, to evaluate the previously selected action.
 
 
-        print('Episode: {}, total reward: {}, epsilon: {}'.format(episode, total_reward_episode[episode], epsilon))
-
-        epsilon = max(epsilon * epsilon_decay, 0.01)
-
-if __name__ =="__main__":
-
-    n_state = env.observation_space.shape[0]
-    n_action = env.action_space.n
-    n_hidden = 50
-    lr = 0.001
-    dqn = DQN(n_state, n_action, n_hidden, lr)
-
-    n_episode = 1000
-    total_reward_episode = [0] * n_episode
-    q_learning(env, dqn, n_episode, gamma=.9, epsilon=.3)
-\end{lstlisting}
+\section{Dueling DDQN}
+% \label{sec:}
+The dueling network is an improvement that applies only to the net- work architecture and not the algorithm. That is, we won’t make any changes to the algorithm, but the only modifications go into the network architecture. 

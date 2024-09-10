@@ -1,109 +1,89 @@
 \chapter{Introduction}
 \section{Introduction}
 
-\textbf{Reinforcement learning (RL) is a science of decision making}. RL is learning what to do so as to maximize a numerical reward signal. The learner is not told which actions to take, but instead must discover which actions yield the most reward by trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards. There are some differences compared to other machine learning paradigms:
+\textbf{Reinforcement Learning (RL) is a science of decision making}. RL involves learning to make decisions in order to maximize a numerical reward signal. The learner is not explicitly told which actions to take, but instead must discover the most rewarding actions through experience. In complex scenarios, actions affect not only immediate rewards but also subsequent situations and future rewards. RL differs from other machine learning paradigms in several key ways:
 \begin{itemize}
 	\item RL uses training information that \textit{evaluates} the actions taken rather than \textit{instructs} by giving correct actions.
-		\begin{itemize}
-			\item Evaluative feedback, not about best or worst.
-			\item There is no supervisor, only a \textit{reward} signal
-		\end{itemize}
-	\item Delayed reward: Feeedback is delayed, not instantaneous. 
-	\item Time really matters (sequential, non i.i.d. data). 
-	\item Agent's action affects the subsequent data it receives. e.g., a robot moves around a room and it receives a different front view.  
-	\item The environment is initially unknown. The agent interacts with the environment. The agent improves its policy
-		\begin{itemize}
-			\item Trial-and-error search
-		\end{itemize}
-	\item Planning: the environment is known. 
-	\item Exploitation: the model finds more information about the environment
-	\item Exploration: the model exploits known information
+    \begin{itemize}
+        \item Provides evaluative feedback rather than indicating the best or worst action.
+        \item There is no explicit supervisor, only a \textit{reward} signal.
+    \end{itemize}
+    \item \textbf{Delayed Reward}: Feedback is not instantaneous but occurs after some delay.
+    \item Time plays a crucial role (sequential, non-i.i.d. data).
+    \item The agent’s actions affect the subsequent data it receives. For example, a robot moving through a room will receive a different front view with each step.
+    \item The environment is initially unknown. The agent interacts with it, improving its policy via \textbf{trial-and-error search}.
+    \begin{itemize}
+        \item \textbf{Planning}: The environment is known.
+        \item \textbf{Exploration}: The agent seeks to find more information about the environment.
+        \item \textbf{Exploitation}: The agent exploits known information to maximize rewards.
+    \end{itemize}
 \end{itemize}
 
 \subsection{Sequential Decision Making}
 \begin{itemize}
-	\item Goal: select actions to maximize total future reward
-	\item Actions may have long term consequences (we have to plan ahead)
-	\item Reward may be delayed
-	\item It may be better to sacrifice immediate reward to gain more long-term reward. 
+    \item \textbf{Goal}: Select actions that maximize the total future reward.
+    \item Actions may have long-term consequences, requiring foresight and planning.
+    \item Rewards may be delayed.
+    \item It may be better to sacrifice immediate rewards for greater long-term gains.
 \end{itemize}
 
-Fully observability: agent directly observes environment state. Fully observable environment is one in which the agent can always see the entire state of environment. In case of fully observable environments all relevant portions of the environment are observable.
+
+\subsection{Fully Observable vs Partially Observable Environments}
+In a fully observable environment, the agent can directly observe the entire environment state. Here, the agent’s state is identical to the environment's state, and the information state is the same:
 $$O_t=S_t^a=S_t^w$$
-So agent state is equal to environment state and information state. Formally, this is a \textbf{Markov decision process} (MDP).
+This setting can be formally represented as a \textbf{Markov Decision Process (MDP)}.
 
-Partially observability: agent indirectly observes environment. For example, a robot with camera vision isn't told its absolute location or a trading agent doesn't tell about a tread and only observes current prices. Now agent state is not equal to the environment state. Formally this is a partially observable Markov decision process (POMDP). 
+In a partially observable environment, the agent can only observe the environment indirectly. For example, a robot using camera vision may not know its exact location, or a trading agent might only observe current prices, not broader market trends. In this case, the agent's state differs from the environment's state, leading to a formal model known as a \textbf{Partially Observable Markov Decision Process (POMDP)}.
 
-RL agents can be categorized as follows:
+\subsection{RL Agent Categories}
+RL agents can be classified as follows:
 \begin{itemize}
-	\item Value based: policy is implicit
-	\item Policy based
-	\item Actor-Critic
-	\item The set of transition and reward function is referred to as the model of the environment.
-	\item Model-free: Model-free reinforcement learning algorithms are a class of approaches where the agent learns to make decisions without explicit knowledge of the underlying dynamics or transition probabilities of the environment. 
-	\item Model-based: Model-based reinforcement learning (MBRL) algorithms are approaches where the agent learns an explicit model of the environment, including transition dynamics and reward structure. Instead of directly interacting with the environment to learn a policy or value function, the agent builds a model and then uses that model for planning and decision-making. The learned model is typically used to simulate possible future trajectories, which the agent can then optimize to make decisions.
+    \item \textbf{Value-based}: Policy is implicit, and decisions are based on value functions.
+    \item \textbf{Policy-based}: The agent directly learns a policy that maps states to actions.
+    \item \textbf{Actor-Critic}: Combines value-based and policy-based methods.
+    \item The set of transition and reward functions is referred to as the \textbf{model} of the environment.
+    \item \textbf{Model-free}: Model-free RL algorithms learn to make decisions without explicitly modeling the environment's dynamics or transitions.
+    \item \textbf{Model-based}: Model-based RL algorithms learn an explicit model of the environment, including transition dynamics and reward structure. The agent builds a model and uses it for planning by simulating possible future trajectories to optimize decisions.
 \end{itemize}
 
 \subsection{Exploration and Exploitation}
 \begin{itemize}
-	\item Reinforcement learning is like a trial-and-error learning
-	\item The agent should discover a good policy from its experiences of the environment without losing too much reward along the way
-	\item Exploration: finds more information about the environment
-	\item Exploitation: exploits known information to maximize reward
-	\begin{itemize}
-		\item Restaurant selection: 
-			\begin{itemize}
-				\item Exploitation: go to your favorite restaurant 
-				\item Exploration: try a new
-			\end{itemize}
-		\item Oil drilling: 
-			\begin{itemize}
-				\item Exploitation: drill at the best location 
-				\item Exploration: try a new location
-			\end{itemize}
-			
-	\end{itemize}
+    \item RL is akin to trial-and-error learning.
+    \item The agent should discover a good policy from its experiences in the environment without losing too much reward along the way.
+    \item \textbf{Exploration}: The agent explores to gather more information about the environment.
+    \item \textbf{Exploitation}: The agent exploits known information to maximize reward. For example,
+    \begin{enumerate}
+        \item Restaurant Selection:
+        \begin{itemize}
+            \item \textbf{Exploitation}: Visit your favorite restaurant.
+            \item \textbf{Exploration}: Try a new restaurant.
+        \end{itemize}
+        \item Oil Drilling:
+        \begin{itemize}
+            \item \textbf{Exploitation}: Drill at the best-known location.
+            \item \textbf{Exploration}: Test a new location.
+        \end{itemize}
+    \end{enumerate}
 \end{itemize}
 
-
-%There are four main subelements of a RL system: 
+%\section{Markov Chain}
 %\begin{itemize}
-%	\item A policy.
-%	\item A reward signal.
-%	\item A value function: Whereas the reward signal indicates what is good in an immediate sense, a value function specifies what is good in the long run. Roughly speaking, the value of a state is the total amount of reward an agent can expect to accumulate over the tufutre, starting form that state. 
-%	\item Optionally, a model of the environment.
-%\end{itemize}
-
-
-\section{Markov Chain}
-\begin{itemize}
-	\item Reachable: $i\to j$
-	\item Communicate: $i\leftrightarrow j$
-	\item Irreducible: $i\leftrightarrow j, \forall i,j$
-	\item Absorbing state: If the only possible transition is to itself. This is also a terminal state.
-	\item Transient state: A state $s$ is called a transient state, if there is another state $s'$, that is reachable from $s$, but not vice versa. 
-	\item Recurrent state: A state that is not transient. 
-	\item Periodic: A state is periodic if all of the paths leaving $s$ come back after some multiple steps ($k>1$). 
-		\begin{itemize}
-			\item Recurrent state is aperiodic if $k=1$.
-		\end{itemize}
-	\item Ergodicity if a Markov chain follows:
-		\begin{itemize}
-			\item Irredicible
-			\item Recurrent
-			\item Aperiodic
-		\end{itemize}
-	%\item Steady-state probability distribution.
-\end{itemize}
-
-%$$p_n = qP^n$$
-
-
-%\subsection{Bellman Optimility Equation for $v_*$ and $q_*$}
-%\begin{itemize}
-%	\item $v_*(s) = \max_a q_*(s,a)$
-%	\item $q_*(s,a) = \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a v_*(s')$
-%	\item $v_*(s) = \max_a \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a v_*(s')$
-%	\item $q_*(s,a) = \mathcal{R}_s^a + \gamma \sum_{s'\in \mathcal{S}}\mathcal{P}_{ss'}^a \max_{a'} q_*(s', a')$
+%	\item Reachable: $i\to j$
+%	\item Communicate: $i\leftrightarrow j$
+%	\item Irreducible: $i\leftrightarrow j, \forall i,j$
+%	\item Absorbing state: If the only possible transition is to itself. This is also a terminal state.
+%	\item Transient state: A state $s$ is called a transient state, if there is another state $s'$, that is reachable from $s$, but not vice versa. 
+%	\item Recurrent state: A state that is not transient. 
+%	\item Periodic: A state is periodic if all of the paths leaving $s$ come back after some multiple steps ($k>1$). 
+%		\begin{itemize}
+%			\item Recurrent state is aperiodic if $k=1$.
+%		\end{itemize}
+%	\item Ergodicity if a Markov chain follows:
+%		\begin{itemize}
+%			\item Irredicible
+%			\item Recurrent
+%			\item Aperiodic
+%		\end{itemize}
+%	%\item Steady-state probability distribution.
 %\end{itemize}
 

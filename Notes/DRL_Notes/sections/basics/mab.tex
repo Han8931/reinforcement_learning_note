@@ -1,16 +1,12 @@
 \section{Multi-Armed Bandits}
 
-%$k$-armed bandit problem:
-%\begin{itemize}
-%	\item You are given $k$ different options or actions
-%\end{itemize}
-
 Bandit problems are stateless. Each arm has a fixed distribution of rewards. It does not depend on which arms were pulled previously. The goal is to explore the reward distributions of all arms and then keep pulling the best one. We only have a single chance of selecting an action in each episode. 
 
-Markov decision processes are a temporal extension of bandit problems: pulling an arm influences the future rewards. Technically, there is a state that changes by pulling an arm. The reward distributions depend on that state.
+% Markov decision processes are a temporal extension of bandit problems: pulling an arm influences the future rewards. Technically, there is a state that changes by pulling an arm. The reward distributions depend on that state.
 
 You can view bandit problems as Markov decision processes where all states are terminal. In that case, all decision sequences have a length of 1 and subsequent pulls don't influence each other.
 
+In sum,
 \begin{itemize}
 	\item When the lever of a slot machine is pulled it gives a random reward coming from a probability distribution specific to that machine.
 	\item Although the machines look identical, their reward probability distributions are different. 

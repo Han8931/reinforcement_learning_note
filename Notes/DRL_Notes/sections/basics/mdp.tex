@@ -13,8 +13,7 @@ Bellman equation for MRP. In matrix form,
 $$v = PR+\gamma Pv.$$
 We can solve this system by
 $$v = (I-\gamma P)^{-1}PR$$
-
-An MRP is fully characterized by a $\langle S,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
+An MRP is fully characterized by a $\langle S,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor. I will explain more about the discount factor later. 
 
 
 \section{Markov Decision Process}
@@ -37,20 +36,7 @@ Components of RL:
 	\item A value function: what is good in the long run.
 	\item A model of the environment: This allows inferences to be made about how the environment will behave.
 \end{itemize}
-%\begin{itemize}
-%	\item Agent
-%	\item Action
-%	\item Environment
-%	\item State
-%	\item The knowledge of the state is fully observable or partially observable.
-%	\item Reward
-%	\item Policy
-%	\item Episodic task: from an initial state to a terminal state.
-%	\item Continuing task: infinite horizon
-%\end{itemize}
-
-
-An MDP is fully characterized by a $\langle S A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
+An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
 
 \begin{definition}[Markov Property]
 	A state $S_t$ is \textbf{Markov} if and only if 
@@ -74,7 +60,7 @@ An MDP is fully characterized by a $\langle S A,P,R,\gamma \rangle$ tuple, where
 	All goals can be described by the maximization of expected cumulative reward.
 \end{definition}
 \begin{itemize}
-	\item That all of what we mean by goals and purposes can be well thought of as athe maximization of the expected value of the cumulative sum of a received scalar signal (called reward).
+	\item All goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar signal (\ie reward).
 \end{itemize}
 
 \begin{definition}[Reward Function]
@@ -93,19 +79,16 @@ An MDP is fully characterized by a $\langle S A,P,R,\gamma \rangle$ tuple, where
 	\item The reward function can also be defined as a function that takes a full transition tuple $s,a,s'$.
 		\begin{align*}
 			r(s,a,s')&= \mathbb{E}[R_t|S_{t-1}=s,A_{t-1}=a,S_{t}=s]\\
-			&= \sum_{r\in \mathcal{R}}\frac{p(s',r|s,a)}{p(s'|s,a)}
+			&= \sum_{r\in \mathcal{R}}r\frac{p(s',r|s,a)}{p(s'|s,a)}
 		\end{align*}
 \end{itemize}
-
-
-
 
 \begin{definition}[Discount Factor, $\gamma$]
 	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{T} $$
 \end{definition}
 
 \begin{itemize}
-	\item \textbf{The sum of all rewards obtained during the course of an episode} is referred to as the \textit{return}, $G_t$.
+	\item The sum of all rewards obtained during the course of an episode is referred to as the \textit{return}, $G_t$.
 	\item Episodic tasks: $G_t = R_{t+1} + R_{t+2} + \cdots + R_{T}.$
 		\begin{itemize}
 			\item $G_t = R_{t+1}+\gamma G_{t+1}$

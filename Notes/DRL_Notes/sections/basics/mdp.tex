@@ -6,7 +6,7 @@ In reinforcement learning, a MRP arises when you fix a policy π for your MDP. T
 
 \begin{align*}
 	v(s)&=\mathbb{E}[G_t|S_t=s]\\
-		&=\mathbb{E}[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s]\\
+		&=\mathbb{E}\left[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s\right]\\
 		&= \sum_{s',r}p(s',r|s)[r+\gamma v(s')]
 \end{align*} 
 Bellman equation for MRP. In matrix form,

@@ -1,9 +1,59 @@
 \chapter{Markov Decision Process}
 
+\paragraph{Example}
+
+To help conceptualize Finite Markov Processes, let us consider a simple example of changes in inventory at a store. Assume you are the store manager and that you are tasked with controlling the ordering of inventory from a supplier. Let us focus on the inventory of a particular type of bicycle. Assume that each day there is random (non-negative integer) demand for the bicycle with the probabilities of demand following a Poisson distribution (with Poisson parameter $\lambda \in \mathbb{R}_{\geq 0}$), i.e. demand $i$ for each $i = 0, 1, 2, \ldots$ occurs with probability
+$$f(i) = \frac {e^{-\lambda} \lambda^i} {i!}$$
+Denote $F: \mathbb{Z}_{\geq 0} \rightarrow [0, 1]$ as the Poisson cumulative probability distribution function, i.e.,
+ $$F(i) = \sum_{j=0}^i f(j)$$
+ \begin{itemize}
+	 \item Assume you have storage capacity for at most $C \in \mathbb{Z}_{\geq 0}$ bicycles in your store. 
+	 \item Each evening at 6pm when your store closes, you have the choice to order a certain number of bicycles from your supplier (including the option to not order any bicycles on a given day). 
+	 \item The ordered bicycles will arrive 36 hours later (at 6am the day after the day after you order—we refer to this as delivery lead time of 36 hours). 
+	 \item Denote the State at 6pm store-closing each day as $(\alpha, \beta)$, where $\alpha$ is the inventory in the store (referred to as On-Hand Inventory at 6pm) and $\beta$ is the inventory on a truck from the supplier (that you had ordered the previous day) that will arrive in your store the next morning at 6am ($\beta$ is referred to as On-Order Inventory at 6pm). Due to your storage capacity constraint of at most $C$ bicycles, your ordering policy is to order $C-(\alpha + \beta)$ if $\alpha + \beta < C$ and to not order if $\alpha + \beta \geq C$. The precise sequence of events in a 24-hour cycle is:
+ \end{itemize}
+ 
+In sum,
+\begin{itemize}
+	\item Observe the $(\alpha, \beta)$ \textit{State} at 6pm store-closing (call this state $S_t$).
+	\item Immediately order according to the ordering policy described above.
+	\item Receive bicycles at 6am if you had ordered 36 hours ago.
+	\item Open the store at 8am.
+	\item Experience random demand from customers according to demand probabilities stated above (number of bicycles sold for the day will be the minimum of demand on the day and inventory at store opening on the day).
+	\item Close the store at 6pm and observe the state (this state is $S_{t+1}$).
+\end{itemize}
+
+If we let this process run for a while, in steady-state, we ensure that $\alpha + \beta \leq C$. So to model this process as a Finite Markov Process, we shall only consider the steady-state (finite) set of states
+$$\mathcal{S} = \{(\alpha, \beta) | \alpha \in \mathbb{Z}_{\geq 0}, \beta \in \mathbb{Z}_{\geq 0}, 0 \leq \alpha + \beta \leq C\}$$
+So restricting ourselves to this finite set of states, our order quantity equals $C - (\alpha + \beta)$ when the state is $(\alpha, \beta)$.
+
+If the current state $S_t$ is $(\alpha, \beta)$, there are only $\alpha + \beta + 1$ possible next states $S_{t+1}$ as follows\footnotemark:
+$$(\alpha + \beta - i, C - (\alpha + \beta)) \text{ for } i =0, 1, \ldots, \alpha + \beta$$
+with transition probabilities governed by the Poisson probabilities of demand as follows:
+\begin{align*}
+	&\mathcal{P}((\alpha, \beta), (\alpha + \beta - i, C - (\alpha + \beta))) = f(i)\text{ for } 0 \leq i \leq \alpha + \beta - 1\\
+	&\mathcal{P}((\alpha, \beta), (0, C - (\alpha + \beta))) = \sum_{j=\alpha+\beta}^{\infty} f(j) = 1 - F(\alpha + \beta - 1)
+\end{align*}
+\begin{itemize}
+	\item $P((\alpha, \beta), (\alpha + \beta - i, C - (\alpha + \beta)))$ is the probability of transitioning from state $(\alpha, \beta)$ to $(\alpha + \beta - i, C - (\alpha + \beta))$ when demand equals $i$. The probability $f(i)$ is based on the Poisson demand distribution.
+	\item If demand exceeds $\alpha + \beta$, the system transitions to a state where all on-hand inventory is depleted:
+		\begin{align*}
+			\mathbb{P}((\alpha, \beta), (0, C - (\alpha + \beta))) = 1 - F(\alpha + \beta - 1)
+		\end{align*}
+	\item $1 - F(\alpha + \beta - 1)$ gives the probability that the demand is greater than or equal to $\alpha+\beta$ (\ie demand is large enough to deplete the entire on-hand inventory).
+\end{itemize}
+\footnotetext{Since $\alpha+\beta=C$, there are only $C+1$ states. Also, the number of bicycles is the sum of the number of bicycles in the inventory and the truck. Thus, the next state's bicycles is $\alpha+\beta+i$}
+
+
 \section{Markov Reward Process}
 % \label{sec:}
-In reinforcement learning, a MRP arises when you fix a policy π for your MDP. Then all the decision making is accounted for, and we have a MRP with the induced transition kernel
+The reason we covered Markov Processes is that we want to make our way to Markov Decision Processes (the framework for Reinforcement Learning algorithms) by adding incremental features to Markov Processes. Now we cover an intermediate framework between Markov Processes and Markov Decision Processes, known as Markov Reward Processes. We essentially just include the notion of a numerical reward to a Markov Process each time we transition from one state to the next. These rewards are random, and all we need to do is to specify the probability distributions of these rewards as we make state transitions.
 
+The main purpose of Markov Reward Processes is to calculate how much reward we would accumulate (in expectation, from each of the non-terminal states) if we let the process run indefinitely, bearing in mind that future rewards need to be discounted appropriately (otherwise, the sum of rewards could blow up to $\infty$). In order to solve the problem of calculating expected accumulative rewards from each non-terminal state, we will first set up some formalism for Markov Reward Processes, develop some (elegant) theory on calculating rewards accumulation, write plenty of code (based on the theory), and apply the theory and code to the simple inventory example (which we will embellish with rewards equal to negative of the costs incurred at the store).
+
+Formally, A Markov Reward Process is a Markov Process, along with a time-indexed sequence of Reward random variables $R_t\in \mathcal{D}$ (countable set $\mathcal{D}$) for time steps $t=1,2,\dots,$ satisfying the Markov Property (including Rewards):
+$$P[(R_{t+1}, S_{t+1})|S_t, S_{t-1}, \dots , S_0] = P[(R_{t+1}, S_{t+1})|S_t]\  \forall t\geq 0.$$
+In reinforcement learning, a MRP arises when you fix a policy $\pi$ for your MDP. Then all the decision making is accounted for, and we have a MRP with the induced transition kernel
 \begin{align*}
 	v(s)&=\mathbb{E}[G_t|S_t=s]\\
 		&=\mathbb{E}\left[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s\right]\\

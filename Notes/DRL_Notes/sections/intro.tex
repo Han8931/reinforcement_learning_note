@@ -1,23 +1,43 @@
 \chapter{Introduction}
 \section{Introduction}
 
-\textbf{Reinforcement Learning (RL) is a science of decision making}. RL involves learning to make decisions in order to maximize a numerical reward signal. The learner is not explicitly told which actions to take, but instead must discover the most rewarding actions through experience. In complex scenarios, actions affect not only immediate rewards but also subsequent situations and future rewards. RL differs from other machine learning paradigms in several key ways:
+\textbf{Reinforcement Learning (RL) is the science of decision-making.} It focuses on learning to make decisions that maximize a numerical reward signal. Unlike traditional approaches, the learner is not explicitly told which actions to take but must discover the most rewarding actions through experience. In complex scenarios, actions influence not only immediate rewards but also future situations and rewards. RL differs from other machine learning paradigms in several key aspects:
 \begin{itemize}
-	\item RL uses training information that \textit{evaluates} the actions taken rather than \textit{instructs} by giving correct actions.
+    \item RL uses training information that \textit{evaluates} actions rather than \textit{instructing} by providing the correct actions.
     \begin{itemize}
-        \item Provides evaluative feedback rather than indicating the best or worst action.
-        \item There is no explicit supervisor, only a \textit{reward} signal.
+        \item The feedback is evaluative, indicating how good or bad an action was, without explicitly identifying the best or worst action.
+        \item There is no explicit supervisor; learning is guided by a \textit{reward signal}.
     \end{itemize}
-    \item \textbf{Delayed Reward}: Feedback is not instantaneous but occurs after some delay.
-    \item Time plays a crucial role (sequential, non-i.i.d. data).
-    \item The agent’s actions affect the subsequent data it receives. For example, a robot moving through a room will receive a different front view with each step.
-    \item The environment is initially unknown. The agent interacts with it, improving its policy via \textbf{trial-and-error search}.
+    \item \textbf{Delayed Rewards}: Feedback is not immediate; rewards are often received after a delay, reflecting the long-term consequences of actions.
+    \item Time is crucial: RL deals with sequential decision-making and non-i.i.d. (non-independent and identically distributed) data, where past actions influence future data.
+    \item Actions affect the subsequent data: For instance, a robot moving through a room will see a different view with each step it takes, directly influenced by its previous movements.
+    \item The environment is initially unknown: The agent interacts with the environment and improves its policy through \textbf{trial-and-error}.
     \begin{itemize}
-        \item \textbf{Planning}: The environment is known.
-        \item \textbf{Exploration}: The agent seeks to find more information about the environment.
-        \item \textbf{Exploitation}: The agent exploits known information to maximize rewards.
+        \item \textbf{Planning}: When the environment is known, the agent can compute optimal policies or actions.
+        \item \textbf{Exploration}: The agent gathers more information about the environment by trying new actions.
+        \item \textbf{Exploitation}: The agent leverages existing knowledge to maximize rewards.
     \end{itemize}
 \end{itemize}
+
+
+
+% \textbf{Reinforcement Learning (RL) is a science of decision making}. RL involves learning to make decisions in order to maximize a numerical reward signal. The learner is not explicitly told which actions to take, but instead must discover the most rewarding actions through experience. In complex scenarios, actions affect not only immediate rewards but also subsequent situations and future rewards. RL differs from other machine learning paradigms in several key ways:
+% \begin{itemize}
+% 	\item RL uses training information that \textit{evaluates} the actions taken rather than \textit{instructs} by giving correct actions.
+%     \begin{itemize}
+%         \item Provides evaluative feedback rather than indicating the best or worst action.
+%         \item There is no explicit supervisor, only a \textit{reward} signal.
+%     \end{itemize}
+%     \item \textbf{Delayed Reward}: Feedback is not instantaneous but occurs after some delay.
+%     \item Time plays a crucial role (sequential, non-i.i.d. data).
+%     \item The agent’s actions affect the subsequent data it receives. For example, a robot moving through a room will receive a different front view with each step.
+%     \item The environment is initially unknown. The agent interacts with it, improving its policy via \textbf{trial-and-error search}.
+%     \begin{itemize}
+%         \item \textbf{Planning}: The environment is known.
+%         \item \textbf{Exploration}: The agent seeks to find more information about the environment.
+%         \item \textbf{Exploitation}: The agent exploits known information to maximize rewards.
+%     \end{itemize}
+% \end{itemize}
 
 \subsection{Sequential Decision Making}
 \begin{itemize}
@@ -29,7 +49,6 @@
 
 
 \subsection{The Concept of State in a Process}
-% \subsection{Fully Observable vs Partially Observable Environments}
 For a gentle introduction to the concept of \textit{State}, we start with an informal notion of the terms \textit{Process} and State. Informally, think of a Process as producing a sequence of random outcomes at discrete time steps that we’ll index by a time variable $t = 0, 1, 2, \dots$. The random outcomes produced by a Process might be key financial/trading/business metrics one cares about, such as prices of financial derivatives or the value of a portfolio held by an investor. To understand and reason about the evolution of these random outcomes of a Process, it is beneficial to focus on the internal representation of the Process at each point in time t, that is fundamentally responsible for driving the outcomes produced by the Process. We refer to this internal representation of the Process at time $t$ as the (random) \textit{State} of the Process at time $t$ and denote it as $S_t$.
 
 Specifically, we are interested in the probability of the next State $S_{t+1}$, given the present State $S_t$ and the past States $S_0, S_1, \dots, S_{t-1}$, \ie $P[S_{t+1}|S_t, S_{t-1},\dots, S_0]$. So to clarify, we distinguish between the internal representation (State) and the output (outcomes) of the Process. The State could be any data type-it could be something as simple as the daily closing price of a single stock, or it could be something quite elaborate like the number of shares of each publicly traded stock held by each bank in the U.S., as noted at the end of each week.

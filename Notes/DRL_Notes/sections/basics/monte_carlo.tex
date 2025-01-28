@@ -186,6 +186,85 @@ To clarify the difference, let's consider a simple example of a grid-world navig
 \end{itemize}
 In summary, in the grid-world example, Monte Carlo methods would update values based on complete episodes, whereas TD learning would update values at each time step. The choice depends on the nature of the task, the availability of information, and the computational resources.
 
+\begin{lstlisting}[language=Python]
+import numpy as np
+import random
+
+def random_walk_environment(state):
+    """
+    Given the current state (1..5), this environment transitions left or right 
+    with equal probability and returns the next state, as well as the reward.
+    
+    Args:
+        state (int): Current non-terminal state, 1 <= state <= 5.
+    
+    Returns:
+        next_state (int): Next state in {0,1,2,3,4,5,6}.
+        reward (float): Reward for the transition.
+    """
+    # Action: move left (prob=0.5) or right (prob=0.5)
+    action = random.choice([-1, +1])
+    next_state = state + action
+
+    # If next_state == 6, reward = +1; if next_state == 0, reward = 0
+    # For states 1..5, reward = 0
+    if next_state == 6:
+        reward = 1.0
+    else:
+        reward = 0.0
+    
+    return next_state, reward
+
+
+def td_zero_random_walk(num_episodes=1000, alpha=0.1, gamma=1.0):
+    """
+    Perform TD(0) to evaluate the value function V(s) for the random walk example.
+    
+    Args:
+        num_episodes (int): Number of episodes to run.
+        alpha (float): Step-size / learning rate.
+        gamma (float): Discount factor (set to 1.0 in the classic random walk).
+    
+    Returns:
+        V (np.array): Learned value function estimates V(s) for states s in [0..6].
+                      Terminal states 0 and 6 stay at V=0 by definition.
+    """
+    # We track V(s) for states 0..6, but 0 and 6 are terminal.
+    # Initialize with zeros (you could initialize them differently).
+    V = np.zeros(7)
+
+    for episode in range(num_episodes):
+        # Start each episode in the middle state (often chosen as 3 in the random walk)
+        state = 3
+
+        # Continue until we reach a terminal state
+        while state not in [0, 6]:
+            next_state, reward = random_walk_environment(state)
+
+            # TD(0) update:
+            # V[s] <- V[s] + alpha * [R + gamma * V[s'] - V[s]]
+            V[state] = V[state] + alpha * (reward + gamma * V[next_state] - V[state])
+
+            state = next_state
+
+    return V
+
+if __name__ == "__main__":
+    # Set random seed for reproducibility (optional)
+    random.seed(42)
+    np.random.seed(42)
+
+    # Run TD(0) for 1000 episodes
+    num_episodes = 1000
+    alpha = 0.1
+    V_estimates = td_zero_random_walk(num_episodes, alpha)
+
+    print(f"Value Function Estimates after {num_episodes} episodes:")
+    for s in range(7):
+        print(f"V({s}) = {V_estimates[s]:.3f}")
+\end{lstlisting}
+
+
 \subsection{Q-learning: Off-policy TD Control}
 
 $$Q(S_t, A_t) \leftarrow Q(S_t, A_t)+ \alpha \Big[R_{t+1}+\gamma \max_a Q(S_{t+1}, a)-Q(S_t, A_t)\Big] $$

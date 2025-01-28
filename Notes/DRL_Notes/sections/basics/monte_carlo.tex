@@ -170,7 +170,7 @@ To clarify the difference, let's consider a simple example of a grid-world navig
 
 \paragraph{MC Method} The agent explores the grid-world and reaches a target goal ($S_9$). The episode ends, and the agent receives a reward of +1. At the end of the episode, the agent updates the value of each visited state based on the observed return. If the trajectory is $S_1\to S_2 \to \cdots\to S_9$, then the value update for each visited state would be based on the return of +1.
 
-\paragraph{TD Learning} The agent starts at $S_1$, moves to $S_2$, and receives a reward of $−0.1$ for the movement. The agent updates the value of $S_1$ based on the observed TD error, which is the immediate reward plus the discounted estimate of the next state. If the agent moves right from $S_1$ to $S_2$, the update for $S_1$ would be based on $R_{move}+\gamma V(S_2)$.
+\paragraph{TD Learning} The agent starts at $S_1$, moves to $S_2$, and receives a reward of $-0.1$ for the movement. The agent updates the value of $S_1$ based on the observed TD error, which is the immediate reward plus the discounted estimate of the next state. If the agent moves right from $S_1$ to $S_2$, the update for $S_1$ would be based on $R_{move}+\gamma V(S_2)$.
 
 \begin{itemize}
 	\item Monte Carlo:

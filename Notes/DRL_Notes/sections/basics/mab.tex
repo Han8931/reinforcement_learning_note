@@ -17,6 +17,25 @@ In our $k$-armed bandit problem, each of the $k$ actions has an expected or mean
 $$q_*(a) = \mathbb{E}[R_t|A_t=a].$$
 Since we do not know which action is the best, we have to estimate the value of actions $a$ at time step $t$, $Q_t(a)$.
 
+\begin{lstlisting}[language=Python]
+class GaussianBandit:
+    def __init__(self, mean=0, stdev=1):
+        self.mean = mean
+        self.stdev = stdev
+
+    def pull_lever(self):
+        reward = np.random.normal(self.mean, self.stdev)
+        return np.round(reward,1)
+
+slotA = GaussianBandit(5, 3)
+slotB = GaussianBandit(6, 2)
+slotC = GaussianBandit(1, 5)
+
+game = GaussianBanditGame([slotA, slotB, slotC])
+game.user_play()
+\end{lstlisting}
+
+
 \subsection{Action-value Methods}
 
 One natural way to estimate this is by averaging the rewards actually received: $Q_t(a)$ is sum of rewards when $a$ taken prior $t$ over number of times $a$ taken prior to $t$:
@@ -49,23 +68,6 @@ $$NewEstimate \leftarrow OldEstimate + StepSize \underbrace{\Big[Target - OldEst
 The target is presumed to indicate a desirable direction in which to move, though it may be noisy. So, we adjust our current estimate, $Q_n$, in the direction of the error that we calculate based on the latest observed reward, $R_n-Q_n$, with a step size of $1/n$   and obtain  a new estimate, $Q_{n+1}$ . 
 
 
-\begin{lstlisting}[language=Python]
-class GaussianBandit:
-    def __init__(self, mean=0, stdev=1):
-        self.mean = mean
-        self.stdev = stdev
-
-    def pull_lever(self):
-        reward = np.random.normal(self.mean, self.stdev)
-        return np.round(reward,1)
-
-slotA = GaussianBandit(5, 3)
-slotB = GaussianBandit(6, 2)
-slotC = GaussianBandit(1, 5)
-
-game = GaussianBanditGame([slotA, slotB, slotC])
-game.user_play()
-\end{lstlisting}
 
 
 

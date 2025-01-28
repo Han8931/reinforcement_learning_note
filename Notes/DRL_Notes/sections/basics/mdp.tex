@@ -161,7 +161,7 @@ An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where
 			\item The agent can take actions $A=\{left,right\}$.
 			\item The rewards are as follows:
 				\begin{itemize}
-					\item $R_{left}=−1$: penalty for moving left
+					\item $R_{left}=-1$: penalty for moving left
 					\item $R_{right}=+1$: reward for moving right
 				\end{itemize}
 			\item The discount factor $\gamma$: 0.9.
@@ -169,7 +169,7 @@ An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where
 	\item Episode:
 		\begin{enumerate}
 			\item The agent starts in $S1$.
-			\item If the agent moves left, it incurs a penalty ($R_{left}=−1$), and the episode ends.
+			\item If the agent moves left, it incurs a penalty ($R_{left}=-1$), and the episode ends.
 			\item If the agent moves right, it receives a reward ($R_{right}=+1$), transitions to $S2$, and the episode continues.
 			\item In $S2$, the agent faces the same choices.
 			\item The episode ends when the agent either moves left or reaches $S3$.

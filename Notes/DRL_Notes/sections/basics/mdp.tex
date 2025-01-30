@@ -1,8 +1,189 @@
 \chapter{Markov Decision Process}
 
-\paragraph{Example}
+\section{Introduction}
 
-To help conceptualize Finite Markov Processes, let us consider a simple example of changes in inventory at a store. Assume you are the store manager and that you are tasked with controlling the ordering of inventory from a supplier. Let us focus on the inventory of a particular type of bicycle. Assume that each day there is random (non-negative integer) demand for the bicycle with the probabilities of demand following a Poisson distribution (with Poisson parameter $\lambda \in \mathbb{R}_{\geq 0}$), i.e. demand $i$ for each $i = 0, 1, 2, \ldots$ occurs with probability
+A \textit{Markov Process} (often called a \textit{Markov Chain}) is a mathematical model used to describe a sequence of events (or \textit{states}) where the probability of moving to the next state depends only on the current state. 
+
+In a \textit{Finite Markov Process}, there are only a finite number of possible states. 
+
+A Markov Process can be defined as follows:
+\begin{itemize}
+  \item A finite set of states, denoted by \( \mathcal{S} = \{ s_1, s_2, \dots, s_n \} \).
+  \item A transition probability matrix \( P \), where each entry \( P(i \to j) \) represents:
+	  \begin{align*}
+			P(s_{t+1} = s_j \mid s_t = s_i).
+	  \end{align*}
+\end{itemize}
+
+\begin{definition}[Markov Property]
+	A state $S_t$ is \textbf{Markov} if and only if 
+	$$P[S_{t+1}|S_t, A_t] = P[S_{t+1}|S_t, A_t, S_{t-1},A_{t-1},...]$$
+\end{definition}
+\begin{itemize}
+	\item Actions: a mechanism to influence the environment
+	\item State: specific configurations of the environment
+\end{itemize}
+
+\begin{definition}[Transition Function]
+	$$p(s',r|s,a) = P(S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a)$$
+\end{definition}
+\begin{itemize}
+	\item The way the environment changes as a response to actions is referred to as the state-transition probabilities, or more simply, the transition function, and is denoted by $T(s,a,s')$.
+	\item $\sum_{r\in \mathcal{R}}\sum_{s'\in \mathcal{S}}p(s',r|s,a) = 1, \quad \forall s \in \mathcal{S}, \forall a\in \mathcal{A}(s)$
+	\item $p(s'|s,a)=P(S_t=s'|S_{t-1}=s,A_{t-1}=a)=\sum_{r\in \mathcal{R}}p(s',r|s,a)$
+\end{itemize}
+
+The \textit{Markov property} states that 
+\[
+P(s_{t+1} = s_j \,\big\vert\, s_t = s_i, s_{t-1} = s_{t-1}, \dots, s_0 = s_0 )
+\;=\;
+P(s_{t+1} = s_j \,\big\vert\, s_t = s_i).
+\]
+In simple terms, \textit{the next state depends only on the current state} and not on the history of how you got there.
+
+\paragraph{Example: A Simple Weather Model}
+
+Consider a system with three possible weather states:
+\[
+\mathcal{S} = \{ S, C, R \},
+\]
+where
+\begin{itemize}
+  \item \(S\) = Sunny,
+  \item \(C\) = Cloudy,
+  \item \(R\) = Rainy.
+\end{itemize}
+
+\subsection{Transition Probabilities}
+
+We define the transition probability matrix \(P\) for moving from one day's weather to the next. 
+Let us list the rows in the order \(\{S, C, R\}\). 
+Each row of \(P\) corresponds to the probabilities of transitioning \textbf{from} a specific current state \textbf{to} each of the possible next states:
+
+\[
+P 
+\;=\;
+\begin{bmatrix}
+P(S \to S) & P(S \to C) & P(S \to R) \\
+P(C \to S) & P(C \to C) & P(C \to R) \\
+P(R \to S) & P(R \to C) & P(R \to R)
+\end{bmatrix}.
+\]
+
+Assume:
+\[
+P(S \to S) = 0.6, \quad 
+P(S \to C) = 0.3, \quad 
+P(S \to R) = 0.1,
+\]
+\[
+P(C \to S) = 0.4, \quad 
+P(C \to C) = 0.2, \quad 
+P(C \to R) = 0.4,
+\]
+\[
+P(R \to S) = 0.3, \quad 
+P(R \to C) = 0.3, \quad 
+P(R \to R) = 0.4.
+\]
+
+Hence,
+\[
+P 
+\;=\;
+\begin{bmatrix}
+0.6 & 0.3 & 0.1 \\[6pt]
+0.4 & 0.2 & 0.4 \\[6pt]
+0.3 & 0.3 & 0.4
+\end{bmatrix}.
+\]
+
+Notice each row sums to 1:
+\begin{align*}
+  0.6 + 0.3 + 0.1 &= 1.0, \\
+  0.4 + 0.2 + 0.4 &= 1.0, \\
+  0.3 + 0.3 + 0.4 &= 1.0.
+\end{align*}
+This ensures that from any given state, the probabilities of moving to some next state total 1.
+
+\subsection{Evolution Over Time}
+
+We often track a \textit{probability distribution} over the states at each time step. 
+Let \(\pi_t = [\, \pi_t(S),\; \pi_t(C),\; \pi_t(R) \,]\) be a row vector such that:
+\[
+\pi_t(S) = P\bigl(\text{state at time }t = S\bigr), \quad
+\pi_t(C) = P\bigl(\text{state at time }t = C\bigr), \quad
+\pi_t(R) = P\bigl(\text{state at time }t = R\bigr).
+\]
+
+The \textbf{standard formula} for updating the distribution is:
+\[
+\pi_{t+1} 
+\;=\; 
+\pi_t \, P.
+\]
+This means you multiply your current \textit{row vector} by the transition matrix on the right.
+
+\begin{itemize}
+  \item If we know \textbf{Day 0} is \textit{definitely} Sunny, we have:
+  \[
+    \pi_0 = [\, 1,\; 0,\; 0 \,].
+  \]
+
+  \item Then, the distribution for \textbf{Day 1} is:
+  \[
+    \pi_1 
+    = \pi_0 \, P
+    = [\, 1,\; 0,\; 0 \,]
+      \begin{bmatrix}
+      0.6 & 0.3 & 0.1 \\
+      0.4 & 0.2 & 0.4 \\
+      0.3 & 0.3 & 0.4
+      \end{bmatrix}.
+  \]
+  This multiplication gives:
+  \[
+    \pi_1 
+    = [\, 1 \times 0.6 + 0 \times 0.4 + 0 \times 0.3,\;\;
+         1 \times 0.3 + 0 \times 0.2 + 0 \times 0.3,\;\;
+         1 \times 0.1 + 0 \times 0.4 + 0 \times 0.4 \,]
+    = [\, 0.6,\; 0.3,\; 0.1 \,].
+  \]
+  Thus, on Day~1:
+  \[
+    \pi_1(S) = 0.6, \quad \pi_1(C) = 0.3, \quad \pi_1(R) = 0.1,
+  \]
+  which sums to \(1.0\). This means there is a 60\% chance of Sunny, 30\% chance of Cloudy, and 10\% chance of Rainy for Day~1.
+\end{itemize}
+
+In practice, this process continues step by step:
+\[
+\pi_{t+1} = \pi_t \, P, 
+\]
+telling you the probability distribution over \(\{S, C, R\}\) on each subsequent day.
+
+\section{Why Is This ``Markov''?}
+It is called a Markov Process because the probability of the next state (Day~\((t+1)\) weather) depends \textit{only} on the current state (Day~\(t\) weather). It does \textbf{not} depend on the entire history of how the weather evolved prior to Day~\(t\). This property is often referred to as \textit{memorylessness}.
+
+\section{Key Takeaways}
+\begin{itemize}
+  \item A \textbf{finite Markov Process} has a finite set of states and a transition matrix with row sums equal to 1.
+  \item The \textit{Markov property} means: 
+  \[
+   P(S_{t+1} = s_j \;\vert\; S_t = s_i, S_{t-1} = s_{t-1}, \dots) 
+   \;=\;
+   P(S_{t+1} = s_j \;\vert\; S_t = s_i).
+  \]
+  \item You can track the evolution of the process over time by repeatedly multiplying the current \textit{distribution} by the transition matrix:
+  \[
+   \pi_{t+1} = \pi_t \, P.
+  \]
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To help conceptualize Finite Markov Processes, let us consider a simple example of changes in inventory at a store. Assume you are the store manager and that your task is to manage the inventory. Let us focus on the inventory of a particular type of bicycle. Assume that each day there is random (non-negative integer) demand for the bicycle with the probabilities of demand following a Poisson distribution (with Poisson parameter $\lambda \in \mathbb{R}_{\geq 0}$), \ie demand $i$ with probability
 $$f(i) = \frac {e^{-\lambda} \lambda^i} {i!}$$
 Denote $F: \mathbb{Z}_{\geq 0} \rightarrow [0, 1]$ as the Poisson cumulative probability distribution function, i.e.,
  $$F(i) = \sum_{j=0}^i f(j)$$
@@ -98,24 +279,6 @@ Components of RL:
 	\item A model of the environment: This allows inferences to be made about how the environment will behave.
 \end{itemize}
 An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
-
-\begin{definition}[Markov Property]
-	A state $S_t$ is \textbf{Markov} if and only if 
-	$$P[S_{t+1}|S_t, A_t] = P[S_{t+1}|S_t, A_t, S_{t-1},A_{t-1},...]$$
-\end{definition}
-\begin{itemize}
-	\item Actions: a mechanism to influence the environment
-	\item State: specific configurations of the environment
-\end{itemize}
-
-\begin{definition}[Transition Function]
-	$$p(s',r|s,a) = P(S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a)$$
-\end{definition}
-\begin{itemize}
-	\item The way the environment changes as a response to actions is referred to as the state-transition probabilities, or more simply, the transition function, and is denoted by $T(s,a,s')$.
-	\item $\sum_{r\in \mathcal{R}}\sum_{s'\in \mathcal{S}}p(s',r|s,a) = 1, \quad \forall s \in \mathcal{S}, \forall a\in \mathcal{A}(s)$
-	\item $p(s'|s,a)=P(S_t=s'|S_{t-1}=s,A_{t-1}=a)=\sum_{r\in \mathcal{R}}p(s',r|s,a)$
-\end{itemize}
 
 \begin{definition}[Reward Hypothesis]
 	All goals can be described by the maximization of expected cumulative reward.

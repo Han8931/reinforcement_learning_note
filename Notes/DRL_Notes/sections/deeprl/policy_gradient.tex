@@ -142,7 +142,7 @@ Because the advantage is positive, the objective will increase if the action bec
 
 \paragraph{Negative Advantage:} Suppose the advantage for that state-action pair is negative, in which case its contribution to the objective reduces to
 \begin{align}
-	L(s, a, \theta_k, \theta) = \min \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)}, 1-\varepsilon \Bigg) A^{\pi_{\theta_k}}(s,a).
+	L(s, a, \theta_k, \theta) = \max \Bigg(\frac{\pi_{\theta}\left(a | s\right)}{\pi_{\theta_{\text {k}}}\left(a | s\right)}, 1-\varepsilon \Bigg) A^{\pi_{\theta_k}}(s,a).
 	\label{eq:ppo_negative}
 \end{align}
 

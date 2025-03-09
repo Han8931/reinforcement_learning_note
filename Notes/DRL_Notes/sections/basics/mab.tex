@@ -1,10 +1,17 @@
 \section{Multi-Armed Bandits}
 The name \textit{bandit} comes from one-armed bandits, a nickname for slot machines.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{./images/slot.pdf}
+	\caption{Multi-armed bandits.}
+\end{figure}
 \begin{itemize}
 	\item When the lever of a slot machine is pulled it gives a random reward coming from a probability distribution specific to that machine.
 	\item Although the machines look identical, their reward probability distributions are different. 
 	\item In each turn, gamblers need to decide whether to play the machine that has given the highest average reward so far, or to try another machine. 
+	\item In terms of RL, the \textbf{gamblers are agents and the machines are environments}. 
 \end{itemize}
+
 Now, you face a dilemma:
 \begin{enumerate}
 	\item Try different machines to figure out which one pays the most (exploration).
@@ -16,13 +23,15 @@ Note that bandit problems are \textit{stateless}. \textbf{Each arm has a fixed d
 
 You can view the bandit problems as Markov decision processes where all states are terminal. In that case, all decision sequences have a length of 1 and subsequent pulls don't influence each other.
 
-In our \textit{multi-armed bandit problem} (MAB) (or $k$-armed bandit problem), each of the $k$ actions has an expected or mean reward given that that action is selected: let us call this the \textit{value} of that action. We denote the action selected on time step $t$ as $A_t$, and the corresponding reward as $R_t$. The value then of an arbitrary action $a$, denoted $q_*(a)$ (\cf the $q$ stands for the quality of an action), is the expected reward given that $a$ is selected:
-$$q_*(a) = \mathbb{E}[R_t|A_t=a].$$
-Since we do not know which action is the best, we have to estimate the value of actions $a$ at time step $t$, $Q_t(a)$.
+In our \textit{multi-armed bandit problem} (MAB) (or $k$-armed bandit problem), each of the $k$-th actions has an expected or mean reward given that that action is selected: let us call this the \textit{value} of that action (\ie action value). We denote the action selected on time step $t$ as $A_t$, and the corresponding reward as $R_t$. The value then of an arbitrary action $a$, denoted $q_*(a)$ (\cf the $q$ stands for the quality of an action), is the expected reward given that $a$ is selected:
+\begin{align*}
+	q_*(a) = \mathbb{E}[R_t|A_t=a].
+\end{align*}
+Since we do not know which action is the best, we have to estimate the value of actions $a$ at time step $t$, $Q_t(a)$. Note that we use $Q(A)$ for estimated values. 
 
-Let's say there are two slot machines and we know their distributions. Then, we can compute their expected values.
+Let's say there are two slot machines and we know their distributions of rewards (\ie the number of coins we can get). Then, we can compute their expected values.
 \begin{table}[h]
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.6\textwidth}
 \centering
 \begin{tabular}{lllll}
 \toprule
@@ -33,7 +42,7 @@ Prob     & 0.3 & 0.2 & 0.1 & 0.4\\
 \end{tabular}
 \caption{Slot Machine 1}
 \end{minipage}%
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}{0.3\textwidth}
 \centering
 \begin{tabular}{lllll}
 \toprule
@@ -49,7 +58,7 @@ Prob     & 0.2 & 0.3 & 0.4 & 0.1\\
 	\mathbb{E}[S_1]&= 0*0.3+1*0.2+2*0.1+3*0.4 = 1.6 \\
 	\mathbb{E}[S_2]&= 0*0.2+1*0.3+2*0.4+3*0.1 = 1.4
 \end{align*}
-We can say that the average number of coins we can get from the slot machine 1 is higher than that of the slot machine 2. This tells us that we should chose the slot machine 1 to maximize our rewards. 
+We can say that the slot machine 1 has a higher reward than that of the slot machine 2. This tells us that we should chose the slot machine 1 to maximize our rewards. 
 
 However, we have no access to the true expected value of the slot machines in practice. Thus, we have to estimate them heuristically. 
 
@@ -59,7 +68,6 @@ One natural way to estimate this is by averaging the rewards actually received: 
 \begin{align*}
 	Q_t(a) = \frac{\sum_{t=1}^{t-1}R_i \cdot \mathds{1}_{A_i=a}}{\sum_{t=1}^{t-1}\mathds{1}_{A_i=a}}
 \end{align*}
-
 In other words, the average reward (action value) observed before the $n$-th selection of this action is $Q_n = (R_1+\dots+R_{n-1})/(n-1)$. % Note that the $Q$ stands for the quality of the action. 
 
 Then, the simplest action selection rule is to select one of the actions with the highest estimated value, which is a \textit{greedy action selection} method represented as follows:
@@ -85,7 +93,17 @@ $$NewEstimate \leftarrow OldEstimate + StepSize \underbrace{\Big[Target - OldEst
 The target is presumed to indicate a desirable direction in which to move, though it may be noisy. So, we adjust our current estimate, $Q_n$, in the direction of the error that we calculate based on the latest observed reward, $R_n-Q_n$, with a step size of $1/n$   and obtain  a new estimate, $Q_{n+1}$ . 
 
 
+\subsection{Exponential Moving Average}
 
+Let's replace $1/n$ with $\alpha$:
+\begin{align*}
+	Q_{n+1} &=  Q_n + \alpha \Big[R_n - Q_n \Big]\\
+			&= \alpha R_n + (1-\alpha)Q_n\\
+			&= \alpha R_n + (1-\alpha)[\alpha R_{n-1} + (1-\alpha)Q_{n-1}]\\
+			&= \alpha R_n + \alpha(1-\alpha)R_{n-1} + (1-\alpha)^2Q_{n-1}\\
+			&\,\,\, \vdots
+\end{align*}
+If we set $0<\alpha<1$, we can weight more on recent rewards. For non-stationary problem, the exponential moving average would be more suitable, since the distribution changes over time. Thus, we have to put more weight on recent rewards. 
 
 
 

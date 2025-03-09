@@ -6,24 +6,6 @@ A \textit{Markov Process} (often called a \textit{Markov Chain}) is a mathematic
 
 In a \textit{Finite Markov Process}, there are only a finite number of possible states. 
 
-A Markov Process can be defined as follows:
-\begin{itemize}
-  \item A finite set of states, denoted by \( \mathcal{S} = \{ s_1, s_2, \dots, s_n \} \).
-  \item A transition probability matrix \( P \), where each entry \( P(i \to j) \) represents:
-	  \begin{align*}
-			P(s_{t+1} = s_j \mid s_t = s_i).
-	  \end{align*}
-\end{itemize}
-
-\begin{definition}[Markov Property]
-	A state $S_t$ is \textbf{Markov} if and only if 
-	$$P[S_{t+1}|S_t, A_t] = P[S_{t+1}|S_t, A_t, S_{t-1},A_{t-1},...]$$
-\end{definition}
-\begin{itemize}
-	\item Actions: a mechanism to influence the environment
-	\item State: specific configurations of the environment
-\end{itemize}
-
 \begin{definition}[Transition Function]
 	$$p(s',r|s,a) = P(S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a)$$
 \end{definition}
@@ -31,6 +13,10 @@ A Markov Process can be defined as follows:
 	\item The way the environment changes as a response to actions is referred to as the state-transition probabilities, or more simply, the transition function, and is denoted by $T(s,a,s')$.
 	\item $\sum_{r\in \mathcal{R}}\sum_{s'\in \mathcal{S}}p(s',r|s,a) = 1, \quad \forall s \in \mathcal{S}, \forall a\in \mathcal{A}(s)$
 	\item $p(s'|s,a)=P(S_t=s'|S_{t-1}=s,A_{t-1}=a)=\sum_{r\in \mathcal{R}}p(s',r|s,a)$
+		\begin{itemize}
+			\item An action $a$ is chosen at a state $s$ and move to a state $s'$
+			\item The next state $s'$ depends only on the previous state $s$ and an action $a$.
+		\end{itemize}
 \end{itemize}
 
 The \textit{Markov property} states that 
@@ -41,194 +27,10 @@ P(s_{t+1} = s_j \,\big\vert\, s_t = s_i).
 \]
 In simple terms, \textit{the next state depends only on the current state} and not on the history of how you got there.
 
-\paragraph{Example: A Simple Weather Model}
-
-Consider a system with three possible weather states:
-\[
-\mathcal{S} = \{ S, C, R \},
-\]
-where
-\begin{itemize}
-  \item \(S\) = Sunny,
-  \item \(C\) = Cloudy,
-  \item \(R\) = Rainy.
-\end{itemize}
-
-\subsection{Transition Probabilities}
-
-We define the transition probability matrix \(P\) for moving from one day's weather to the next. 
-Let us list the rows in the order \(\{S, C, R\}\). 
-Each row of \(P\) corresponds to the probabilities of transitioning \textbf{from} a specific current state \textbf{to} each of the possible next states:
-
-\[
-P 
-\;=\;
-\begin{bmatrix}
-P(S \to S) & P(S \to C) & P(S \to R) \\
-P(C \to S) & P(C \to C) & P(C \to R) \\
-P(R \to S) & P(R \to C) & P(R \to R)
-\end{bmatrix}.
-\]
-
-Assume:
-\[
-P(S \to S) = 0.6, \quad 
-P(S \to C) = 0.3, \quad 
-P(S \to R) = 0.1,
-\]
-\[
-P(C \to S) = 0.4, \quad 
-P(C \to C) = 0.2, \quad 
-P(C \to R) = 0.4,
-\]
-\[
-P(R \to S) = 0.3, \quad 
-P(R \to C) = 0.3, \quad 
-P(R \to R) = 0.4.
-\]
-
-Hence,
-\[
-P 
-\;=\;
-\begin{bmatrix}
-0.6 & 0.3 & 0.1 \\[6pt]
-0.4 & 0.2 & 0.4 \\[6pt]
-0.3 & 0.3 & 0.4
-\end{bmatrix}.
-\]
-
-Notice each row sums to 1:
-\begin{align*}
-  0.6 + 0.3 + 0.1 &= 1.0, \\
-  0.4 + 0.2 + 0.4 &= 1.0, \\
-  0.3 + 0.3 + 0.4 &= 1.0.
-\end{align*}
-This ensures that from any given state, the probabilities of moving to some next state total 1.
-
-\subsection{Evolution Over Time}
-
-We often track a \textit{probability distribution} over the states at each time step. 
-Let \(\pi_t = [\, \pi_t(S),\; \pi_t(C),\; \pi_t(R) \,]\) be a row vector such that:
-\[
-\pi_t(S) = P\bigl(\text{state at time }t = S\bigr), \quad
-\pi_t(C) = P\bigl(\text{state at time }t = C\bigr), \quad
-\pi_t(R) = P\bigl(\text{state at time }t = R\bigr).
-\]
-
-The \textbf{standard formula} for updating the distribution is:
-\[
-\pi_{t+1} 
-\;=\; 
-\pi_t \, P.
-\]
-This means you multiply your current \textit{row vector} by the transition matrix on the right.
-
-\begin{itemize}
-  \item If we know \textbf{Day 0} is \textit{definitely} Sunny, we have:
-  \[
-    \pi_0 = [\, 1,\; 0,\; 0 \,].
-  \]
-
-  \item Then, the distribution for \textbf{Day 1} is:
-  \[
-    \pi_1 
-    = \pi_0 \, P
-    = [\, 1,\; 0,\; 0 \,]
-      \begin{bmatrix}
-      0.6 & 0.3 & 0.1 \\
-      0.4 & 0.2 & 0.4 \\
-      0.3 & 0.3 & 0.4
-      \end{bmatrix}.
-  \]
-  This multiplication gives:
-  \[
-    \pi_1 
-    = [\, 1 \times 0.6 + 0 \times 0.4 + 0 \times 0.3,\;\;
-         1 \times 0.3 + 0 \times 0.2 + 0 \times 0.3,\;\;
-         1 \times 0.1 + 0 \times 0.4 + 0 \times 0.4 \,]
-    = [\, 0.6,\; 0.3,\; 0.1 \,].
-  \]
-  Thus, on Day~1:
-  \[
-    \pi_1(S) = 0.6, \quad \pi_1(C) = 0.3, \quad \pi_1(R) = 0.1,
-  \]
-  which sums to \(1.0\). This means there is a 60\% chance of Sunny, 30\% chance of Cloudy, and 10\% chance of Rainy for Day~1.
-\end{itemize}
-
-In practice, this process continues step by step:
-\[
-\pi_{t+1} = \pi_t \, P, 
-\]
-telling you the probability distribution over \(\{S, C, R\}\) on each subsequent day.
-
-\section{Why Is This ``Markov''?}
-It is called a Markov Process because the probability of the next state (Day~\((t+1)\) weather) depends \textit{only} on the current state (Day~\(t\) weather). It does \textbf{not} depend on the entire history of how the weather evolved prior to Day~\(t\). This property is often referred to as \textit{memorylessness}.
-
-\section{Key Takeaways}
-\begin{itemize}
-  \item A \textbf{finite Markov Process} has a finite set of states and a transition matrix with row sums equal to 1.
-  \item The \textit{Markov property} means: 
-  \[
-   P(S_{t+1} = s_j \;\vert\; S_t = s_i, S_{t-1} = s_{t-1}, \dots) 
-   \;=\;
-   P(S_{t+1} = s_j \;\vert\; S_t = s_i).
-  \]
-  \item You can track the evolution of the process over time by repeatedly multiplying the current \textit{distribution} by the transition matrix:
-  \[
-   \pi_{t+1} = \pi_t \, P.
-  \]
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-To help conceptualize Finite Markov Processes, let us consider a simple example of changes in inventory at a store. Assume you are the store manager and that your task is to manage the inventory. Let us focus on the inventory of a particular type of bicycle. Assume that each day there is random (non-negative integer) demand for the bicycle with the probabilities of demand following a Poisson distribution (with Poisson parameter $\lambda \in \mathbb{R}_{\geq 0}$), \ie demand $i$ with probability
-$$f(i) = \frac {e^{-\lambda} \lambda^i} {i!}$$
-Denote $F: \mathbb{Z}_{\geq 0} \rightarrow [0, 1]$ as the Poisson cumulative probability distribution function, i.e.,
- $$F(i) = \sum_{j=0}^i f(j)$$
- \begin{itemize}
-	 \item Assume you have storage capacity for at most $C \in \mathbb{Z}_{\geq 0}$ bicycles in your store. 
-	 \item Each evening at 6pm when your store closes, you have the choice to order a certain number of bicycles from your supplier (including the option to not order any bicycles on a given day). 
-	 \item The ordered bicycles will arrive 36 hours later (at 6am the day after the day after you order—we refer to this as delivery lead time of 36 hours). 
-	 \item Denote the State at 6pm store-closing each day as $(\alpha, \beta)$, where $\alpha$ is the inventory in the store (referred to as On-Hand Inventory at 6pm) and $\beta$ is the inventory on a truck from the supplier (that you had ordered the previous day) that will arrive in your store the next morning at 6am ($\beta$ is referred to as On-Order Inventory at 6pm). Due to your storage capacity constraint of at most $C$ bicycles, your ordering policy is to order $C-(\alpha + \beta)$ if $\alpha + \beta < C$ and to not order if $\alpha + \beta \geq C$. The precise sequence of events in a 24-hour cycle is:
- \end{itemize}
- 
-In sum,
-\begin{itemize}
-	\item Observe the $(\alpha, \beta)$ \textit{State} at 6pm store-closing (call this state $S_t$).
-	\item Immediately order according to the ordering policy described above.
-	\item Receive bicycles at 6am if you had ordered 36 hours ago.
-	\item Open the store at 8am.
-	\item Experience random demand from customers according to demand probabilities stated above (number of bicycles sold for the day will be the minimum of demand on the day and inventory at store opening on the day).
-	\item Close the store at 6pm and observe the state (this state is $S_{t+1}$).
-\end{itemize}
-
-If we let this process run for a while, in steady-state, we ensure that $\alpha + \beta \leq C$. So to model this process as a Finite Markov Process, we shall only consider the steady-state (finite) set of states
-$$\mathcal{S} = \{(\alpha, \beta) | \alpha \in \mathbb{Z}_{\geq 0}, \beta \in \mathbb{Z}_{\geq 0}, 0 \leq \alpha + \beta \leq C\}$$
-So restricting ourselves to this finite set of states, our order quantity equals $C - (\alpha + \beta)$ when the state is $(\alpha, \beta)$.
-
-If the current state $S_t$ is $(\alpha, \beta)$, there are only $\alpha + \beta + 1$ possible next states $S_{t+1}$ as follows\footnotemark:
-$$(\alpha + \beta - i, C - (\alpha + \beta)) \text{ for } i =0, 1, \ldots, \alpha + \beta$$
-with transition probabilities governed by the Poisson probabilities of demand as follows:
-\begin{align*}
-	&\mathcal{P}((\alpha, \beta), (\alpha + \beta - i, C - (\alpha + \beta))) = f(i)\text{ for } 0 \leq i \leq \alpha + \beta - 1\\
-	&\mathcal{P}((\alpha, \beta), (0, C - (\alpha + \beta))) = \sum_{j=\alpha+\beta}^{\infty} f(j) = 1 - F(\alpha + \beta - 1)
-\end{align*}
-\begin{itemize}
-	\item $P((\alpha, \beta), (\alpha + \beta - i, C - (\alpha + \beta)))$ is the probability of transitioning from state $(\alpha, \beta)$ to $(\alpha + \beta - i, C - (\alpha + \beta))$ when demand equals $i$. The probability $f(i)$ is based on the Poisson demand distribution.
-	\item If demand exceeds $\alpha + \beta$, the system transitions to a state where all on-hand inventory is depleted:
-		\begin{align*}
-			\mathbb{P}((\alpha, \beta), (0, C - (\alpha + \beta))) = 1 - F(\alpha + \beta - 1)
-		\end{align*}
-	\item $1 - F(\alpha + \beta - 1)$ gives the probability that the demand is greater than or equal to $\alpha+\beta$ (\ie demand is large enough to deplete the entire on-hand inventory).
-\end{itemize}
-\footnotetext{Since $\alpha+\beta=C$, there are only $C+1$ states. Also, the number of bicycles is the sum of the number of bicycles in the inventory and the truck. Thus, the next state's bicycles is $\alpha+\beta+i$}
-
 
 \section{Markov Reward Process}
 % \label{sec:}
-The reason we covered Markov Processes is that we want to make our way to Markov Decision Processes (the framework for Reinforcement Learning algorithms) by adding incremental features to Markov Processes. Now we cover an intermediate framework between Markov Processes and Markov Decision Processes, known as Markov Reward Processes. We essentially just include the notion of a numerical reward to a Markov Process each time we transition from one state to the next. These rewards are random, and all we need to do is to specify the probability distributions of these rewards as we make state transitions.
+The reason we covered Markov Processes is that we want to make our way to Markov Decision Processes (the framework for Reinforcement Learning algorithms) by adding incremental features to Markov Processes. Now we cover an intermediate framework between Markov Processes and Markov Decision Processes, known as \textit{Markov Reward Processes}. We essentially just include the notion of a numerical reward to a Markov Process each time we transition from one state to the next. These rewards are random, and all we need to do is to specify the probability distributions of these rewards as we make state transitions.
 
 The main purpose of Markov Reward Processes is to calculate how much reward we would accumulate (in expectation, from each of the non-terminal states) if we let the process run indefinitely, bearing in mind that future rewards need to be discounted appropriately (otherwise, the sum of rewards could blow up to $\infty$). In order to solve the problem of calculating expected accumulative rewards from each non-terminal state, we will first set up some formalism for Markov Reward Processes, develop some (elegant) theory on calculating rewards accumulation, write plenty of code (based on the theory), and apply the theory and code to the simple inventory example (which we will embellish with rewards equal to negative of the costs incurred at the store).
 
@@ -272,11 +74,11 @@ The general framework of MDPs (representing environments as MDPs) allows us to m
 
 Components of RL:
 \begin{itemize}
-	\item An agent
-	\item A policy
-	\item A reward signal: what is good in an immediate sense.
-	\item A value function: what is good in the long run.
-	\item A model of the environment: This allows inferences to be made about how the environment will behave.
+	\item Agent: a person or thing that takes an active role
+	\item Policy: a strategy or set of rules that an agent uses to decide which action to take in a given state
+	\item Reward signal: what is good in an immediate sense.
+	\item Value function: what is good in the long run.
+	\item Model: This allows inferences to be made about how the environment will behave.
 \end{itemize}
 An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
 

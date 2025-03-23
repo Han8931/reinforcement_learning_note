@@ -19,6 +19,8 @@
     \end{itemize}
 \end{itemize}
 
+
+
 \subsection{Sequential Decision Making}
 \begin{itemize}
     \item \textbf{Goal}: Select actions that maximize the total future reward.
@@ -68,6 +70,13 @@ RL agents can be classified as follows:
         \end{itemize}
     \end{enumerate}
 \end{itemize}
+
+\subsection{Supervised Learning v.s. Reinforcement Learning}
+
+The data form of RL is in the form of states, actions, and rewards: \((s, a, r, s')\), whereas that of SL has $(x, y)$. When the problem requires a sequence of decisions rather than a single labeled prediction, RL is often more suitable. SL typically outputs a single label or value at a time (e.g., a single classification). RL optimizes a policy for long-term reward and can handle dependencies among actions across multiple time steps. Also, the agent must explore actions that are not immediately optimal to discover higher long-term rewards, while also exploiting known good actions. SL usually does not deal with exploration in the same sense, because it is based on a labeled training set where the correct labels or targets are already provided.
+
+Moreover, many real-world tasks do not have direct or well-defined labels for each possible state–action pair. Instead, they have overall performance metrics or success criteria. RL can learn which actions lead to successful outcomes purely from a reward signal, eliminating the need for manually labeled data. 
+
 
 \section{Markov Chain}
 \begin{itemize}

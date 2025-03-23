@@ -80,7 +80,7 @@ Components of RL:
 	\item Value function: what is good in the long run.
 	\item Model: This allows inferences to be made about how the environment will behave.
 \end{itemize}
-An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
+An MDP can be fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor.
 
 \begin{definition}[Reward Hypothesis]
 	All goals can be described by the maximization of expected cumulative reward.
@@ -112,10 +112,13 @@ An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where
 \begin{definition}[Discount Factor, $\gamma$]
 	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{T} $$
 \end{definition}
-
 \begin{itemize}
 	\item The sum of all rewards obtained during the course of an episode is referred to as the \textit{return}, $G_t$.
-	\item Episodic tasks: A task with an ending.  
+\end{itemize}
+
+An MDP problem can be categorized either an \textit{episodic task} or a \textit{continuous task}: 
+\begin{itemize}
+	\item \textbf{Episodic tasks}: A task with an ending.  
 		\begin{align*}
 			G_t &= R_{t+1} + R_{t+2} + \cdots + R_{T}\\
 				&= R_{t+1}+\gamma G_{t+1}
@@ -123,7 +126,7 @@ An MDP is fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, where
 		\begin{itemize}
 			\item \eg Go or Chess
 		\end{itemize}
-	\item Continuous tasks: $G_t = R_{t+1} + \gamma R_{t+2} +  \gamma^2 R_{t+3} \cdots =\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1}.$
+	\item \textbf{Continuous tasks}: $G_t = R_{t+1} + \gamma R_{t+2} +  \gamma^2 R_{t+3} \cdots =\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1}.$
 		\begin{itemize}
 			\item \eg Warehouse management or stock market prediction
 			\item $\gamma=0$: myopic evaluation
@@ -163,7 +166,7 @@ Then, we can compute the return:
 
 \section{Policies and Value Functions}
 \begin{itemize}
-	\item Policies are universal plans, which provides all possible plans for all states. 
+	\item \textit{Policies} are universal plans, which provides all possible plans for all states. 
 		\begin{itemize}
 			\item Plans are not enough to fully describe an environment in stochastic environments.
 				\begin{itemize}
@@ -173,17 +176,17 @@ Then, we can compute the return:
 			\item Policy can be stochastic or deterministic.
 			\item A policy is a function that prescribes actions to take for a given non-terminal state.
 		\end{itemize}
+	\item Formally, a policy is a mapping from states to probabilities of selecting each possible action. It can be defined 
+		\begin{align*}
+			\pi(a|s).
+		\end{align*}
 \end{itemize}
 
-Formally, a policy is a mapping from states to probabilities of selecting each possible action. It can be defined 
-\begin{align*}
-	\pi(a|s).
-\end{align*}
 
 
 \subsection{The State-Value Functions}
 
-The goal of an agent is to maximize a return. However, the agent is likely to behave stochastically under an uncertain environment. Thus, it is critical to stochastically model the states and the actions. To handle the stochastic nature, we need to estimate the expected values of the returns which is given by
+\textbf{The goal of an agent is to maximize a return}. However, the agent is likely to behave stochastically under an uncertain environment. Thus, it is critical to stochastically model the states and the actions. To handle the stochastic nature, we need to estimate the expected values of the returns which is given by
 \begin{align*}
 	v_{\pi}(s) &= \mathbb{E}_\pi[G_t|S_t=s]
 \end{align*}

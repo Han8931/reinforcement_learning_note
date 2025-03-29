@@ -27,6 +27,7 @@ class Agent:
 
     def update(self, action, reward):
         self.ns[action] += 1
+
         # Incremental approach
         self.Qs[action] += (reward - self.Qs[action]) / self.ns[action] 
 

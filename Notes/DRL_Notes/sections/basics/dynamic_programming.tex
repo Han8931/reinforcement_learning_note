@@ -58,12 +58,13 @@ the changes in state values are sufficiently small in successive iterations.
 Our reason for computing the value function for a policy is to help find better policies. The goal of policy improvement is to modify the policy to make it better with respect to the value function. This is done by selecting actions that are known to be better, according to the current value estimates.
 
 \begin{itemize}
-	\item The key is the action-value function, $q_\pi(s,a)$. To improve a policy, we use a state-value function and an MDP to get a one-step look-ahead and determine which of the actions lead to the highest value. We can selects the action that maximizes the action-value function in a greedy way: 
+	\item The key is the action-value function, $q_\pi(s,a)$. To improve a policy, we use a state-value function and an MDP to get a one-step look-ahead and determine which of the actions lead to the highest value. We can selects the action that \textit{maximizes the action-value function in a greedy way}: 
 		\begin{align*}
 			\pi'(s) &= \argmax_a q_\pi(s,a)\\
 			&= \argmax_a \sum_{s'}p(s'|s,a)[r + \gamma v_\pi(s')].
 		\end{align*}
 	\item The greedy policy takes the action that looks best in the short term according to $v_\pi$.
+	\item If the policy is not going to be updated, then the policy is the optimal policy.
 \end{itemize}
 
 The process of policy evaluation and improvement is often repeated iteratively until the policy converges to an optimal policy that maximizes the expected return in the given environment. This iterative process is the basis for algorithms like \textit{policy iteration} and \textit{value iteration} in reinforcement learning.

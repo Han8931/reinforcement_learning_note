@@ -96,4 +96,3 @@ plt.xlabel('Steps')
 plt.plot(avg_rates)
 plt.show()
 
-

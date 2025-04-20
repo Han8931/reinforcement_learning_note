@@ -1,4 +1,7 @@
+import numpy as np
 from collections import defaultdict
+
+from numpy import argmax
 from grid_world import GridWorld
 
 def eval_onestep(pi, V, env, gamma=0.9):
@@ -39,5 +42,22 @@ pi = defaultdict(lambda: {0:0.25, 1:0.25, 2:0.25, 3:0.25})
 V = defaultdict(lambda: 0)
 V = policy_eval(pi, V, env, gamma)
 
-for key, value in V.items():
-    print(f"{key}: {value:.2f}")
+# for key, value in V.items():
+#     print(f"{key}: {value:.2f}")
+
+def argmax(d):
+    max_value = max(d.values())
+    max_key = 0
+    for key, value in d.items():
+        if value==max_value:
+            max_key = key
+    return max_key
+
+action_values = {0:0.1, 1:-0.3, 2:9.9, 3:-1.3}
+max_action = max(action_values, key=action_values.get)
+print(max_action)
+
+def greedy_policy(V, env, gamma):
+    pi = {}
+    for state in env.states():
+        action_values = {}

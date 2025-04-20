@@ -39,9 +39,9 @@ The main purpose of Markov Reward Processes is to calculate how much reward we w
 
 We'd want to identify non-terminal states with large expected returns and those with small expected returns. This, in fact, is the main problem involving a Markov Reward Process—to compute the \textit{Expected Return} associated with each non-terminal state in the Markov Reward Process. Formally, we are interested in computing the \textit{Value Function}, which is given by
 \begin{align*}
-	v(s)&=\mathbb{E}[G_t|S_t=s]\\
-		&=\mathbb{E}\left[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s\right]\\
-		&= \sum_{s',r}p(s',r|s)[r+\gamma v(s')].
+	v(s)=\mathbb{E}_\pi[G_t|S_t=s]
+		% &=\mathbb{E}_\pi\left[\sum_{k=0}^\infty \gamma^kR_{t+k+1}|S_t=s\right]\\
+		% &= \sum_{s',r}p(s',r|s)[r+\gamma v(s')].
 \end{align*} 
 
 \begin{figure}[t]
@@ -50,14 +50,15 @@ We'd want to identify non-terminal states with large expected returns and those 
 	\caption{MRP diagram}
 	\label{fig:mrp_diagram}
 \end{figure}
-It is easier to understand the equation with a diagram (\cf \Cref{fig:mrp_diagram})
-Note that a MRP can be obtained when we fix a policy $\pi$ for your MDP. 
+An MRP can be fully characterized by a $\langle S,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and discount factor $\gamma\in[0,1]$.
 
-In matrix form,
-$$v = PR+\gamma Pv.$$
-We can solve this system by
-$$v = (I-\gamma P)^{-1}PR$$
-An MRP is fully characterized by a $\langle S,P,R,\gamma \rangle$ tuple, where $S$ is a set of states, $P$ is a transition probability matrix, $R$ is a reward function, and $\gamma\in[0,1]$  is a discount factor. I will explain more about the discount factor later. 
+% It is easier to understand the equation with a diagram (\cf \Cref{fig:mrp_diagram})
+% Note that a MRP can be obtained when we fix a policy $\pi$ for your MDP. 
+
+% In matrix form,
+% $$v = PR+\gamma Pv.$$
+% We can solve this system by
+% $$v = (I-\gamma P)^{-1}PR$$
 
 
 \section{Markov Decision Process}
@@ -110,7 +111,7 @@ An MDP can be fully characterized by a $\langle S,A,P,R,\gamma \rangle$ tuple, w
 \end{itemize}
 
 \begin{definition}[Discount Factor, $\gamma$]
-	$$G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots+\gamma^{T-1} R_{T} $$
+	$$G_t = R_{t}+\gamma R_{t+1}+\gamma^2 R_{t+2}+\cdots$$
 \end{definition}
 \begin{itemize}
 	\item The sum of all rewards obtained during the course of an episode is referred to as the \textit{return}, $G_t$.
@@ -120,13 +121,13 @@ An MDP problem can be categorized either an \textit{episodic task} or a \textit{
 \begin{itemize}
 	\item \textbf{Episodic tasks}: A task with an ending.  
 		\begin{align*}
-			G_t &= R_{t+1} + R_{t+2} + \cdots + R_{T}\\
-				&= R_{t+1}+\gamma G_{t+1}
+			G_t &= R_{t} + R_{t+1} + \cdots + R_{T}\\
+				&= R_{t}+\gamma G_{t+1}
 		\end{align*}
 		\begin{itemize}
 			\item \eg Go or Chess
 		\end{itemize}
-	\item \textbf{Continuous tasks}: $G_t = R_{t+1} + \gamma R_{t+2} +  \gamma^2 R_{t+3} \cdots =\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1}.$
+	\item \textbf{Continuous tasks}: $G_t = R_{t} + \gamma R_{t+1} +  \gamma^2 R_{t+2} \cdots =\sum_{k=0}^{\infty} \gamma^{k} R_{t+k}.$
 		\begin{itemize}
 			\item \eg Warehouse management or stock market prediction
 			\item $\gamma=0$: myopic evaluation
@@ -197,7 +198,7 @@ Almost all reinforcement learning algorithms involve estimating \textit{value fu
 	The state-value function $v(s)$ for policy $\pi$ of an Markov Reward Process is the expected return starting from state $s$
 	\begin{align*}
 		v_{\pi}(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
-				   &= \mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}
+				   &= \mathbb{E}_\pi \Bigg[\sum_{k=0}^\infty \gamma^kR_{t+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}
 				   % &= \mathbb{E}_\pi \Bigg[R_{t+1}+\gamma G_{t+1}\sum_{k=1}^\infty \gamma^kR_{t+1+k}\Big|S_t=s\Bigg], \quad \forall s\in \mathcal{S}\\
 	\end{align*}
 	$$$$
@@ -216,9 +217,9 @@ Almost all reinforcement learning algorithms involve estimating \textit{value fu
 The state-value function satisfies the \textit{Bellman equation}, which expresses the relationship between the value of a state and the values of its successor states:
 \begin{align}
 	v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t=s]\\
-	& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s]\\
+	& = \mathbb{E}_\pi[R_{t} + \gamma G_{t+1}|S_t=s]\\
 	% & = \mathbb{E}_\pi[R_{t+1} + \gamma v(s_{t+1})|S_t=s]\\
-	& = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')],\, \forall s \in \mathcal{S}.
+	& = \sum_{a}\pi(a|s)\sum_{s'}p(s'|s,a)[r + \gamma v_\pi(s')],\, \forall s \in \mathcal{S}.
 	\label{eq:state_value_bellman}
 \end{align}
 For better understanding, let's look at the \Cref{fig:state_value_diagram}. Starting from state $s$, the root node at the top, the agent could take any of some set of actions (three actions are shown in the diagram), based on its policy $\pi$. From each of these, the environment could respond with one of several next states, $s'$ (two states are shown in the figure), along with a reward, $r$, depending on its dynamics given by the function $p$. The Bellman equation averages over all the possibilities, weighting each by its probability of occurring. \textbf{It states that the value of the start state must equal (discounted) the value of the expected next state, plus the reward expected along the way}. 
@@ -253,15 +254,15 @@ The derivation of \Cref{eq:state_value_bellman} is given in \Cref{appendix:bellm
 
 \begin{definition}[The Action-Value Function, $Q$]
 	The action-value function $q_{\pi}(s,a)$ for policy $\pi$ is the expected return starting from state $s$, tacking action $a$ under policy $\pi$
-	$$q_{\pi}(s,a) = \mathbb{E}_\pi[G_t|S_t=s, A_t=a]=\mathbb{E}_\pi\Bigg[\sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\Bigg| S_t=s, A_t=a\Bigg]$$
+	$$q_{\pi}(s,a) = \mathbb{E}_\pi[G_t|S_t=s, A_t=a]=\mathbb{E}_\pi\Bigg[\sum_{k=0}^{\infty}\gamma^k R_{t+k}\Bigg| S_t=s, A_t=a\Bigg]$$
 \end{definition}
 
 \begin{itemize}
 	\item The Bellman equation for the action-value function is given by
 	\begin{align*}
 		q_{\pi}(s,a) &= \mathbb{E}_\pi[G_t|S_t=s, A_t=a]\\
-		& = \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s, A_t=a]\\
-		& = \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')]
+		& = \mathbb{E}_\pi[R_{t} + \gamma G_{t+1}|S_t=s, A_t=a]\\
+		& = \sum_{s'}p(s'|s,a)[r + \gamma v_\pi(s')]
 	\end{align*}
 	\item Notice that we do not weight over actions because we are interested only in a specific action.
 	\item The action-value function is crucial for understanding the value of different state-action pairs in a Markov Decision Process (MDP) and is used in various reinforcement learning algorithms, such as Q-learning and deep Q-networks (DQN).
@@ -307,38 +308,30 @@ Solving a reinforcement learning task means, roughly, finding a policy that achi
 	The optimal state-value function $v_{*}(s)$ is the maximum value over all policies
 	$$v_{*}(s) = \max_{\pi} v_{\pi}(s),\quad \forall s\in \mathcal{S}.$$
 \end{definition}
-
-\begin{itemize}
-	\item The optimal state-value function can be obtained as follows:
-%		\begin{align*}
-%			v_{*}(s)&= \max_{a\in\mathcal{A}(s)} q_*(s,a)\\
-%			&= \max_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_*(s')]
-%		\end{align*}
-
-		\begin{align*}
-			v_*(s) &= \max_{a\in \mathcal{A}(s)}q_{\pi_*}(s,a)\\
-			&= \max_a \mathbb{E}_{\pi_*}[G_t| S_t=s, A_t=a]\\
-			&= \max_a \mathbb{E}_{\pi_*}[R_{t+1}+\gamma G_{t+1}| S_t=s, A_t=a]\\
-			&= \max_a \mathbb{E}_{\pi_*}[R_{t+1}+\gamma v_*(S_{t+1})| S_t=s, A_t=a]\\
-			&= \max_a \sum_{r,s'}p(s',r|s,a)\Big[r + \gamma  v_*(s')\Big] 
-	\end{align*}
-
-\end{itemize}
+The optimal state-value function can be obtained as follows:
+\begin{align*}
+	v_*(s) &= \max_{a\in \mathcal{A}(s)}q_{\pi_*}(s,a)\\
+	&= \max_a \mathbb{E}_{\pi_*}[G_t| S_t=s, A_t=a]\\
+	% &= \max_a \mathbb{E}_{\pi_*}[R_{t}+\gamma G_{t+1}| S_t=s, A_t=a]\\
+	% &= \max_a \mathbb{E}_{\pi_*}[R_{t}+\gamma v_*(S_{t+1})| S_t=s, A_t=a]\\
+	&= \max_a \sum_{s'}p(s',r|s,a)\Big[r + \gamma  v_*(s')\Big] 
+\end{align*}
+Note that the optimal policy can be considered as a deterministic, so we will choose the best action at any state. Thus, $\pi$ is not stochastic anymore. 
 
 \begin{definition}[Optimal Action-Value Function]
 	The optimal action-value function $q_{*}(s, a)$ is the maximum value over all policies
 	$$q_{*}(s,a) = \max_{\pi} q_{\pi}(s,a), \quad \forall s\in \mathcal{S} \textrm{ and } a\in \mathcal{A}.$$
 \end{definition}
+The optimal action-value function can be obtained as follows:
+\begin{align*}
+	q_{*}(s,a) &= \mathbb{E}[R_{t}+\gamma v_*(S_{t+1})|S_t=s, A_t=a]\\ 
+			   &= \sum_{s'}p(s',r|s,a)[r + \gamma \max_a q_*(s',a')]
+\end{align*}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{./images/optimal_action.pdf}
+\end{figure}
 \begin{itemize}
-	\item The optimal action-value function can be obtained as follows:
-		\begin{align*}
-		q_{*}(s,a) &= \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s, A_t=a]\\
-		&= \sum_{s',r}p(s',r|s,a)[r + \gamma \max_a q_*(s',a')]
-		\end{align*}
-		\begin{figure}[h]
-			\centering
-			\includegraphics[scale=0.5]{./images/optimal_action.pdf}
-		\end{figure}
 	\item The optimal value function specifies the best possible performance in the MDP.
 	\item The MDP is solved when we know the optimal value function
 \end{itemize}
@@ -361,6 +354,14 @@ An optimal policy can be found by maximizing over $q_*(s,a)$,
 		&0 \quad \textrm{otherwise}
 	\end{cases}
 \end{align*}
+In sum, the optimal policy can be expressed as follows:
+
+\begin{align*}
+	\mu_*(s) = \argmax_a \sum_{s'}p(s',r|s,a)\Big[r + \gamma  v_*(s')\Big] 
+\end{align*}
+
+
+
 \begin{itemize}
 	\item There is always a deterministic optimal policy for any MDP
 	\item If we know $q_*(s,a)$, we immediately have the optimal policy 

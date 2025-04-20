@@ -12,25 +12,26 @@ Then, the policy $\pi'$ must be as good as, or better than $\pi$. Equivalently, 
 \end{align*}
 
 \begin{theorem}[Policy Improvement Theorem]
-	$q_\pi(s, \pi'(s))\geq v_\pi(s)$, then $v_\pi'(s)\geq v_\pi(s)$.	
+	If $q_\pi(s, \pi'(s))\geq v_\pi(s)$, then 
+	$$v_\pi'(s)\geq v_\pi(s)$$
 	\label{thrm:policy_improvement}
 \end{theorem}
-Proof.
+%Proof.
 
-\begin{align*}
-	v_\pi(s)&\leq q_\pi(s, \pi'(s))	\\
-	&= \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s, A_t=\pi'(s)]\\
-	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s]\\
-	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma q_\pi(S_{t+1}, \pi'(S_{t+1}))|S_t=s]\\
-	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma \mathbb{E}_{\pi'}[R_{t+2}+\gamma v_\pi(S_{t+2})|S_{t+1}, A_{t+1}=\pi'(S_{t+1})]\,|\,S_t=s]\\
-	&= \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 v_\pi(S_{t+2})|\,S_t=s]\\
-	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 v_\pi(S_{t+3})|\,S_t=s]\\
-	&\vdots\\
-	&\leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 R_{t+4}+\ldots|\,S_t=s]\\
-	&= \mathbb{E}_{\pi'}[G_t|\,S_t=s]\\
-	&= v_{\pi'}(s).
-	%\label{eq:policy_improvement_theorem}
-\end{align*}
+%\begin{align*}
+%	v_\pi(s)&\leq q_\pi(s, \pi'(s))	\\
+%	&= \mathbb{E}[R_{t}+\gamma v_\pi(S_{t+1})|S_t=s, A_t=\pi'(s)]\\
+%	&= \mathbb{E}_{\pi'}[R_{t}+\gamma v_\pi(S_{t+1})|S_t=s]\\
+%	&\leq \mathbb{E}_{\pi'}[R_{t}+\gamma q_\pi(S_{t+1}, \pi'(S_{t+1}))|S_t=s]\\
+%	&= \mathbb{E}_{\pi'}[R_{t}+\gamma \mathbb{E}_{\pi'}[R_{t+2}+\gamma v_\pi(S_{t+2})|S_{t+1}, A_{t+1}=\pi'(S_{t+1})]\,|\,S_t=s]\\
+%	&= \mathbb{E}_{\pi'}[R_{t}+\gamma R_{t+2}+\gamma^2 v_\pi(S_{t+2})|\,S_t=s]\\
+%	&\leq \mathbb{E}_{\pi'}[R_{t}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 v_\pi(S_{t+3})|\,S_t=s]\\
+%	&\vdots\\
+%	&\leq \mathbb{E}_{\pi'}[R_{t}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\gamma^3 R_{t+4}+\ldots|\,S_t=s]\\
+%	&= \mathbb{E}_{\pi'}[G_t|\,S_t=s]\\
+%	&= v_{\pi'}(s).
+%	%\label{eq:policy_improvement_theorem}
+%\end{align*}
 
 
 \section{Policy Evaluation}
@@ -40,7 +41,7 @@ Proof.
 	\item Policy evaluation: refers to algorithms that solve the prediction problem.
 		\begin{itemize}
 			\item Iterative policy evaluation:
-				$$v_{k+1}(s)=\sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r + \gamma v_k(s')].$$ 
+				$$v_{k+1}(s)=\sum_{a}\pi(a|s)\sum_{s'}p(s'|s,a)[r + \gamma v_k(s')].$$ 
 				\begin{enumerate}
 					\item Init $v_0(s)$ for all $s$ arbitrarily and to 0 if $s$ is terminal. 
 					\item Bootstrapping: $v_1(s)\to v_2(s)\to\cdots\to v_N(s)$
@@ -51,6 +52,8 @@ Proof.
 A single round of updates, $k$ , involves updating all the state values. The algorithm stops until 
 the changes in state values are sufficiently small in successive iterations.
 
+% \section{Policy Iteration}
+
 \section{Policy Improvement}
 Our reason for computing the value function for a policy is to help find better policies. The goal of policy improvement is to modify the policy to make it better with respect to the value function. This is done by selecting actions that are known to be better, according to the current value estimates.
 
@@ -58,7 +61,7 @@ Our reason for computing the value function for a policy is to help find better 
 	\item The key is the action-value function, $q_\pi(s,a)$. To improve a policy, we use a state-value function and an MDP to get a one-step look-ahead and determine which of the actions lead to the highest value. We can selects the action that maximizes the action-value function in a greedy way: 
 		\begin{align*}
 			\pi'(s) &= \argmax_a q_\pi(s,a)\\
-			&= \argmax_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_\pi(s')].
+			&= \argmax_a \sum_{s'}p(s'|s,a)[r + \gamma v_\pi(s')].
 		\end{align*}
 	\item The greedy policy takes the action that looks best in the short term according to $v_\pi$.
 \end{itemize}
@@ -72,7 +75,7 @@ One drawback to policy iteration is that each of its iterations involves policy 
 In fact, the policy evaluation step of policy iteration can be truncated in several ways without losing the convergence guarantees of policy iteration.
 
 \begin{align}
-	v_{k+1}(s)=\max_a \sum_{s',r}p(s',r|s,a)[r + \gamma v_k(s')], \, \forall s\in \mathcal{S}.
+	v_{k+1}(s)=\max_a \sum_{s'}p(s'|s,a)[r + \gamma v_k(s')], \, \forall s\in \mathcal{S}.
 	\label{eq:value_iteration}
 \end{align}
 For arbitrary $v_0$, the sequence $v_k$ can be shown to converge to $v_*$ under the same conditions that guarantee the existence of $v_*$.

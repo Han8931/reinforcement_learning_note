@@ -67,8 +67,7 @@ Our reason for computing the value function for a policy is to help find better 
 	\item If the policy is not going to be updated, then the policy is the optimal policy.
 \end{itemize}
 
-The process of policy evaluation and improvement is often repeated iteratively until the policy converges to an optimal policy that maximizes the expected return in the given environment. This iterative process is the basis for algorithms like \textit{policy iteration} and \textit{value iteration} in reinforcement learning.
-
+The process of the policy evaluation and the policy improvement are often repeated iteratively until the policy converges to an optimal policy that maximizes the expected return in the given environment. This iterative process is the basis for algorithms like \textit{policy iteration} and \textit{value iteration} in reinforcement learning.
 
 \section{Value Iteration}
 One drawback to policy iteration is that each of its iterations involves policy evaluation, which may itself be a protracted iterative computation requiring multiple sweeps through the state set.
@@ -81,3 +80,11 @@ In fact, the policy evaluation step of policy iteration can be truncated in seve
 \end{align}
 For arbitrary $v_0$, the sequence $v_k$ can be shown to converge to $v_*$ under the same conditions that guarantee the existence of $v_*$.
 
+Key points:
+\begin{itemize}
+	\item Policy iteration includes: policy evaluation with improvement, and the two are repeated iteratively until policy converges.
+	\item Value iteration includes: finding optimal value function and one policy extraction. There is no repeat of the two because once the value function is optimal, then the policy out of it should also be optimal (\ie. converged).
+	\item Finding optimal value function can also be seen as a combination of policy improvement (due to max) and truncated policy evaluation (the reassignment of v_(s) after just one sweep of all states regardless of convergence).
+	\item The algorithms for policy evaluation and finding optimal value function are highly similar except for a max operation (as highlighted)
+	\item Similarly, the key step to policy improvement and policy extraction are identical except the former involves a stability check.
+\end{itemize}
